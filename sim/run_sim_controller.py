@@ -45,7 +45,11 @@ def main():
     poses = yaml.safe_load(POSES_CONFIG.read_text(encoding="utf-8"))
     pose = poses[args.pose]
     initial_qpos = build_initial_qpos(args.pose, pose)
-    scene_path = prepare_scene_path(initial_qpos, grip_roll_phase_deg=pose_grip_roll_phase(pose))
+    scene_path = prepare_scene_path(
+        initial_qpos,
+        grip_roll_phase_deg=pose_grip_roll_phase(pose),
+        left_weld_distance_m=pose_left_weld_distance(pose),
+    )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
     if args.zero_gravity:
         model.opt.gravity[:] = 0.0
@@ -158,7 +162,10 @@ def publish_low_state(data, num_motors: int, msg, publisher) -> None:
 
 
 def build_initial_qpos(pose_name: str, pose: dict):
-    scene_path = prepare_scene_path(grip_roll_phase_deg=pose_grip_roll_phase(pose))
+    scene_path = prepare_scene_path(
+        grip_roll_phase_deg=pose_grip_roll_phase(pose),
+        left_weld_distance_m=pose_left_weld_distance(pose),
+    )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
     qpos = model.qpos0.copy()
     if "base_z_m" in pose:
@@ -179,8 +186,22 @@ def pose_grip_roll_phase(pose: dict) -> float:
     return float(pose.get("dual_hold_geometry", {}).get("grip_roll_phase_deg", hammer_default_grip_roll_phase()))
 
 
-def prepare_scene_path(initial_qpos=None, grip_roll_phase_deg: float | None = None) -> Path:
-    robot_xml = patch_g1_right_hand_to_hammer(grip_roll_phase_deg=grip_roll_phase_deg)
+def pose_left_weld_distance(pose: dict) -> float | None:
+    geometry = pose.get("dual_hold_geometry", {})
+    if not geometry:
+        return None
+    return float(geometry.get("left_grip_distance_m", 0.20))
+
+
+def prepare_scene_path(
+    initial_qpos=None,
+    grip_roll_phase_deg: float | None = None,
+    left_weld_distance_m: float | None = None,
+) -> Path:
+    robot_xml = patch_g1_right_hand_to_hammer(
+        grip_roll_phase_deg=grip_roll_phase_deg,
+        left_weld_distance_m=left_weld_distance_m,
+    )
     xml = MOCHI_G1_SCENE.read_text(encoding="utf-8")
     xml = xml.replace(
         '<include file="/home/shota/dev/unitree/unitree_mujoco/unitree_robots/g1/g1_29dof.xml"/>',
@@ -195,6 +216,18 @@ def prepare_scene_path(initial_qpos=None, grip_roll_phase_deg: float | None = No
   </keyframe>
 """
         xml = xml.replace("\n</mujoco>", f"{keyframe}</mujoco>")
+    if left_weld_distance_m is not None:
+        equality = """
+
+  <equality>
+    <weld name="left_hand_stick_weld"
+      site1="right_hammer_left_grip_site"
+      site2="left_hammer_clamp_center"
+      solref="0.005 1"
+      solimp="0.95 0.99 0.001"/>
+  </equality>
+"""
+        xml = xml.replace("\n</mujoco>", f"{equality}</mujoco>")
     generated = Path(tempfile.gettempdir()) / "mochi_g1_scene.xml"
     generated.write_text(xml, encoding="utf-8")
 
@@ -205,7 +238,10 @@ def prepare_scene_path(initial_qpos=None, grip_roll_phase_deg: float | None = No
     return generated
 
 
-def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> Path:
+def patch_g1_right_hand_to_hammer(
+    grip_roll_phase_deg: float | None = None,
+    left_weld_distance_m: float | None = None,
+) -> Path:
     """Generate a G1 XML with both rubber hands replaced by matching clamps."""
     original = UNITREE_G1_29DOF_XML.read_text(encoding="utf-8")
     hammer_config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
@@ -214,6 +250,13 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
     half_phase = math.radians(grip_roll_phase_deg) * 0.5
     grip_roll_quat = f"{math.cos(half_phase):.7f} 0 0 {math.sin(half_phase):.7f}"
     head_enabled = bool(hammer_config.get("head", {}).get("enabled", True))
+    left_grip_site = ""
+    if left_weld_distance_m is not None:
+        left_grip_site = f"""                              <site name="right_hammer_left_grip_site"
+                                pos="0 0 {left_weld_distance_m:.6f}"
+                                quat="0.5 0 0 -0.8660254"
+                                size="0.010" rgba="0.1 0.5 1 1"/>
+"""
     head_geom = (
         """                              <geom name="right_hammer_head" type="cylinder"
                                 fromto="0 0 0.60 0.30 0 0.60" size="0.030"
@@ -233,19 +276,19 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
     left_clamp = """                          <body name="left_hammer_clamp" pos="0.0415 0.003 0">
                             <!-- Same clamp geometry as the right side. The clamp center
                                  for IK and grip bookkeeping is the tool root. -->
-                            <geom name="left_hammer_adapter_upper" type="box" pos="0 0.035 0.030"
+                            <geom name="left_hammer_adapter_upper" type="box" pos="0 0.024 0.030"
                               size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
                               mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="left_hammer_adapter_lower" type="box" pos="0 -0.035 0.030"
+                            <geom name="left_hammer_adapter_lower" type="box" pos="0 -0.024 0.030"
                               size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
                               mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="left_hammer_clamp_upper" type="box" pos="0 0.035 0"
+                            <geom name="left_hammer_clamp_upper" type="box" pos="0 0.024 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="left_hammer_clamp_lower" type="box" pos="0 -0.035 0"
+                            <geom name="left_hammer_clamp_lower" type="box" pos="0 -0.024 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
@@ -260,19 +303,19 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
     hammer_tool = f"""                          <body name="right_hammer_tool" pos="0.0415 -0.003 0">
                             <!-- Same clamp geometry as the left side. The wood handle
                                  rear end and clamp center are at this wrist/tool root. -->
-                            <geom name="right_hammer_adapter_upper" type="box" pos="0 0.035 0.030"
+                            <geom name="right_hammer_adapter_upper" type="box" pos="0 0.024 0.030"
                               size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
                               mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="right_hammer_adapter_lower" type="box" pos="0 -0.035 0.030"
+                            <geom name="right_hammer_adapter_lower" type="box" pos="0 -0.024 0.030"
                               size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
                               mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="right_hammer_clamp_upper" type="box" pos="0 0.035 0"
+                            <geom name="right_hammer_clamp_upper" type="box" pos="0 0.024 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="right_hammer_clamp_lower" type="box" pos="0 -0.035 0"
+                            <geom name="right_hammer_clamp_lower" type="box" pos="0 -0.024 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
@@ -294,6 +337,7 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
                                 rgba="0.62 0.38 0.16 1" mass="0.2586"
                                 contype="1" conaffinity="1"
                                 friction="1.0 0.02 0.002" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+{left_grip_site.rstrip()}
 {head_geom.rstrip()}
                             </body>
                           </body>"""
