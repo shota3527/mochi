@@ -10,10 +10,11 @@ Files:
 
 Notes:
 
-- This is the frozen baseline before the latest shota adapter integration.
+- This keeps the frozen v3 trajectory but updates the scene to the
+  shota3527/mochi primitive clamp adapter geometry.
 - It uses the PhysicalAI multi-camera validation workflow.
 - The trajectory is embedded in Python keyframes, not in `configs/trajectory.yaml`.
-- Keep this version immutable unless explicitly creating a new named version.
+- Use this as the v3 trajectory reference with the colleague adapter mapping.
 
 Local wrapper check status:
 

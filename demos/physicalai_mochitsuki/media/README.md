@@ -15,10 +15,12 @@ Shared reference media for PR https://github.com/shota3527/mochi/pull/1.
 - `photos/latest/camera_contact_sheets/`: latest per-camera contact sheets.
 - `photos/latest/main_camera_keyframes/`: latest main-camera keyframes.
 - `photos/latest/diagnostic_dense/`: latest dense diagnostic sheets.
-- `photos/v3/`: v3 contact sheets and dense diagnostic sheets.
+- `photos/v3/`: v3 multi-camera keyframes, contact sheets, and dense diagnostic sheets.
+- `photos/v2/`: v2 main/grip keyframes, contact sheets, and dense diagnostic sheets.
 
 ## Notes
 
 - Code branch: `ekkkkki/mochi:eric_v3`.
 - Upstream PR: https://github.com/shota3527/mochi/pull/1.
+- v2/v3 media was regenerated after switching the snapshots to the shota3527 clamp adapter geometry.
 - The v2 and v3 trajectories are simulation/visual prototypes. Their dynamic warnings are documented in the version manifests in the PR.

@@ -25,7 +25,8 @@ Reference media is under `media/`:
 
 - `videos/`: v2, v3, and latest render videos.
 - `photos/latest/`: latest multi-camera keyframes, contact sheets, and dense diagnostics.
-- `photos/v3/`: v3 contact sheets and dense diagnostics.
+- `photos/v3/`: v3 multi-camera keyframes, contact sheets, and dense diagnostics.
+- `photos/v2/`: v2 main/grip keyframes, contact sheets, and dense diagnostics.
 
 Use `apps/render_physicalai_mochitsuki_snapshot.py` from the repo root to run a
 snapshot without moving files into the original PhysicalAI directory layout.

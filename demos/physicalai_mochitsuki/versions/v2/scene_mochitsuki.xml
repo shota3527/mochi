@@ -18,6 +18,8 @@
     <material name="adapter_rubber" rgba="0.05 0.055 0.055 1" reflectance="0.02"/>
     <material name="adapter_pad" rgba="0.16 0.17 0.17 1" reflectance="0.03"/>
     <material name="adapter_bolt" rgba="0.58 0.59 0.57 1" reflectance="0.22"/>
+    <material name="shota_adapter_shell" rgba="0.25 0.35 0.42 0.55" reflectance="0.05"/>
+    <material name="shota_adapter_pin" rgba="0.10 0.12 0.13 0.75" reflectance="0.08"/>
     <material name="mochi_white" rgba="0.96 0.94 0.86 1" reflectance="0.18"/>
     <material name="impact_red" rgba="0.85 0.12 0.08 1" emission="0.15"/>
   </asset>
@@ -48,34 +50,26 @@
       <geom name="kine_head_end_low" type="cylinder" pos="0 0 -0.202" size="0.0278 0.003" material="wood_dark" mass="0.01" contype="0" conaffinity="0"/>
       <geom name="kine_head_end_high" type="cylinder" pos="0 0 0.202" size="0.0278 0.003" material="wood_dark" mass="0.01" contype="0" conaffinity="0"/>
       <geom name="kine_handle" type="capsule" fromto="0 0 0 0 0.54 0" size="0.017" material="wood_light" mass="0.34"/>
-      <geom name="lower_adapter_clamp_top" type="capsule" fromto="0 0.225 0.030 0 0.315 0.030" size="0.006" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_clamp_bottom" type="capsule" fromto="0 0.225 -0.030 0 0.315 -0.030" size="0.006" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_clamp_inner" type="capsule" fromto="-0.027 0.232 0 -0.027 0.308 0" size="0.005" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_clamp_outer" type="capsule" fromto="0.027 0.232 0 0.027 0.308 0" size="0.005" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bridge_low_top" type="capsule" fromto="0.030 0.232 0.026 0.078 0.232 0.048" size="0.0045" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bridge_low_bottom" type="capsule" fromto="0.030 0.232 -0.026 0.078 0.232 -0.048" size="0.0045" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bridge_high_top" type="capsule" fromto="0.030 0.308 0.026 0.078 0.308 0.048" size="0.0045" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bridge_high_bottom" type="capsule" fromto="0.030 0.308 -0.026 0.078 0.308 -0.048" size="0.0045" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_palm_side_top" type="capsule" fromto="0.084 0.226 0.052 0.084 0.314 0.052" size="0.0048" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_palm_side_bottom" type="capsule" fromto="0.084 0.226 -0.052 0.084 0.314 -0.052" size="0.0048" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_hand_strap_low" type="capsule" fromto="0.088 0.232 -0.056 0.088 0.232 0.056" size="0.0052" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_hand_strap_high" type="capsule" fromto="0.088 0.308 -0.056 0.088 0.308 0.056" size="0.0052" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bolt_low" type="sphere" pos="0.034 0.232 0.030" size="0.0055" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
-      <geom name="lower_adapter_bolt_high" type="sphere" pos="0.034 0.308 0.030" size="0.0055" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_clamp_top" type="capsule" fromto="0 0.395 0.030 0 0.465 0.030" size="0.0055" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_clamp_bottom" type="capsule" fromto="0 0.395 -0.030 0 0.465 -0.030" size="0.0055" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_clamp_inner" type="capsule" fromto="0.026 0.400 0 0.026 0.460 0" size="0.0045" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_clamp_outer" type="capsule" fromto="-0.026 0.400 0 -0.026 0.460 0" size="0.0045" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bridge_low_top" type="capsule" fromto="-0.030 0.405 0.026 -0.078 0.405 0.046" size="0.0042" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bridge_low_bottom" type="capsule" fromto="-0.030 0.405 -0.026 -0.078 0.405 -0.046" size="0.0042" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bridge_high_top" type="capsule" fromto="-0.030 0.455 0.026 -0.078 0.455 0.046" size="0.0042" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bridge_high_bottom" type="capsule" fromto="-0.030 0.455 -0.026 -0.078 0.455 -0.046" size="0.0042" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_palm_side_top" type="capsule" fromto="-0.084 0.400 0.050 -0.084 0.460 0.050" size="0.0044" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_palm_side_bottom" type="capsule" fromto="-0.084 0.400 -0.050 -0.084 0.460 -0.050" size="0.0044" material="adapter_rubber" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_hand_strap_low" type="capsule" fromto="-0.088 0.405 -0.053 -0.088 0.405 0.053" size="0.0048" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_hand_strap_high" type="capsule" fromto="-0.088 0.455 -0.053 -0.088 0.455 0.053" size="0.0048" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bolt_low" type="sphere" pos="-0.034 0.400 0.030" size="0.005" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
-      <geom name="upper_adapter_bolt_high" type="sphere" pos="-0.034 0.460 0.030" size="0.005" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
+      <!-- shota3527/mochi clamp geometry, transformed from source tool +Z to this hammer local +Y. -->
+      <geom name="lower_adapter_shota_clamp_upper" type="box" pos="0 0.270 0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_clamp_lower" type="box" pos="0 0.270 -0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_adapter_upper" type="box" pos="0 0.300 0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_adapter_lower" type="box" pos="0 0.300 -0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_antirotation_pin" type="cylinder" pos="0 0.270 0" size="0.004 0.030" material="shota_adapter_pin" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_hand_receiver" type="box" pos="0.061 0.270 0" size="0.0225 0.044 0.0175" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_bridge_upper" type="box" pos="0.031 0.276 0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_bridge_lower" type="box" pos="0.031 0.276 -0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_cross_pin" type="cylinder" pos="0.032 0.270 0" size="0.004 0.030" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
+      <!-- shota3527/mochi clamp geometry, transformed from source tool +Z to this hammer local +Y. -->
+      <geom name="upper_adapter_shota_clamp_upper" type="box" pos="0 0.430 0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_clamp_lower" type="box" pos="0 0.430 -0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_adapter_upper" type="box" pos="0 0.460 0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_adapter_lower" type="box" pos="0 0.460 -0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_antirotation_pin" type="cylinder" pos="0 0.430 0" size="0.004 0.030" material="shota_adapter_pin" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_hand_receiver" type="box" pos="-0.061 0.430 0" size="0.0225 0.044 0.0175" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_bridge_upper" type="box" pos="-0.031 0.436 0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_bridge_lower" type="box" pos="-0.031 0.436 -0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_cross_pin" type="cylinder" pos="-0.032 0.430 0" size="0.004 0.030" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
       <geom name="kine_handle_tip" type="sphere" pos="0 0.54 0" size="0.018" material="wood_light" mass="0.02" contype="0" conaffinity="0"/>
       <site name="lower_adapter" pos="0.060 0.27 0" size="0.004" rgba="0 0 0 0"/>
       <site name="upper_adapter" pos="-0.060 0.43 0" size="0.004" rgba="0 0 0 0"/>

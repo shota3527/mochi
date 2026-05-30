@@ -6,6 +6,7 @@ physicalai_mochitsuki_versions:
     scene: demos/physicalai_mochitsuki/versions/v2/scene_mochitsuki.xml
     status: historical_reference
     trajectory_format: embedded_python_keyframes
+    adapter_mapping: shota3527_mochi_clamp_pin_geometry_preserve_v2_grips
     local_check: passes_with_speed_and_acceleration_warnings
   v3:
     source: PhysicalAI frozen v3 snapshot
@@ -14,6 +15,7 @@ physicalai_mochitsuki_versions:
     render_script: demos/physicalai_mochitsuki/versions/v3/render_mochitsuki_demo.sh
     status: frozen_baseline
     trajectory_format: embedded_python_keyframes
+    adapter_mapping: shota3527_mochi_clamp_pin_geometry
     local_check: passes_with_speed_acceleration_and_torque_warnings
   latest:
     source: PhysicalAI current mainline snapshot

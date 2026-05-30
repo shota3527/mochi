@@ -10,8 +10,8 @@ joint-waypoint format.
 ## Versions
 
 ```text
-v2/       Git tag v2, commit a6992b0. Older standing mochitsuki visual demo.
-v3/       Frozen v3 snapshot from PhysicalAI. Multi-camera validated baseline.
+v2/       Git tag v2, commit a6992b0. Older standing demo with shota adapter geometry.
+v3/       Frozen v3 trajectory with shota adapter geometry and multi-camera validation.
 latest/   Current best PhysicalAI mainline with shota adapter geometry mapping.
 ```
 

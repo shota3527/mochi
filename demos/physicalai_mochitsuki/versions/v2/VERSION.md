@@ -10,7 +10,8 @@ Files:
 Notes:
 
 - This is an older visual demo snapshot.
-- It does not include the shota adapter geometry mapping.
+- The scene now uses the shota3527/mochi primitive clamp adapter geometry while
+  preserving the original v2 grip positions and timing.
 - The trajectory is embedded in Python keyframes, not in `configs/trajectory.yaml`.
 - Use it as historical reference, not as a real robot low-level trajectory.
 
