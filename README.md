@@ -70,13 +70,11 @@ ip -o addr show
 
 On this machine, `eth3` worked for simulator DDS. `lo` did not discover peers reliably because CycloneDDS reported loopback multicast issues.
 
-For simulator:
-
-```bash
---interface eth3
-```
-
-For the real robot, use the network interface physically connected to the G1 control network, for example `eth0`, `enp...`, or `enx...`.
+For simulator, `configs/run_sim.yaml` overrides the base run config with
+`interface: eth3` and DDS domain `1`. For the real robot,
+`configs/run_real.yaml` overrides the base run config with `interface: eth0`
+and DDS domain `0`; edit that file if the robot cable appears under another
+interface.
 
 Successful real G1 wired setup on this machine:
 
@@ -123,9 +121,36 @@ python apps/dump_state.py \
 
 If this fails after replugging the cable, follow [connect.md](connect.md).
 
+## Run Profiles
+
+Normal simulator and replay usage is config-driven:
+
+```bash
+python sim/run_sim_controller.py --config configs/run_sim.yaml
+python apps/replay_trajectory.py --config configs/run_sim.yaml
+```
+
+For the real robot:
+
+```bash
+python apps/dump_state.py --interface eth0 --domain-id 0 --timeout 10
+python apps/replay_trajectory.py --config configs/run_real.yaml
+```
+
+Run profiles are split into three files:
+
+- `configs/run_base.yaml` is a complete runnable default config.
+- `configs/run_sim.yaml` sets `profile: sim`, points at `base_config:
+  run_base.yaml`, and overrides simulator-only fields.
+- `configs/run_real.yaml` sets `profile: real`, points at `base_config:
+  run_base.yaml`, and overrides real-robot-only fields.
+
+The Python loaders recursively merge `base_config` first, then apply the selected
+run file as an override. The final runtime config is flat.
+
 ## Run First-Frame G1 Viewer
 
-This viewer is for pose and hammer geometry inspection. It publishes DDS `rt/lowstate`, subscribes to DDS `rt/lowcmd`, and starts paused by default. Press Space to pause/resume, or pass `--run` to start unpaused. The viewer also auto-starts once when the first DDS low command arrives from a sim command app.
+This viewer is for pose and hammer geometry inspection. It publishes DDS `rt/lowstate`, subscribes to DDS `rt/lowcmd`, and starts paused by default. Press Space to pause/resume, or set `run: true` in `configs/run_sim.yaml` to start unpaused. The viewer also auto-starts once when the first DDS low command arrives from a sim command app.
 
 Default hammer memo pose:
 
@@ -133,17 +158,12 @@ Default hammer memo pose:
 cd ~/workspace/mochi
 source .venv/bin/activate
 
-python sim/run_sim_controller.py --interface eth3
+python sim/run_sim_controller.py --config configs/run_sim.yaml
 ```
 
-Hammer variants are selected with `--hammer-variant`:
+Hammer variants are selected by editing `hammer_variant` in `configs/run_sim.yaml`:
 
-```bash
-python sim/run_sim_controller.py --interface eth3 --hammer-variant full_600_300
-python sim/run_sim_controller.py --interface eth3 --hammer-variant easy_450_150
-python sim/run_sim_controller.py --interface eth3 --hammer-variant compact_450_300
-python sim/run_sim_controller.py --interface eth3 --hammer-variant handle_only_450
-```
+`full_600_300`, `easy_450_150`, `compact_450_300`, `handle_only_450`.
 
 Then read state from a second terminal:
 
@@ -151,11 +171,7 @@ Then read state from a second terminal:
 python apps/dump_state.py --interface eth3 --timeout 5
 ```
 
-To inspect the current kneel candidate:
-
-```bash
-python sim/run_sim_controller.py --interface eth3 --pose kneel_static_v0
-```
+To inspect another pose, edit `pose` in `configs/run_sim.yaml`.
 
 `kneel` is based on the knee/ankle limit-fold pose, with both knees opened 8 deg from the hard knee limit to reduce interference. It is the baseline for stable hammering inspection.
 
@@ -170,70 +186,48 @@ force Mesa software rendering for the visual simulator:
 
 ```bash
 LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe \
-python sim/run_sim_controller.py --interface eth3 --pose kneel_static_v0
+python sim/run_sim_controller.py --config configs/run_sim.yaml
 ```
 
-To replay the locked kneeling hammer trajectory:
+To replay the configured hammer trajectory:
 
-Terminal 1 must start the simulator at the matching first waypoint pose:
+Terminal 1:
 
 ```bash
-python sim/run_sim_controller.py --interface eth3 --pose knee_double_v0_start
+python sim/run_sim_controller.py --config configs/run_sim.yaml
 ```
 
 Terminal 2:
 
 ```bash
-python apps/replay_trajectory.py \
-  --interface eth3 \
-  --trajectory knee_double_v0 \
-  --gravity-comp \
-  --no-release-motion-mode
+python apps/replay_trajectory.py --config configs/run_sim.yaml
 ```
 
 `replay_trajectory.py` first ramps from the current joint state to the first
-waypoint with the configured `--max-step-rad` limit, then starts the hammer
-trajectory. This lets the simulator recover from a mismatched initial pose
-without a hard start.
+waypoint over the fixed initial ramp, then starts the hammer trajectory.
+Trajectory speed is set by `duration_s`, `rate_hz`, and `time_plan`.
 
-To watch the hammer swing forward and backward repeatedly:
+Trajectory replay uses a small menu with allowed transitions:
 
-```bash
-python apps/replay_trajectory.py \
-  --interface eth3 \
-  --trajectory knee_double_v0 \
-  --loop \
-  --no-release-motion-mode
-```
+1. `[p]` moves to hammer standby and holds the first waypoint.
+2. `[r]` in standby toggles the waist yaw side-ready pose for left-right hammering.
+3. `[h]` starts the hammer trajectory loop. It repeatedly plays forward/back until `[s]` stops it.
+4. After hammering, the app holds the final/current command.
+5. `[b]` manually reverses back to hammer standby; `[h]` can hammer again from standby.
+6. `[x]` from hammer standby or stopped state returns to `hammer_mounted_elbow_65` and releases.
+7. From hammer standby, `[q]` exits without release and leaves the last hold command active for hardware adjustment.
+8. `Ctrl+C` immediately disables the active command interface and exits.
 
-Trajectory replay always uses a staged SPACE-key workflow:
+The backward lift, manual reverse, and release return duration are controlled by
+`return_duration_s`.
 
-1. Press SPACE to ramp to the first waypoint.
-2. Press SPACE to start the trajectory.
-3. By default, normal completion releases the active command interface from the
-   current command.
-
-Set `--return-to-start-s 6` when you explicitly want the old slow return to the
-startup state before release.
-
-There are two command paths:
-
-`--arm-sdk` publishes upper-body commands on `rt/arm_sdk`, matching Unitree's G1
-arm SDK example. It sets `motor_cmd[29].q = 1` while active and disables it on
-exit. The built-in high-level motion mode stays running, so this is the path for
-our first G1 workflow test.
-
-Without `--arm-sdk`, the app publishes full-body low-level commands on
-`rt/lowcmd` and releases the active Unitree high-level motion mode by default.
-Use `--no-release-motion-mode` for simulator runs or for environments without
-MotionSwitcher. Full-body lowcmd is not the path for the first real standing
-test.
+Replay commands use Unitree's G1 `rt/arm_sdk` path only. The app sets
+`motor_cmd[29].q = 1` while active and disables arm SDK on release or Ctrl+C.
+The built-in high-level lower-body mode stays running; this project does not use
+full-body `rt/lowcmd` for the hammer replay workflow.
 
 ```bash
-python apps/replay_trajectory.py \
-  --interface eth3 \
-  --trajectory real_link_hammer_mounted_elbow_v0 \
-  --arm-sdk
+python apps/replay_trajectory.py --config configs/run_sim.yaml
 ```
 
 Optional gravity feedforward is deliberately scoped for tuning. It sends torque
@@ -261,11 +255,7 @@ the stable two-hand swing profile, hip roll/yaw, knees, and ankles keep the orig
 Trajectories default to `double_hand`.
 
 ```bash
-python apps/replay_trajectory.py \
-  --interface eth3 \
-  --trajectory knee_double_v1 \
-  --loop \
-  --gravity-comp
+python apps/replay_trajectory.py --config configs/run_sim.yaml
 ```
 
 The default scene includes a primitive mochi-pounding target in front of the robot:
@@ -427,22 +417,18 @@ leaving the built-in lower-body controller active. Always confirm
 cd ~/workspace/mochi
 source .venv/bin/activate
 
-python apps/replay_trajectory.py \
-  --interface eth0 \
-  --domain-id 0 \
-  --trajectory dual_hold_swing_v0 \
-  --arm-sdk \
-  --max-step-rad 0.003
+python apps/replay_trajectory.py --config configs/run_real.yaml
 ```
 
-SPACE workflow:
+Replay menu workflow:
 
 ```text
-SPACE 1: ramp from current state to first waypoint
-SPACE 2: start trajectory
-SPACE 3: hold current/final command for stick removal
-SPACE 4: return to startup state, then release
+[p]: move to hammer standby
+[h]: hammer
+[b]: after hammering, manually reverse back to standby
+[x]: from standby or stopped, return to hammer_mounted_elbow_65, then release
+[q]: from standby only, exit without release and leave hold command active
 ```
 
 Use the robot-side physical emergency stop if anything looks wrong. Terminal
-`Ctrl+C` is only a software-level stop.
+`Ctrl+C` immediately disables the active command interface and exits; use `[x]` for the planned software release.

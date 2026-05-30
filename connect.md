@@ -136,40 +136,31 @@ Only after `dump_state.py` works:
 cd ~/workspace/mochi
 source .venv/bin/activate
 
-python apps/replay_trajectory.py \
-  --interface eth0 \
-  --domain-id 0 \
-  --trajectory dual_hold_swing_v0 \
-  --arm-sdk \
-  --max-step-rad 0.003
+python apps/replay_trajectory.py --config configs/run_real.yaml
 ```
 
-SPACE workflow:
+Replay menu workflow:
 
 ```text
-SPACE 1: ramp from current state to first waypoint
-SPACE 2: start trajectory
-SPACE 3: hold current/final command for stick removal
-SPACE 4: return to startup state, then release
+[p]: move to hammer standby
+[h]: hammer
+[b]: after hammering, manually reverse back to standby
+[x]: from standby or stopped, return to hammer_mounted_elbow_65, then release
+[q]: from standby only, exit without release and leave hold command active
 ```
 
-For repeated viewing:
+Hammering is always looped forward/back. Run:
 
 ```bash
-python apps/replay_trajectory.py \
-  --interface eth0 \
-  --domain-id 0 \
-  --trajectory dual_hold_swing_v0 \
-  --arm-sdk \
-  --max-step-rad 0.003 \
-  --loop
+python apps/replay_trajectory.py --config configs/run_real.yaml
 ```
 
-In loop mode, the third SPACE stops at the current command and holds there.
+Press `[s]` while hammering to stop at the current command and hold there.
 
 ## Emergency Stop
 
 Use the robot-side physical emergency stop when needed.
 
-From the terminal, `Ctrl+C` asks the app to hold briefly, disable commands, and
-release. It is software-level only, not a substitute for the physical stop.
+From the terminal, `Ctrl+C` immediately disables the active command interface
+and exits. Use `[x]` for the planned software release after unloading the
+hammer. It is software-level only, not a substitute for the physical stop.

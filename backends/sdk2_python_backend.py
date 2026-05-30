@@ -166,6 +166,7 @@ class G1Sdk2Backend:
         kp,
         kd,
         tau=None,
+        dq_des=None,
     ) -> None:
         if self._low_cmd_publisher is None:
             raise RuntimeError("Command publisher was not enabled.")
@@ -176,12 +177,17 @@ class G1Sdk2Backend:
         if tau is None:
             tau = np.zeros(self.num_motors, dtype=float)
         tau = np.asarray(tau, dtype=float)
+        if dq_des is None:
+            dq_des = np.zeros(self.num_motors, dtype=float)
+        dq_des = np.asarray(dq_des, dtype=float)
         if q_des.shape != (self.num_motors,):
             raise ValueError(f"q_des must have shape ({self.num_motors},)")
         if kp.shape != (self.num_motors,) or kd.shape != (self.num_motors,):
             raise ValueError(f"kp and kd must have shape ({self.num_motors},)")
         if tau.shape != (self.num_motors,):
             raise ValueError(f"tau must have shape ({self.num_motors},)")
+        if dq_des.shape != (self.num_motors,):
+            raise ValueError(f"dq_des must have shape ({self.num_motors},)")
 
         cmd = unitree_hg_msg_dds__LowCmd_()
         if hasattr(cmd, "mode_pr"):
@@ -193,7 +199,7 @@ class G1Sdk2Backend:
             cmd.motor_cmd[i].mode = 1
             cmd.motor_cmd[i].tau = float(tau[i])
             cmd.motor_cmd[i].q = float(q_des[i])
-            cmd.motor_cmd[i].dq = 0.0
+            cmd.motor_cmd[i].dq = float(dq_des[i])
             cmd.motor_cmd[i].kp = float(kp[i])
             cmd.motor_cmd[i].kd = float(kd[i])
 
@@ -227,6 +233,7 @@ class G1Sdk2Backend:
         kp,
         kd,
         tau=None,
+        dq_des=None,
         weight: float = 1.0,
         joint_indices: list[int] | tuple[int, ...] | None = None,
     ) -> None:
@@ -239,12 +246,17 @@ class G1Sdk2Backend:
         if tau is None:
             tau = np.zeros(self.num_motors, dtype=float)
         tau = np.asarray(tau, dtype=float)
+        if dq_des is None:
+            dq_des = np.zeros(self.num_motors, dtype=float)
+        dq_des = np.asarray(dq_des, dtype=float)
         if q_des.shape != (self.num_motors,):
             raise ValueError(f"q_des must have shape ({self.num_motors},)")
         if kp.shape != (self.num_motors,) or kd.shape != (self.num_motors,):
             raise ValueError(f"kp and kd must have shape ({self.num_motors},)")
         if tau.shape != (self.num_motors,):
             raise ValueError(f"tau must have shape ({self.num_motors},)")
+        if dq_des.shape != (self.num_motors,):
+            raise ValueError(f"dq_des must have shape ({self.num_motors},)")
 
         if joint_indices is None:
             joint_indices = tuple(range(12, self.num_motors))
@@ -255,7 +267,7 @@ class G1Sdk2Backend:
             cmd.motor_cmd[i].mode = 1
             cmd.motor_cmd[i].tau = float(tau[i])
             cmd.motor_cmd[i].q = float(q_des[i])
-            cmd.motor_cmd[i].dq = 0.0
+            cmd.motor_cmd[i].dq = float(dq_des[i])
             cmd.motor_cmd[i].kp = float(kp[i])
             cmd.motor_cmd[i].kd = float(kd[i])
 

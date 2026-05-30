@@ -341,3 +341,69 @@ standing_double_v2_end:
     closed_loop_only: true
     full_pose_locked: false
     forward_head_x_optimized: true
+knee_double_v2a_start:
+  memo: Start pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; lower body copied from knee_double_v2 with waist pitch held at -0.3 rad.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -1.433884065165686
+    left_shoulder_roll_joint: 0.633355718900276
+    left_shoulder_yaw_joint: -0.5000038814410294
+    left_elbow_joint: 0.4233908953419443
+    left_wrist_roll_joint: -1.8247310260808356
+    left_wrist_pitch_joint: 0.7803099437622644
+    left_wrist_yaw_joint: -0.9779677770871058
+    right_shoulder_pitch_joint: -1.0326403887740496
+    right_shoulder_roll_joint: -0.518594041570906
+    right_shoulder_yaw_joint: 0.6275703653889975
+    right_elbow_joint: -0.10953620197752818
+    right_wrist_roll_joint: 1.5504054271842078
+    right_wrist_pitch_joint: 0.9058660334345374
+    right_wrist_yaw_joint: 0.8332988613139867
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v2a
+    left_grip_distance_m: 0.16
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+knee_double_v2a_end:
+  memo: End pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; lower body copied from knee_double_v2 with waist pitch held at -0.3 rad.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -0.4570191760086408
+    left_shoulder_roll_joint: 0.4008141679655522
+    left_shoulder_yaw_joint: -0.8778806216844082
+    left_elbow_joint: 0.30599435393423613
+    left_wrist_roll_joint: -1.4788016358418314
+    left_wrist_pitch_joint: 0.21653431428186212
+    left_wrist_yaw_joint: -1.2373377196142823
+    right_shoulder_pitch_joint: -0.21696693977396525
+    right_shoulder_roll_joint: -0.4027782746796872
+    right_shoulder_yaw_joint: 1.1284047968130237
+    right_elbow_joint: 0.3048092235275928
+    right_wrist_roll_joint: 0.9376923322210334
+    right_wrist_pitch_joint: 0.2902386299790546
+    right_wrist_yaw_joint: 1.3531762796504805
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v2a
+    left_grip_distance_m: 0.16
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false

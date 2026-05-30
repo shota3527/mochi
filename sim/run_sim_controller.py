@@ -37,27 +37,90 @@ ARM_SDK_JOINTS = tuple(range(12, 29))
 ARM_SDK_ENABLE_INDEX = 29
 
 
+def merge_dicts(base: dict, override: dict) -> dict:
+    merged = dict(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = merge_dicts(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def infer_profile(path: Path, config: dict) -> str:
+    if "profile" in config:
+        return str(config["profile"])
+    if "real" in path.stem:
+        return "real"
+    return "sim"
+
+
+def config_reference_path(config_path: Path, reference: str) -> Path:
+    referenced = Path(reference)
+    if referenced.is_absolute():
+        return referenced
+    candidate = config_path.parent / referenced
+    if candidate.exists():
+        return candidate
+    return PROJECT_ROOT / referenced
+
+
+def load_run_config_map(path: Path, seen: set[Path] | None = None) -> dict:
+    config_path = path if path.is_absolute() else PROJECT_ROOT / path
+    config_path = config_path.resolve()
+    seen = set() if seen is None else seen
+    if config_path in seen:
+        chain = " -> ".join(str(item) for item in [*seen, config_path])
+        raise SystemExit(f"Run config base_config cycle detected: {chain}")
+    seen.add(config_path)
+
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    if not isinstance(config, dict):
+        raise SystemExit(f"{config_path} must contain a YAML map.")
+
+    base_ref = config.get("base_config")
+    if not base_ref:
+        return config
+    base_config = load_run_config_map(config_reference_path(config_path, str(base_ref)), seen)
+    override = {key: value for key, value in config.items() if key != "base_config"}
+    return merge_dicts(base_config, override)
+
+
+def select_run_profile(config_path: Path, config: dict) -> dict:
+    profile = infer_profile(config_path, config)
+    if "basic" in config:
+        basic = config.get("basic") or {}
+        override = config.get(profile) or {}
+        merged = merge_dicts(basic, override)
+    else:
+        merged = {key: value for key, value in config.items() if key != "base_config"}
+    merged["profile"] = profile
+    return merged
+
+
+def load_run_config(path: Path) -> dict:
+    config_path = path if path.is_absolute() else PROJECT_ROOT / path
+    config = load_run_config_map(config_path)
+    return select_run_profile(config_path, config)
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pose", default="hammer_mounted_elbow_65")
-    parser.add_argument("--interface", default="eth3")
-    parser.add_argument("--domain-id", type=int, default=1)
-    parser.add_argument("--run", action="store_true", help="Start unpaused.")
-    parser.add_argument(
-        "--hammer-variant",
-        default=None,
-        help="Hammer geometry variant from configs/hammer.yaml. Default uses default_variant.",
-    )
+    parser.add_argument("--config", required=True, type=Path, help="Run profile YAML, e.g. configs/run_sim.yaml.")
     args = parser.parse_args()
+    run_config = load_run_config(args.config)
+    pose_name = str(run_config.get("pose", "standing_double_v2_start"))
+    hammer_variant_value = run_config.get("hammer_variant", "easy_450_150")
+    hammer_variant = str(hammer_variant_value) if hammer_variant_value is not None else None
 
     poses = yaml.safe_load(POSES_CONFIG.read_text(encoding="utf-8"))
-    pose = poses[args.pose]
-    initial_qpos = build_initial_qpos(args.pose, pose, hammer_variant=args.hammer_variant)
+    pose = poses[pose_name]
+    initial_qpos = build_initial_qpos(pose_name, pose, hammer_variant=hammer_variant)
     scene_path = prepare_scene_path(
         initial_qpos,
         grip_roll_phase_deg=pose_grip_roll_phase(pose),
         left_weld_distance_m=pose_left_weld_distance(pose),
-        hammer_variant=args.hammer_variant,
+        hammer_variant=hammer_variant,
     )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
     data = mujoco.MjData(model)
@@ -67,8 +130,8 @@ def main():
 
     lock = threading.Lock()
     sim_state = {
-        "paused": not args.run,
-        "auto_started_from_lowcmd": args.run,
+        "paused": not bool(run_config.get("run", False)),
+        "auto_started_from_lowcmd": bool(run_config.get("run", False)),
         "arm_sdk_active": False,
         "hip_fixture_qpos": data.qpos.copy(),
     }
@@ -76,10 +139,10 @@ def main():
     right_elbow_q = data.qpos[model.jnt_qposadr[right_elbow_id]]
 
     print(
-        f"G1 first-frame viewer: pose={args.pose} scene={scene_path} "
-        f"domain_id={args.domain_id} paused={sim_state['paused']} "
+        f"G1 first-frame viewer: pose={pose_name} scene={scene_path} "
+        f"domain_id={int(run_config.get('domain_id', 1))} paused={sim_state['paused']} "
         f"right_elbow={right_elbow_q:.6f} hip_fixed=True waist_fixed=False "
-        f"hammer_variant={resolve_hammer_variant_name(args.hammer_variant)}",
+        f"hammer_variant={resolve_hammer_variant_name(hammer_variant)}",
         flush=True,
     )
 
@@ -102,7 +165,7 @@ def main():
         )
         sim_thread = Thread(
             target=simulation_thread,
-            args=(viewer, model, data, lock, sim_state, args),
+            args=(viewer, model, data, lock, sim_state, run_config),
             daemon=True,
         )
 
@@ -115,8 +178,8 @@ def main():
     return 0
 
 
-def simulation_thread(viewer, model, data, lock: threading.Lock, sim_state: dict, args) -> None:
-    ChannelFactoryInitialize(args.domain_id, args.interface)
+def simulation_thread(viewer, model, data, lock: threading.Lock, sim_state: dict, run_config: dict) -> None:
+    ChannelFactoryInitialize(int(run_config.get("domain_id", 1)), str(run_config.get("interface", "eth3")))
     low_state = unitree_hg_msg_dds__LowState_()
     low_state_publisher = ChannelPublisher(TOPIC_LOWSTATE, LowState_)
     low_state_publisher.Init()
@@ -125,7 +188,7 @@ def simulation_thread(viewer, model, data, lock: threading.Lock, sim_state: dict
     low_cmd_subscriber.Init(lambda msg: apply_low_cmd(msg, data, model.nu, lock, sim_state), 10)
     arm_sdk_subscriber = ChannelSubscriber(TOPIC_ARMSDK, LowCmd_)
     arm_sdk_subscriber.Init(lambda msg: apply_arm_sdk_cmd(msg, data, model.nu, lock, sim_state), 10)
-    print(f"DDS initialized: interface={args.interface}", flush=True)
+    print(f"DDS initialized: interface={run_config.get('interface', 'eth3')}", flush=True)
 
     while viewer.is_running():
         step_start = time.perf_counter()
@@ -169,12 +232,15 @@ def apply_low_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_state: d
 def apply_arm_sdk_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_state: dict) -> None:
     with lock:
         weight = float(max(0.0, min(1.0, msg.motor_cmd[ARM_SDK_ENABLE_INDEX].q)))
+        was_active = bool(sim_state["arm_sdk_active"])
         sim_state["arm_sdk_active"] = weight > 0.0
         if sim_state["arm_sdk_active"]:
             if sim_state["paused"] and not sim_state["auto_started_from_lowcmd"]:
                 sim_state["paused"] = False
                 sim_state["auto_started_from_lowcmd"] = True
                 print("paused=False (arm_sdk received)", flush=True)
+        elif was_active:
+            print("arm_sdk disabled: upper-body ctrl set to zero; hip fixture remains active", flush=True)
 
         q = data.sensordata[:num_motors]
         dq = data.sensordata[num_motors : 2 * num_motors]

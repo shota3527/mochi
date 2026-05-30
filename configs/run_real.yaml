@@ -1,0 +1,8 @@
+profile: real
+base_config: run_base.yaml
+
+interface: eth0
+domain_id: 0
+pose: standing_double_v2_start
+hammer_variant: easy_450_150
+run: false

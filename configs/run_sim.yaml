@@ -1,0 +1,8 @@
+profile: sim
+base_config: run_base.yaml
+
+interface: eth3
+domain_id: 1
+pose: standing_double_v2_start
+hammer_variant: full_600_300
+run: false
