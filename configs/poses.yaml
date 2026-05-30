@@ -91,24 +91,6 @@ kneel_static_v0:
     ankle_roll:
     - -0.2618
     - 0.2618
-pose_hold_test:
-  memo: Sim-only joint position hold test settings. Requires --enable-command.
-  pose: kneel_static_v0
-  ramp_time_s: 4.0
-  hold_time_s: 10.0
-  rate_hz: 100.0
-  max_step_rad: 0.015
-  limit_margin_rad: 0.0
-  gains:
-    default:
-      kp: 35.0
-      kd: 1.0
-    lower_body:
-      kp: 60.0
-      kd: 2.0
-    knees:
-      kp: 90.0
-      kd: 3.0
 knee_double_v0_start:
   memo: Start pose for knee_double_v0 locked-stick kneeling swing.
   base_z_m: 0.335

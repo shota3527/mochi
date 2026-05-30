@@ -78,11 +78,50 @@ For simulator:
 
 For the real robot, use the network interface physically connected to the G1 control network, for example `eth0`, `enp...`, or `enx...`.
 
+Successful real G1 wired setup on this machine:
+
+```text
+Windows Ethernet adapter index: 16
+WSL/Linux robot interface: eth0
+Host IP: 192.168.123.222/24
+G1 IP observed by ping: 192.168.123.161
+DDS domain: 0
+```
+
+After replugging the robot cable, Windows may reset the Ethernet network back
+to `Public`. In Administrator PowerShell, set it back to `Private`:
+
+```powershell
+Set-NetConnectionProfile -InterfaceIndex 16 -NetworkCategory Private
+```
+
+Then in WSL, make sure DDS multicast goes through the robot cable:
+
+```bash
+sudo ip route del 224.0.0.0/4 2>/dev/null || true
+sudo ip route add 224.0.0.0/4 dev eth0
+ip route get 239.255.0.1
+```
+
+Expected route:
+
+```text
+multicast 239.255.0.1 dev eth0 src 192.168.123.222
+```
+
 Do not guess for real robot control. First verify read-only state:
 
 ```bash
-python apps/dump_state.py --interface <robot_interface> --timeout 5
+cd ~/workspace/mochi
+source .venv/bin/activate
+
+python apps/dump_state.py \
+  --interface eth0 \
+  --domain-id 0 \
+  --timeout 10
 ```
+
+If this fails after replugging the cable, follow [connect.md](connect.md).
 
 ## Run First-Frame G1 Viewer
 
@@ -124,16 +163,6 @@ force Mesa software rendering for the visual simulator:
 LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe \
 python sim/run_sim_controller.py --interface eth3 --pose kneel_static_v0
 ```
-
-To test whether the kneeling joint angles can be held in simulation, start the simulator, then run the sim-only joint position holder. The simulator will start stepping when the first low command arrives:
-
-```bash
-python apps/pose_hold_test.py \
-  --interface eth3 \
-  --enable-command
-```
-
-This publishes DDS low-level joint position commands in simulation. It is not a real-robot app. The pose and hold parameters come from `pose_hold_test` in `configs/poses.yaml`.
 
 To replay the locked kneeling hammer trajectory:
 
@@ -376,7 +405,7 @@ apps/
   dump_state.py
   small_motion_test.py
   pose_check.py
-  run_real.py
+  replay_trajectory.py
 
 sim/
   run_sim_controller.py
@@ -403,15 +432,33 @@ logs/
 
 ## Real Robot Status
 
-Real execution is intentionally not enabled yet.
+Real read-only DDS state has been connected successfully with `eth0`,
+`192.168.123.222/24`, and DDS domain `0`.
 
-Before real motion:
+Current real motion workflow uses Unitree `rt/arm_sdk` for upper-body commands,
+leaving the built-in lower-body controller active. Always confirm
+`dump_state.py` works before sending commands.
 
-1. Read real lowstate successfully.
-2. Confirm joint order.
-3. Confirm joint limits.
-4. Run pose/margin checks.
-5. Verify simulator tiny single-joint motion.
-6. Implement explicit real-run arming and safety gates.
+```bash
+cd ~/workspace/mochi
+source .venv/bin/activate
 
-First real motion must be one tiny upper-body joint only. No lower body, no wrist, no hammer trajectory.
+python apps/replay_trajectory.py \
+  --interface eth0 \
+  --domain-id 0 \
+  --trajectory dual_hold_swing_v0 \
+  --arm-sdk \
+  --max-step-rad 0.003
+```
+
+SPACE workflow:
+
+```text
+SPACE 1: ramp from current state to first waypoint
+SPACE 2: start trajectory
+SPACE 3: hold current/final command for stick removal
+SPACE 4: return to startup state, then release
+```
+
+Use the robot-side physical emergency stop if anything looks wrong. Terminal
+`Ctrl+C` is only a software-level stop.

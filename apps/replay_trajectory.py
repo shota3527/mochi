@@ -444,7 +444,7 @@ def main() -> int:
         "--return-to-start-s",
         type=float,
         default=6.0,
-        help="On normal completion, ramp back to the first waypoint before releasing commands.",
+        help="On normal completion, ramp back to the startup state before releasing commands.",
     )
     args = parser.parse_args()
 
@@ -487,6 +487,7 @@ def main() -> int:
         raise SystemExit(f"{exc}\nStart sim/run_sim_controller.py first.") from exc
 
     q_current = sample.q.copy()
+    q_release_target = q_current.copy()
     q_base = trajectory_base_q(q_current, trajectory, poses_config, name_to_index)
     q_waypoints = [apply_joint_block(q_base, wp["joints_rad"], name_to_index) for wp in waypoints]
     q_waypoints = [clamp_joint_limits(q, q_min, q_max, margin=args.limit_margin_rad) for q in q_waypoints]
@@ -670,15 +671,15 @@ def main() -> int:
                 tau=tau_hold,
                 arm_sdk=args.arm_sdk,
                 rate_hz=rate_hz,
-                prompt="Stage 4/4: Holding current command. Press SPACE to return to first waypoint and release.",
-                confirm_message="Returning to first waypoint before release.",
+                prompt="Stage 4/4: Holding current command. Press SPACE to return to startup state and release.",
+                confirm_message="Returning to startup state before release.",
             )
-            print("returning to first waypoint before release", flush=True)
+            print("returning to startup state before release", flush=True)
             return_steps = max(1, int(math.ceil(float(args.return_to_start_s) * rate_hz)))
             q_prev = publish_segment(
                 backend=backend,
                 q0=q_prev,
-                q1=q_waypoints[0],
+                q1=q_release_target,
                 q_prev=q_prev,
                 segment_steps=return_steps,
                 dt=dt,
@@ -692,7 +693,7 @@ def main() -> int:
                 rate_hz=rate_hz,
                 index_to_name=index_to_name,
                 log=log,
-                label="return_to_start",
+                label="return_to_startup_state",
                 gravity_comp=gravity_comp,
                 arm_sdk=args.arm_sdk,
             )
@@ -719,7 +720,7 @@ def main() -> int:
     if interrupted:
         print("released after interrupt")
     else:
-        print("returned to start and released after trajectory")
+        print("returned to startup state and released after trajectory")
     return 0
 
 
