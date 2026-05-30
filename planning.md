@@ -12,12 +12,12 @@ This file is for another engineer or coding agent taking over the offline hammer
 
 ## Current Naming
 
-- `knee_double_v0`: older kneeling two-hand swing, full stick pose locked.
-- `knee_double_v1`: current height-targeted kneeling two-hand swing, free stick root, hard dual-hand closed-loop grip geometry.
+- `knee_double_v0`: regenerated coarse kneeling two-hand swing, 5 waypoints, height-targeted closed-loop grip geometry.
+- `knee_double_v1`: regenerated finer kneeling two-hand swing, 20 waypoints, height-targeted closed-loop grip geometry.
 - `knee_double_v1_start`: start pose for simulator/replay.
 - `knee_double_v1_end`: end pose for simulator/replay.
 
-The `knee_double_v1` lower body is intentionally copied from `knee_double_v0`. The generated trajectory only stores arm joints, and its `base_pose` is `knee_double_v0_start`.
+The `knee_double_v1` lower body is intentionally copied from `knee_double_v0`. Both generated trajectories store arm joints only, and their kneeling lower-body pose comes from `knee_double_v0_start` / `knee_double_v0_end`.
 
 ## Main Planner
 
@@ -34,7 +34,7 @@ PYTHONPYCACHEPREFIX=/tmp/mochi_pycache .venv/bin/python \
   --write-config
 ```
 
-This writes `knee_double_v1` into `configs/trajectory.yaml`.
+This writes `knee_double_v1` into `configs/trajectory.yaml`. To regenerate the coarse v0 trajectory after a tool-link geometry change, use the same command with `--trajectory-name knee_double_v0 --samples 5`.
 
 After regenerating the trajectory, sync the start/end poses from the first and last waypoint:
 
@@ -221,4 +221,3 @@ python apps/replay_trajectory.py \
 ```
 
 For real hardware, do not start with `--loop`. First run one cycle, reduce gravity compensation scale if torque or tracking looks bad, and verify the robot starts close to `knee_double_v1_start`.
-

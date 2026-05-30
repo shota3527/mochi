@@ -309,34 +309,6 @@ logs/
 
 Use this before sending any motion commands.
 
-## Tiny Motion Test
-
-Only run this after `dump_state.py` works.
-
-Simulator only for now:
-
-```bash
-cd ~/workspace/mochi
-source .venv/bin/activate
-
-python apps/small_motion_test.py \
-  --interface eth3 \
-  --joint left_shoulder_roll \
-  --delta 0.03 \
-  --duration 2.0 \
-  --enable-command
-```
-
-Rules enforced by the app:
-
-- commands are refused unless `--enable-command` is passed
-- delta must be no larger than `0.05 rad`
-- only selected upper-body joints are allowed
-- command passes through `core/safety_filter.py`
-- joint margin is checked before motion
-
-Do not move legs, waist, wrists, multiple joints, or hammer trajectories yet.
-
 ## Safety Contract
 
 All future commands must follow:
@@ -388,7 +360,7 @@ The handle and head use hardwood density `700 kg/m^3` for mass estimates:
 - adapter and clamp mass: about `0.220 kg`
 - total tool mass: about `0.711 kg`
 
-The tool is mounted at the original right hand root on `right_wrist_yaw_link`, local position `[0.0415, -0.003, 0.0]`. The wooden head is fixed at the front of the handle.
+The tool is mounted on `right_wrist_yaw_link`, local position `[0.0735, 0.0, 0.0]`. The wooden head is fixed at the front of the handle.
 
 Static wrist moment estimate:
 
@@ -403,8 +375,6 @@ No CAD mesh collision yet.
 ```text
 apps/
   dump_state.py
-  small_motion_test.py
-  pose_check.py
   replay_trajectory.py
 
 sim/

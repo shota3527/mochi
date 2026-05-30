@@ -141,6 +141,11 @@ def load_gain_profile_vectors(joints: list[dict], profile_name: str) -> tuple[np
     return kp, kd
 
 
+def max_error_index(err: np.ndarray, indices: np.ndarray) -> int:
+    selected = np.asarray(err, dtype=float)[indices]
+    return int(indices[int(np.argmax(selected))])
+
+
 class ModelSelectedJointGravityFeedforward:
     """Quasi-static gravity feedforward from the official G1 model bias torque."""
 
@@ -214,6 +219,7 @@ def publish_segment(
     limit_margin_rad: float,
     rate_hz: float,
     index_to_name: dict[int, str],
+    error_indices: np.ndarray,
     log: list[dict],
     label: str,
     gravity_comp: ModelSelectedJointGravityFeedforward | None,
@@ -231,7 +237,7 @@ def publish_segment(
             latest = backend.latest_state()
             if latest is not None:
                 err = np.abs(q_safe - latest.q)
-                idx = int(np.argmax(err))
+                idx = max_error_index(err, error_indices)
                 print(
                     f"{label} t={step * dt:.1f}s "
                     f"max_cmd_error={float(err[idx]):.4f}({index_to_name[idx]})"
@@ -268,6 +274,7 @@ def publish_initial_ramp(
     rate_hz: float,
     min_duration_s: float,
     index_to_name: dict[int, str],
+    error_indices: np.ndarray,
     gravity_comp: ModelSelectedJointGravityFeedforward | None,
     arm_sdk: bool,
 ) -> np.ndarray:
@@ -289,7 +296,7 @@ def publish_initial_ramp(
             latest = backend.latest_state()
             if latest is not None:
                 err = np.abs(q_safe - latest.q)
-                idx = int(np.argmax(err))
+                idx = max_error_index(err, error_indices)
                 print(
                     f"initial_ramp t={step * dt:.1f}s "
                     f"max_cmd_error={float(err[idx]):.4f}({index_to_name[idx]})"
@@ -465,6 +472,10 @@ def main() -> int:
     q_min = np.array([joint["q_min"] for joint in joints], dtype=float)
     q_max = np.array([joint["q_max"] for joint in joints], dtype=float)
     kp, kd = load_gain_profile_vectors(joints, gain_profile_name)
+    error_indices = np.asarray(
+        ARM_SDK_JOINT_INDICES if args.arm_sdk else tuple(range(len(joints))),
+        dtype=int,
+    )
     gravity_comp = (
         ModelSelectedJointGravityFeedforward(
             joints=joints,
@@ -493,7 +504,7 @@ def main() -> int:
     q_waypoints = [clamp_joint_limits(q, q_min, q_max, margin=args.limit_margin_rad) for q in q_waypoints]
 
     initial_error = np.abs(q_waypoints[0] - q_current)
-    initial_error_index = int(np.argmax(initial_error))
+    initial_error_index = max_error_index(initial_error, error_indices)
     initial_error_value = float(initial_error[initial_error_index])
 
     rate_hz = float(args.rate_hz)
@@ -541,6 +552,7 @@ def main() -> int:
             rate_hz=rate_hz,
             min_duration_s=args.settle_s,
             index_to_name=index_to_name,
+            error_indices=error_indices,
             gravity_comp=gravity_comp,
             arm_sdk=args.arm_sdk,
         )
@@ -585,6 +597,7 @@ def main() -> int:
                                 limit_margin_rad=args.limit_margin_rad,
                                 rate_hz=rate_hz,
                                 index_to_name=index_to_name,
+                                error_indices=error_indices,
                                 log=log,
                                 label=f"cycle={cycles_done} forward segment={segment_index}",
                                 gravity_comp=gravity_comp,
@@ -609,6 +622,7 @@ def main() -> int:
                                 limit_margin_rad=args.limit_margin_rad,
                                 rate_hz=rate_hz,
                                 index_to_name=index_to_name,
+                                error_indices=error_indices,
                                 log=log,
                                 label=f"cycle={cycles_done} backward segment={segment_index}",
                                 gravity_comp=gravity_comp,
@@ -637,6 +651,7 @@ def main() -> int:
                     limit_margin_rad=args.limit_margin_rad,
                     rate_hz=rate_hz,
                     index_to_name=index_to_name,
+                    error_indices=error_indices,
                     log=log,
                     label=f"segment={segment_index}",
                     gravity_comp=gravity_comp,
@@ -692,6 +707,7 @@ def main() -> int:
                 limit_margin_rad=args.limit_margin_rad,
                 rate_hz=rate_hz,
                 index_to_name=index_to_name,
+                error_indices=error_indices,
                 log=log,
                 label="return_to_startup_state",
                 gravity_comp=gravity_comp,

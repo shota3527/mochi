@@ -41,6 +41,7 @@ def waypoint_from_solution(
         "max_hand_grip_y_abs_mm": round(float(solution.max_hand_grip_y_abs_mm), 3),
         "loop_grip_mm": round(float(solution.loop_grip_mm), 6),
         "loop_axis_error": round(float(solution.loop_axis_error), 8),
+        "loop_orientation_error": round(float(solution.loop_orientation_error), 8),
         "min_joint_margin_rad": round(float(solution.min_joint_margin_rad), 6),
         "torso_contacts": int(solution.torso_contacts),
         "joints_rad": {name: float(value) for name, value in solution.joints_rad.items()},
@@ -98,8 +99,11 @@ def main() -> int:
     parser.add_argument("--right-elbow-body", default="right_elbow_link")
     parser.add_argument("--left-wrist-body", default="left_wrist_yaw_link")
     parser.add_argument("--right-wrist-body", default="right_wrist_yaw_link")
+    parser.add_argument("--right-loop-site", default="right_hammer_left_grip_site")
+    parser.add_argument("--left-loop-site", default="left_hammer_clamp_center")
     parser.add_argument("--loop-grip-weight", type=float, default=300.0)
     parser.add_argument("--loop-axis-weight", type=float, default=100.0)
+    parser.add_argument("--loop-orientation-weight", type=float, default=80.0)
     parser.add_argument("--head-z-weight", type=float, default=100.0)
     parser.add_argument("--head-axis-weight", type=float, default=2.5)
     parser.add_argument("--hand-grip-y-weight", type=float, default=0.25)
@@ -146,6 +150,7 @@ def main() -> int:
     max_neighbor_step = 0.0
     max_loop_grip_mm = 0.0
     max_loop_axis_error = 0.0
+    max_loop_orientation_error = 0.0
     max_head_z_error = 0.0
     max_head_axis_y_abs = 0.0
     max_torso_contacts = 0
@@ -178,6 +183,7 @@ def main() -> int:
 
         max_loop_grip_mm = max(max_loop_grip_mm, solution.loop_grip_mm)
         max_loop_axis_error = max(max_loop_axis_error, solution.loop_axis_error)
+        max_loop_orientation_error = max(max_loop_orientation_error, solution.loop_orientation_error)
         max_head_z_error = max(max_head_z_error, abs(solution.head_z_error_m))
         max_head_axis_y_abs = max(max_head_axis_y_abs, abs(solution.head_axis_y))
         max_torso_contacts = max(max_torso_contacts, solution.torso_contacts)
@@ -196,6 +202,7 @@ def main() -> int:
             f"wp={i:02d} alpha={alpha:.3f} "
             f"head_z={solution.head_z_m:.3f}/{target_head_z:.3f} "
             f"loop_mm={solution.loop_grip_mm:.3f} axis={solution.loop_axis_error:.5f} "
+            f"orient={solution.loop_orientation_error:.5f} "
             f"axis_y={solution.head_axis_y:.4f} "
             f"hand_center_y_mm={solution.hand_center_y_mm:.1f} "
             f"max_grip_y_mm={solution.max_hand_grip_y_abs_mm:.1f} "
@@ -230,6 +237,7 @@ def main() -> int:
                 "full_pose_locked": False,
                 "max_loop_grip_mm": round(float(max_loop_grip_mm), 6),
                 "max_loop_axis_error": round(float(max_loop_axis_error), 8),
+                "max_loop_orientation_error": round(float(max_loop_orientation_error), 8),
                 "max_head_z_error_m": round(float(max_head_z_error), 6),
                 "max_head_axis_y_abs": round(float(max_head_axis_y_abs), 6),
                 "max_hand_center_y_mm": round(float(max_hand_center_y_mm), 3),
@@ -247,6 +255,7 @@ def main() -> int:
         f"passed={passed} amplitude_m={amplitude:.3f} "
         f"max_loop_grip_mm={max_loop_grip_mm:.6f} "
         f"max_loop_axis_error={max_loop_axis_error:.8f} "
+        f"max_loop_orientation_error={max_loop_orientation_error:.8f} "
         f"max_head_z_error_m={max_head_z_error:.6f} "
         f"max_head_axis_y_abs={max_head_axis_y_abs:.6f} "
         f"max_hand_center_y_mm={max_hand_center_y_mm:.3f} "

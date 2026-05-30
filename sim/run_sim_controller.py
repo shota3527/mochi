@@ -32,7 +32,7 @@ TOPIC_LOWSTATE = "rt/lowstate"
 TOPIC_ARMSDK = "rt/arm_sdk"
 SIM_DT = 0.005
 VIEWER_DT = 0.02
-LOWER_BODY_JOINTS = tuple(range(12))
+HIP_FIXED_JOINTS = tuple(range(12))
 ARM_SDK_JOINTS = tuple(range(12, 29))
 ARM_SDK_ENABLE_INDEX = 29
 
@@ -43,7 +43,6 @@ def main():
     parser.add_argument("--interface", default="eth3")
     parser.add_argument("--domain-id", type=int, default=1)
     parser.add_argument("--run", action="store_true", help="Start unpaused.")
-    parser.add_argument("--zero-gravity", action="store_true", help="Disable gravity for motor-command plumbing checks.")
     args = parser.parse_args()
 
     poses = yaml.safe_load(POSES_CONFIG.read_text(encoding="utf-8"))
@@ -55,8 +54,6 @@ def main():
         left_weld_distance_m=pose_left_weld_distance(pose),
     )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
-    if args.zero_gravity:
-        model.opt.gravity[:] = 0.0
     data = mujoco.MjData(model)
 
     mujoco.mj_resetDataKeyframe(model, data, 0)
@@ -67,8 +64,7 @@ def main():
         "paused": not args.run,
         "auto_started_from_lowcmd": args.run,
         "arm_sdk_active": False,
-        "butt_fixture_active": False,
-        "butt_fixture_qpos": data.qpos.copy(),
+        "hip_fixture_qpos": data.qpos.copy(),
     }
     right_elbow_id = model.joint("right_elbow_joint").id
     right_elbow_q = data.qpos[model.jnt_qposadr[right_elbow_id]]
@@ -76,7 +72,7 @@ def main():
     print(
         f"G1 first-frame viewer: pose={args.pose} scene={scene_path} "
         f"domain_id={args.domain_id} paused={sim_state['paused']} "
-        f"right_elbow={right_elbow_q:.6f} gravity={model.opt.gravity}",
+        f"right_elbow={right_elbow_q:.6f} hip_fixed=True waist_fixed=False",
         flush=True,
     )
 
@@ -127,12 +123,12 @@ def simulation_thread(viewer, model, data, lock: threading.Lock, sim_state: dict
     while viewer.is_running():
         step_start = time.perf_counter()
         with lock:
-            apply_sim_butt_fixture(data, sim_state)
+            apply_sim_hip_fixture(data, sim_state)
             if sim_state["paused"]:
                 mujoco.mj_forward(model, data)
             else:
                 mujoco.mj_step(model, data)
-                apply_sim_butt_fixture(data, sim_state)
+                apply_sim_hip_fixture(data, sim_state)
                 mujoco.mj_forward(model, data)
             publish_low_state(data, model.nu, low_state, low_state_publisher)
         sleep_time = model.opt.timestep - (time.perf_counter() - step_start)
@@ -168,7 +164,6 @@ def apply_arm_sdk_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_stat
         weight = float(max(0.0, min(1.0, msg.motor_cmd[ARM_SDK_ENABLE_INDEX].q)))
         sim_state["arm_sdk_active"] = weight > 0.0
         if sim_state["arm_sdk_active"]:
-            sim_state["butt_fixture_active"] = True
             if sim_state["paused"] and not sim_state["auto_started_from_lowcmd"]:
                 sim_state["paused"] = False
                 sim_state["auto_started_from_lowcmd"] = True
@@ -184,15 +179,13 @@ def apply_arm_sdk_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_stat
             )
 
 
-def apply_sim_butt_fixture(data, sim_state: dict) -> None:
-    if not sim_state.get("butt_fixture_active"):
-        return
-    fixture_qpos = sim_state.get("butt_fixture_qpos")
+def apply_sim_hip_fixture(data, sim_state: dict) -> None:
+    fixture_qpos = sim_state.get("hip_fixture_qpos")
     if fixture_qpos is None:
         return
     data.qpos[:7] = fixture_qpos[:7]
     data.qvel[:6] = 0.0
-    for i in LOWER_BODY_JOINTS:
+    for i in HIP_FIXED_JOINTS:
         data.qpos[7 + i] = fixture_qpos[7 + i]
         data.qvel[6 + i] = 0.0
 
@@ -297,6 +290,9 @@ def patch_g1_right_hand_to_hammer(
     """Generate a G1 XML with both rubber hands replaced by matching clamps."""
     original = UNITREE_G1_29DOF_XML.read_text(encoding="utf-8")
     hammer_config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
+    wrist_to_handle_root_m = [float(v) for v in hammer_config["wrist_to_handle_root_m"]]
+    right_tool_pos = f"{wrist_to_handle_root_m[0]:.6f} {wrist_to_handle_root_m[1]:.6f} {wrist_to_handle_root_m[2]:.6f}"
+    left_tool_pos = f"{wrist_to_handle_root_m[0]:.6f} {-wrist_to_handle_root_m[1]:.6f} {wrist_to_handle_root_m[2]:.6f}"
     if grip_roll_phase_deg is None:
         grip_roll_phase_deg = hammer_default_grip_roll_phase()
     half_phase = math.radians(grip_roll_phase_deg) * 0.5
@@ -334,7 +330,7 @@ def patch_g1_right_hand_to_hammer(
     right_rubber_hand_geom = """                          <geom pos="0.0415 -0.003 0" quat="1 0 0 0" type="mesh" contype="0"
                             conaffinity="0" group="1" density="0" rgba="0.7 0.7 0.7 1"
                             mesh="right_rubber_hand" />"""
-    left_clamp = """                          <body name="left_hammer_clamp" pos="0.0415 0.003 0">
+    left_clamp = f"""                          <body name="left_hammer_clamp" pos="{left_tool_pos}">
                             <!-- Same clamp geometry as the right side. The clamp center
                                  for IK and grip bookkeeping is the tool root. -->
                             <geom name="left_hammer_adapter_upper" type="box" pos="0 0.024 0.030"
@@ -361,7 +357,7 @@ def patch_g1_right_hand_to_hammer(
                             <site name="left_hammer_clamp_center" pos="0 0 0"
                               size="0.010" rgba="0.1 0.5 1 1"/>
                           </body>"""
-    hammer_tool = f"""                          <body name="right_hammer_tool" pos="0.0415 -0.003 0">
+    hammer_tool = f"""                          <body name="right_hammer_tool" pos="{right_tool_pos}">
                             <!-- Same clamp geometry as the left side. The wood handle
                                  rear end and clamp center are at this wrist/tool root. -->
                             <geom name="right_hammer_adapter_upper" type="box" pos="0 0.024 0.030"
