@@ -29,12 +29,14 @@ def waypoint_from_solution(
     *,
     alpha: float,
     target_head_z_m: float,
+    target_head_x_m: float | None,
     head_down_dot: float,
 ) -> dict:
-    return {
+    waypoint = {
         "alpha": round(float(alpha), 6),
         "target_head_z_m": round(float(target_head_z_m), 6),
         "actual_head_z_m": round(float(solution.head_z_m), 6),
+        "actual_head_x_m": round(float(solution.head_x_m), 6),
         "head_down_dot": round(float(head_down_dot), 6),
         "head_axis_y": round(float(solution.head_axis_y), 6),
         "hand_center_y_mm": round(float(solution.hand_center_y_mm), 3),
@@ -46,6 +48,10 @@ def waypoint_from_solution(
         "torso_contacts": int(solution.torso_contacts),
         "joints_rad": {name: float(value) for name, value in solution.joints_rad.items()},
     }
+    if target_head_x_m is not None:
+        waypoint["target_head_x_m"] = round(float(target_head_x_m), 6)
+        waypoint["head_x_error_m"] = round(float(solution.head_x_error_m), 6)
+    return waypoint
 
 
 def replace_or_append_block(path: Path, key: str, block_text: str) -> None:
@@ -79,9 +85,16 @@ def main() -> int:
     parser.add_argument("--duration-s", type=float, default=4.0)
     parser.add_argument("--start-head-z", type=float, default=0.86)
     parser.add_argument("--end-head-z", type=float, default=0.60)
+    parser.add_argument("--start-head-x", type=float, default=None)
+    parser.add_argument("--end-head-x", type=float, default=None)
     parser.add_argument("--start-head-down-dot", type=float, default=0.50)
     parser.add_argument("--end-head-down-dot", type=float, default=0.85)
     parser.add_argument("--head-axis-lateral-target", type=float, default=None)
+    parser.add_argument(
+        "--solve-start-first",
+        action="store_true",
+        help="Preserve the start-pose IK branch before solving the low/forward endpoint.",
+    )
     parser.add_argument("--write-config", action="store_true")
     EndpointSweeper.add_arguments(parser) if hasattr(EndpointSweeper, "add_arguments") else None
 
@@ -105,6 +118,7 @@ def main() -> int:
     parser.add_argument("--loop-axis-weight", type=float, default=100.0)
     parser.add_argument("--loop-orientation-weight", type=float, default=80.0)
     parser.add_argument("--head-z-weight", type=float, default=100.0)
+    parser.add_argument("--head-x-weight", type=float, default=0.0)
     parser.add_argument("--head-axis-weight", type=float, default=2.5)
     parser.add_argument("--hand-grip-y-weight", type=float, default=0.25)
     parser.add_argument("--grip-center-x-target", type=float, default=None)
@@ -131,18 +145,34 @@ def main() -> int:
 
     sweeper = EndpointSweeper(args)
 
-    # Solve low endpoint first to select the installation/IK branch, then solve
-    # high endpoint from that branch.
-    end_solution = sweeper.solve_pose(
-        target_head_z_m=args.end_head_z,
-        head_down_dot=args.end_head_down_dot,
-        warm_joints=sweeper.base_joints,
-    )
-    start_solution = sweeper.solve_pose(
-        target_head_z_m=args.start_head_z,
-        head_down_dot=args.start_head_down_dot,
-        warm_joints=end_solution.joints_rad,
-    )
+    if args.solve_start_first:
+        start_solution = sweeper.solve_pose(
+            target_head_z_m=args.start_head_z,
+            target_head_x_m=args.start_head_x,
+            head_down_dot=args.start_head_down_dot,
+            warm_joints=sweeper.base_joints,
+        )
+        end_solution = sweeper.solve_pose(
+            target_head_z_m=args.end_head_z,
+            target_head_x_m=args.end_head_x,
+            head_down_dot=args.end_head_down_dot,
+            warm_joints=start_solution.joints_rad,
+        )
+    else:
+        # Solve low endpoint first to select the installation/IK branch, then
+        # solve high endpoint from that branch.
+        end_solution = sweeper.solve_pose(
+            target_head_z_m=args.end_head_z,
+            target_head_x_m=args.end_head_x,
+            head_down_dot=args.end_head_down_dot,
+            warm_joints=sweeper.base_joints,
+        )
+        start_solution = sweeper.solve_pose(
+            target_head_z_m=args.start_head_z,
+            target_head_x_m=args.start_head_x,
+            head_down_dot=args.start_head_down_dot,
+            warm_joints=end_solution.joints_rad,
+        )
 
     waypoints = []
     previous_solution = start_solution
@@ -152,6 +182,7 @@ def main() -> int:
     max_loop_axis_error = 0.0
     max_loop_orientation_error = 0.0
     max_head_z_error = 0.0
+    max_head_x_error = 0.0
     max_head_axis_y_abs = 0.0
     max_torso_contacts = 0
     max_hand_center_y_mm = 0.0
@@ -160,18 +191,25 @@ def main() -> int:
 
     for i, alpha in enumerate(np.linspace(0.0, 1.0, args.samples)):
         target_head_z = (1.0 - alpha) * args.start_head_z + alpha * args.end_head_z
+        target_head_x = (
+            None
+            if args.start_head_x is None or args.end_head_x is None
+            else (1.0 - alpha) * args.start_head_x + alpha * args.end_head_x
+        )
         head_down_dot = (1.0 - alpha) * args.start_head_down_dot + alpha * args.end_head_down_dot
         if i == 0:
             solution = start_solution
         elif i == args.samples - 1:
             solution = sweeper.solve_pose(
                 target_head_z_m=target_head_z,
+                target_head_x_m=target_head_x,
                 head_down_dot=head_down_dot,
                 warm_joints=previous_solution.joints_rad,
             )
         else:
             solution = sweeper.solve_pose(
                 target_head_z_m=target_head_z,
+                target_head_x_m=target_head_x,
                 head_down_dot=head_down_dot,
                 warm_joints=previous_solution.joints_rad,
             )
@@ -185,6 +223,7 @@ def main() -> int:
         max_loop_axis_error = max(max_loop_axis_error, solution.loop_axis_error)
         max_loop_orientation_error = max(max_loop_orientation_error, solution.loop_orientation_error)
         max_head_z_error = max(max_head_z_error, abs(solution.head_z_error_m))
+        max_head_x_error = max(max_head_x_error, abs(solution.head_x_error_m))
         max_head_axis_y_abs = max(max_head_axis_y_abs, abs(solution.head_axis_y))
         max_torso_contacts = max(max_torso_contacts, solution.torso_contacts)
         max_hand_center_y_mm = max(max_hand_center_y_mm, abs(solution.hand_center_y_mm))
@@ -195,12 +234,19 @@ def main() -> int:
                 solution,
                 alpha=alpha,
                 target_head_z_m=target_head_z,
+                target_head_x_m=target_head_x,
                 head_down_dot=head_down_dot,
             )
+        )
+        head_x_text = (
+            f"{solution.head_x_m:.3f}/{target_head_x:.3f}"
+            if target_head_x is not None
+            else f"{solution.head_x_m:.3f}"
         )
         print(
             f"wp={i:02d} alpha={alpha:.3f} "
             f"head_z={solution.head_z_m:.3f}/{target_head_z:.3f} "
+            f"head_x={head_x_text} "
             f"loop_mm={solution.loop_grip_mm:.3f} axis={solution.loop_axis_error:.5f} "
             f"orient={solution.loop_orientation_error:.5f} "
             f"axis_y={solution.head_axis_y:.4f} "
@@ -226,6 +272,8 @@ def main() -> int:
             "base_pose": args.base_pose,
             "start_head_z_m": args.start_head_z,
             "end_head_z_m": args.end_head_z,
+            "start_head_x_m": args.start_head_x,
+            "end_head_x_m": args.end_head_x,
             "actual_head_z_amplitude_m": round(float(amplitude), 6),
             "duration_s": args.duration_s,
             "left_grip_distance_m": args.left_distance,
@@ -239,6 +287,7 @@ def main() -> int:
                 "max_loop_axis_error": round(float(max_loop_axis_error), 8),
                 "max_loop_orientation_error": round(float(max_loop_orientation_error), 8),
                 "max_head_z_error_m": round(float(max_head_z_error), 6),
+                "max_head_x_error_m": round(float(max_head_x_error), 6),
                 "max_head_axis_y_abs": round(float(max_head_axis_y_abs), 6),
                 "max_hand_center_y_mm": round(float(max_hand_center_y_mm), 3),
                 "max_hand_grip_y_abs_mm": round(float(max_hand_grip_y_abs_mm), 3),
@@ -257,6 +306,7 @@ def main() -> int:
         f"max_loop_axis_error={max_loop_axis_error:.8f} "
         f"max_loop_orientation_error={max_loop_orientation_error:.8f} "
         f"max_head_z_error_m={max_head_z_error:.6f} "
+        f"max_head_x_error_m={max_head_x_error:.6f} "
         f"max_head_axis_y_abs={max_head_axis_y_abs:.6f} "
         f"max_hand_center_y_mm={max_hand_center_y_mm:.3f} "
         f"max_hand_grip_y_abs_mm={max_hand_grip_y_abs_mm:.3f} "

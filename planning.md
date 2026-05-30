@@ -14,8 +14,12 @@ This file is for another engineer or coding agent taking over the offline hammer
 
 - `knee_double_v0`: regenerated coarse kneeling two-hand swing, 5 waypoints, height-targeted closed-loop grip geometry.
 - `knee_double_v1`: regenerated finer kneeling two-hand swing, 20 waypoints, height-targeted closed-loop grip geometry.
+- `knee_double_v2`: expanded kneeling two-hand swing, 24 waypoints, `0.94 -> 0.52 m` hammer-head height range, waist pitch bias `-0.30 rad`.
+- `standing_double_v2`: standing-lower-body / `--arm-sdk` v2 swing. This version now optimizes hammer-head forward reach as well as height: head `x` moves about `0.255 -> 0.430 m`, while height drops `1.542 -> 1.230 m`.
 - `knee_double_v1_start`: start pose for simulator/replay.
 - `knee_double_v1_end`: end pose for simulator/replay.
+- `knee_double_v2_start`: start pose for the expanded v2 simulator/replay.
+- `knee_double_v2_end`: end pose for the expanded v2 simulator/replay.
 
 The `knee_double_v1` lower body is intentionally copied from `knee_double_v0`. Both generated trajectories store arm joints only, and their kneeling lower-body pose comes from `knee_double_v0_start` / `knee_double_v0_end`.
 
@@ -34,7 +38,37 @@ PYTHONPYCACHEPREFIX=/tmp/mochi_pycache .venv/bin/python \
   --write-config
 ```
 
-This writes `knee_double_v1` into `configs/trajectory.yaml`. To regenerate the coarse v0 trajectory after a tool-link geometry change, use the same command with `--trajectory-name knee_double_v0 --samples 5`.
+This writes `knee_double_v1` into `configs/trajectory.yaml`. To regenerate the coarse v0 trajectory after a tool-link geometry change, use the same command with `--trajectory-name knee_double_v0 --samples 5`. For the current expanded kneeling v2, use `--trajectory-name knee_double_v2 --base-pose knee_double_v1_start --samples 24 --start-head-z 0.94 --end-head-z 0.52 --loop-orientation-weight 80`, then apply the constant `waist_pitch_joint: -0.30` bias to every waypoint and the v2 start/end poses.
+
+For the current standing / arm-sdk v2 with forward reach, use the standing start pose and solve start-first so the optimizer keeps the existing safe IK branch:
+
+```bash
+PYTHONPYCACHEPREFIX=/tmp/mochi_pycache .venv/bin/python \
+  planner/plan_dual_hold_height_swing.py \
+  --trajectory-name standing_double_v2 \
+  --base-pose standing_double_v2_start \
+  --samples 24 \
+  --start-head-z 1.542 \
+  --end-head-z 1.23 \
+  --start-head-x 0.255 \
+  --end-head-x 0.43 \
+  --head-x-weight 40 \
+  --head-z-weight 80 \
+  --start-head-down-dot 0.145 \
+  --end-head-down-dot 0.65 \
+  --head-axis-lateral-target 0.0 \
+  --left-distance 0.20 \
+  --loop-orientation-weight 80 \
+  --minimize-wrist-center-x-weight 0.005 \
+  --regularization-weight 0.04 \
+  --warm-blend 0.9 \
+  --solve-start-first \
+  --max-neighbor-joint-step-rad 0.20 \
+  --max-head-z-error 0.08 \
+  --write-config
+```
+
+After writing `standing_double_v2`, keep `waist_pitch_joint: -0.30` in every waypoint and in `standing_double_v2_start/end`. The planner optimizes the two arms only, but the arm-sdk command path includes waist joints, and this v2 pose assumes the waist pitch bias.
 
 After regenerating the trajectory, sync the start/end poses from the first and last waypoint:
 
@@ -89,7 +123,9 @@ Hard-ish constraints in the least-squares residual:
 
 - Dual-hand loop: left clamp point equals right clamp point plus the fixed stick-axis distance.
 - Clamp axes aligned: left and right clamp axes match.
+- Clamp roll/orientation aligned: `right_hammer_left_grip_site` and `left_hammer_clamp_center` must match in orientation, not only position. This avoids hidden roll-phase error that makes the MuJoCo `weld` inject large wrist-yaw torque.
 - Head height: `target_head_z_m` follows the start-to-end height schedule.
+- Head forward reach: optional `--start-head-x`, `--end-head-x`, and `--head-x-weight` make the hammer head move forward in world `x`. This can trade away some vertical drop.
 
 Soft objectives:
 
@@ -98,6 +134,7 @@ Soft objectives:
 - `--minimize-wrist-center-x-weight`: targetless loss that pulls the wrist center closer to the body in forward `x`.
 - `--elbow-clearance-*`: keeps elbows away from the torso side.
 - `--regularization-weight`: keeps the IK close to the warm-start branch.
+- `--solve-start-first`: useful for standing v2 with a forward `x` target. It preserves the visual start pose's IK branch before solving the lower/forward endpoint. Without this, the optimizer can jump to a wrist-roll limit branch.
 
 Important: do not reintroduce `hand-center-y-target` or `hand-center-y-weight`. The old average-hand-center objective can hide one hand being far from the center plane.
 
@@ -109,6 +146,8 @@ Important: do not reintroduce `hand-center-y-target` or `hand-center-y-weight`. 
 - `--start-head-down-dot 0.50`
 - `--end-head-down-dot 0.85`
 - `--head-axis-lateral-target 0.0`
+- `--loop-orientation-weight 80`
+- For `knee_double_v2`, use `waist_pitch_joint: -0.30` to move COM rearward while keeping waist margin about `0.22 rad`.
 - `--hand-grip-y-weight 0.25`
 - `--minimize-wrist-center-x-weight 0.01`
 
@@ -130,6 +169,7 @@ Treat this as the minimum acceptable offline result:
 - `max_neighbor_joint_step_rad <= 0.16`
 - `max_loop_grip_mm <= 1.0`
 - `max_loop_axis_error <= 0.002`
+- `max_loop_orientation_error <= 0.002`
 - `max_head_z_error_m <= 0.015`
 
 Run an interpolated replay-style validation after writing YAML:
@@ -206,7 +246,7 @@ PY
 Start simulator at the matching pose:
 
 ```bash
-python sim/run_sim_controller.py --interface eth3 --pose knee_double_v1_start
+python sim/run_sim_controller.py --interface eth3 --pose knee_double_v2_start
 ```
 
 Replay once before looping:
@@ -214,10 +254,10 @@ Replay once before looping:
 ```bash
 python apps/replay_trajectory.py \
   --interface eth3 \
-  --trajectory knee_double_v1 \
-  --gravity-comp \
-  --cycles 1 \
-  --enable-command
+  --trajectory knee_double_v2 \
+  --arm-sdk \
+  --duration-s 4.0 \
+  --max-step-rad 0.006
 ```
 
-For real hardware, do not start with `--loop`. First run one cycle, reduce gravity compensation scale if torque or tracking looks bad, and verify the robot starts close to `knee_double_v1_start`.
+For real hardware, do not start with `--loop`. First run one cycle and verify the robot starts close to the matching `*_start` pose.

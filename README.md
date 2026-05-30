@@ -178,7 +178,8 @@ Terminal 2:
 python apps/replay_trajectory.py \
   --interface eth3 \
   --trajectory knee_double_v0 \
-  --gravity-comp
+  --gravity-comp \
+  --no-release-motion-mode
 ```
 
 `replay_trajectory.py` first ramps from the current joint state to the first
@@ -192,15 +193,19 @@ To watch the hammer swing forward and backward repeatedly:
 python apps/replay_trajectory.py \
   --interface eth3 \
   --trajectory knee_double_v0 \
-  --loop
+  --loop \
+  --no-release-motion-mode
 ```
 
 Trajectory replay always uses a staged SPACE-key workflow:
 
 1. Press SPACE to ramp to the first waypoint.
 2. Press SPACE to start the trajectory.
-3. At the final pose, press SPACE to confirm the current-position stop for stick removal.
-4. Press SPACE to return to the first waypoint and release.
+3. By default, normal completion releases the active command interface from the
+   current command.
+
+Set `--return-to-start-s 6` when you explicitly want the old slow return to the
+startup state before release.
 
 There are two command paths:
 
@@ -210,7 +215,10 @@ exit. The built-in high-level motion mode stays running, so this is the path for
 our first G1 workflow test.
 
 Without `--arm-sdk`, the app publishes full-body low-level commands on
-`rt/lowcmd`. This is not the path for the first real standing test.
+`rt/lowcmd` and releases the active Unitree high-level motion mode by default.
+Use `--no-release-motion-mode` for simulator runs or for environments without
+MotionSwitcher. Full-body lowcmd is not the path for the first real standing
+test.
 
 ```bash
 python apps/replay_trajectory.py \

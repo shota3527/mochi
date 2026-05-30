@@ -43,6 +43,8 @@ class EndpointSolution:
     loop_orientation_error: float
     hand_center_y_mm: float
     max_hand_grip_y_abs_mm: float
+    head_x_m: float
+    head_x_error_m: float
     head_z_m: float
     head_z_error_m: float
     head_axis_error: float
@@ -107,6 +109,7 @@ class EndpointSweeper:
         target_head_z_m: float,
         head_down_dot: float,
         warm_joints: dict[str, float],
+        target_head_x_m: float | None = None,
     ) -> EndpointSolution:
         target_lateral = (
             self.initial_head_lateral
@@ -139,6 +142,7 @@ class EndpointSweeper:
             left_loop_x = self.data.site_xmat[self.left_loop_site_id].reshape(3, 3)[:, 0]
             right_left_grip = right_grip + right_axis * self.args.left_distance
             head_axis = self.data.xmat[self.hammer_grip_body_id].reshape(3, 3)[:, 0]
+            head_x = self.data.geom_xpos[self.head_geom_id][0]
             head_z = self.data.geom_xpos[self.head_geom_id][2]
             hand_grip_y = np.array([right_grip[1], left_grip[1]])
             grip_center_x = 0.5 * (right_grip[0] + left_grip[0])
@@ -165,12 +169,18 @@ class EndpointSweeper:
                 if self.args.minimize_wrist_center_x_weight > 0.0
                 else np.empty(0)
             )
+            head_x_residual = (
+                np.array([head_x - float(target_head_x_m)]) * self.args.head_x_weight
+                if target_head_x_m is not None and self.args.head_x_weight > 0.0
+                else np.empty(0)
+            )
             return np.concatenate(
                 [
                     (left_grip - right_left_grip) * self.args.loop_grip_weight,
                     (left_axis - right_axis) * self.args.loop_axis_weight,
                     (left_loop_x - right_loop_x) * self.args.loop_orientation_weight,
                     np.array([head_z - target_head_z_m]) * self.args.head_z_weight,
+                    head_x_residual,
                     (head_axis - target_axis) * self.args.head_axis_weight,
                     (hand_grip_y - self.args.hand_grip_y_target) * self.args.hand_grip_y_weight,
                     grip_center_x_residual,
@@ -225,6 +235,7 @@ class EndpointSweeper:
         right_loop_x = self.data.site_xmat[self.right_loop_site_id].reshape(3, 3)[:, 0]
         left_loop_x = self.data.site_xmat[self.left_loop_site_id].reshape(3, 3)[:, 0]
         head_axis = self.data.xmat[self.hammer_grip_body_id].reshape(3, 3)[:, 0].copy()
+        head_x = float(self.data.geom_xpos[self.head_geom_id][0])
         head_z = float(self.data.geom_xpos[self.head_geom_id][2])
         hand_center_y = float(0.5 * (right_grip[1] + left_grip[1]))
         max_hand_grip_y_abs_mm = float(max(abs(right_grip[1]), abs(left_grip[1])) * 1000.0)
@@ -233,6 +244,7 @@ class EndpointSweeper:
         loop_grip_mm = float(np.linalg.norm(left_grip - right_left_grip) * 1000.0)
         loop_axis_error = float(np.linalg.norm(left_axis - right_axis))
         loop_orientation_error = float(np.linalg.norm(left_loop_x - right_loop_x))
+        head_x_error = 0.0 if target_head_x_m is None else float(head_x - target_head_x_m)
         head_z_error = float(head_z - target_head_z_m)
         head_axis_error = float(np.linalg.norm(head_axis - target_axis))
         joints_rad = {name: float(value) for name, value in zip(ARM_JOINTS, best.x)}
@@ -252,6 +264,8 @@ class EndpointSweeper:
             loop_orientation_error=loop_orientation_error,
             hand_center_y_mm=hand_center_y * 1000.0,
             max_hand_grip_y_abs_mm=max_hand_grip_y_abs_mm,
+            head_x_m=head_x,
+            head_x_error_m=head_x_error,
             head_z_m=head_z,
             head_z_error_m=head_z_error,
             head_axis_error=head_axis_error,
@@ -299,6 +313,8 @@ def main() -> int:
     parser.add_argument("--loop-axis-weight", type=float, default=100.0)
     parser.add_argument("--loop-orientation-weight", type=float, default=80.0)
     parser.add_argument("--head-z-weight", type=float, default=100.0)
+    parser.add_argument("--head-x-target", type=float, default=None)
+    parser.add_argument("--head-x-weight", type=float, default=0.0)
     parser.add_argument("--head-axis-weight", type=float, default=2.5)
     parser.add_argument("--hand-grip-y-weight", type=float, default=0.25)
     parser.add_argument("--grip-center-x-target", type=float, default=None)
@@ -328,11 +344,13 @@ def main() -> int:
             target_head_z_m=end_z,
             head_down_dot=args.end_head_down_dot,
             warm_joints=sweeper.base_joints,
+            target_head_x_m=args.head_x_target,
         )
         start_solution = sweeper.solve_pose(
             target_head_z_m=start_z,
             head_down_dot=args.start_head_down_dot,
             warm_joints=end_solution.joints_rad,
+            target_head_x_m=args.head_x_target,
         )
         amplitude = start_solution.head_z_m - end_solution.head_z_m
         pair_ok = end_solution.ok and start_solution.ok and amplitude > 0.10

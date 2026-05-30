@@ -11,6 +11,7 @@ import sys
 import termios
 import time
 import tty
+from dataclasses import dataclass
 from pathlib import Path
 
 import mujoco
@@ -26,9 +27,6 @@ from core.safety_filter import clamp_joint_limits, rate_limit
 from sim.run_sim_controller import UNITREE_G1_29DOF_XML
 
 GAIN_PROFILES_CONFIG = PROJECT_ROOT / "configs" / "gain_profiles.yaml"
-SHUTDOWN_HOLD_S = 2.0
-SHUTDOWN_HOLD_KP = 20.0
-SHUTDOWN_HOLD_KD = 1.0
 SHUTDOWN_DISABLE_REPEATS = 20
 ARM_SDK_JOINT_INDICES = tuple(range(12, 29))
 
@@ -202,160 +200,170 @@ class ModelSelectedJointGravityFeedforward:
         return tau
 
 
+@dataclass
+class ReplayContext:
+    backend: G1Sdk2Backend
+    q_min: np.ndarray
+    q_max: np.ndarray
+    kp: np.ndarray
+    kd: np.ndarray
+    mode_machine: int | None
+    max_step_rad: float
+    limit_margin_rad: float
+    rate_hz: float
+    index_to_name: dict[int, str]
+    error_indices: np.ndarray
+    log: list[dict]
+    gravity_comp: ModelSelectedJointGravityFeedforward | None
+    arm_sdk: bool
+
+    @property
+    def dt(self) -> float:
+        return 1.0 / float(self.rate_hz)
+
+    @property
+    def report_interval_steps(self) -> int:
+        return max(1, int(self.rate_hz))
+
+
 def publish_segment(
     *,
-    backend: G1Sdk2Backend,
+    ctx: ReplayContext,
     q0: np.ndarray,
     q1: np.ndarray,
     q_prev: np.ndarray,
     segment_steps: int,
-    dt: float,
-    q_min: np.ndarray,
-    q_max: np.ndarray,
-    kp: np.ndarray,
-    kd: np.ndarray,
-    mode_machine,
-    max_step_rad: float,
-    limit_margin_rad: float,
-    rate_hz: float,
-    index_to_name: dict[int, str],
-    error_indices: np.ndarray,
-    log: list[dict],
     label: str,
-    gravity_comp: ModelSelectedJointGravityFeedforward | None,
-    arm_sdk: bool,
     stop_checker=None,
 ) -> np.ndarray:
     for step in range(segment_steps):
         alpha = smoothstep(step / segment_steps)
         q_des = q0 + alpha * (q1 - q0)
-        q_safe = clamp_joint_limits(q_des, q_min, q_max, margin=limit_margin_rad)
-        q_safe = rate_limit(q_safe, q_prev, max_step=max_step_rad)
-        tau_ff = gravity_comp.torque(q_safe) if gravity_comp is not None else None
-        publish_command(backend, q_safe, mode_machine, kp, kd, tau_ff, arm_sdk=arm_sdk)
-        if step % max(1, int(rate_hz)) == 0 or step == segment_steps - 1:
-            latest = backend.latest_state()
-            if latest is not None:
-                err = np.abs(q_safe - latest.q)
-                idx = max_error_index(err, error_indices)
-                print(
-                    f"{label} t={step * dt:.1f}s "
-                    f"max_cmd_error={float(err[idx]):.4f}({index_to_name[idx]})"
-                )
-                log.append(
-                    {
-                        "stamp": time.time(),
-                        "label": label,
-                        "max_cmd_error": float(err[idx]),
-                        "max_cmd_error_joint": index_to_name[idx],
-                        "max_abs_tau_ff": float(np.max(np.abs(tau_ff))) if tau_ff is not None else 0.0,
-                    }
-                )
+        q_safe, tau_ff = prepare_command(ctx, q_des, q_prev)
+        publish_and_report(ctx, q_safe, tau_ff, label=label, step=step, force_report=step == segment_steps - 1)
         q_prev = q_safe
-        time.sleep(dt)
+        time.sleep(ctx.dt)
         if stop_checker is not None and stop_checker():
             print(f"{label}: SPACE received; stopping at current command.", flush=True)
             raise StopTrajectory(q_prev.copy())
     return q_prev
 
 
+def run_segments(
+    ctx: ReplayContext,
+    pairs: list[tuple[np.ndarray, np.ndarray]],
+    q_prev: np.ndarray,
+    segment_steps: int,
+    label_prefix: str,
+    stop_checker=None,
+) -> np.ndarray:
+    for segment_index, (q0, q1) in enumerate(pairs):
+        label = f"{label_prefix} segment={segment_index}" if label_prefix else f"segment={segment_index}"
+        q_prev = publish_segment(
+            ctx=ctx,
+            q0=q0,
+            q1=q1,
+            q_prev=q_prev,
+            segment_steps=segment_steps,
+            label=label,
+            stop_checker=stop_checker,
+        )
+    return q_prev
+
+
 def publish_initial_ramp(
     *,
-    backend: G1Sdk2Backend,
+    ctx: ReplayContext,
     q_start: np.ndarray,
     q_target: np.ndarray,
-    q_min: np.ndarray,
-    q_max: np.ndarray,
-    kp: np.ndarray,
-    kd: np.ndarray,
-    mode_machine,
-    max_step_rad: float,
-    limit_margin_rad: float,
-    rate_hz: float,
     min_duration_s: float,
-    index_to_name: dict[int, str],
-    error_indices: np.ndarray,
-    gravity_comp: ModelSelectedJointGravityFeedforward | None,
-    arm_sdk: bool,
 ) -> np.ndarray:
-    dt = 1.0 / float(rate_hz)
     q_prev = q_start.copy()
-    ramp_steps = max(1, int(math.ceil(float(min_duration_s) / dt)))
+    ramp_steps = max(1, int(math.ceil(float(min_duration_s) / ctx.dt)))
 
-    def publish(q_des: np.ndarray, step: int, alpha: float) -> None:
-        nonlocal q_prev
-        q_safe = clamp_joint_limits(q_des, q_min, q_max, margin=limit_margin_rad)
-        q_safe = rate_limit(q_safe, q_prev, max_step=max_step_rad)
-        tau_ff = gravity_comp.torque(q_safe) if gravity_comp is not None else None
-        if tau_ff is not None:
-            tau_ff = tau_ff * alpha
-        publish_command(backend, q_safe, mode_machine, kp, kd, tau_ff, arm_sdk=arm_sdk)
-        q_prev = q_safe
-
-        if step % max(1, int(rate_hz)) == 0:
-            latest = backend.latest_state()
-            if latest is not None:
-                err = np.abs(q_safe - latest.q)
-                idx = max_error_index(err, error_indices)
-                print(
-                    f"initial_ramp t={step * dt:.1f}s "
-                    f"max_cmd_error={float(err[idx]):.4f}({index_to_name[idx]})"
-                )
-        time.sleep(dt)
+    def publish(q_des: np.ndarray, step: int, alpha: float) -> np.ndarray:
+        q_safe, tau_ff = prepare_command(ctx, q_des, q_prev, tau_scale=alpha)
+        publish_and_report(ctx, q_safe, tau_ff, label="initial_ramp", step=step)
+        time.sleep(ctx.dt)
+        return q_safe
 
     for step in range(ramp_steps):
         alpha = smoothstep((step + 1) / ramp_steps)
-        publish(q_start + alpha * (q_target - q_start), step, alpha)
+        q_prev = publish(q_start + alpha * (q_target - q_start), step, alpha)
 
     extra_step = ramp_steps
     while float(np.max(np.abs(q_target - q_prev))) > 1e-4:
-        alpha = 1.0
-        publish(q_target, extra_step, alpha)
+        q_prev = publish(q_target, extra_step, alpha=1.0)
         extra_step += 1
 
     return q_prev
 
 
 def graceful_release(
-    backend: G1Sdk2Backend,
-    q_hold: np.ndarray,
-    mode_machine,
-    rate_hz: float,
-    hold_s: float,
-    hold_kp: float,
-    hold_kd: float,
+    ctx: ReplayContext,
     disable_repeats: int,
-    arm_sdk: bool,
 ) -> None:
-    """Briefly hold the last pose, then disable low-level commands."""
-    dt = 1.0 / float(rate_hz)
-    kp = np.full_like(q_hold, float(hold_kp), dtype=float)
-    kd = np.full_like(q_hold, float(hold_kd), dtype=float)
-    tau = np.zeros_like(q_hold, dtype=float)
-    hold_steps = max(0, int(math.ceil(float(hold_s) / dt)))
-    for _ in range(hold_steps):
-        publish_command(backend, q_hold, mode_machine, kp, kd, tau, arm_sdk=arm_sdk)
-        time.sleep(dt)
+    """Disable the active command interface."""
     for _ in range(max(1, int(disable_repeats))):
-        if arm_sdk:
-            backend.publish_arm_sdk_disable()
+        if ctx.arm_sdk:
+            ctx.backend.publish_arm_sdk_disable()
         else:
-            backend.publish_disable_command(mode_machine=mode_machine)
-        time.sleep(dt)
+            ctx.backend.publish_disable_command(mode_machine=ctx.mode_machine)
+        time.sleep(ctx.dt)
+
+
+def prepare_command(
+    ctx: ReplayContext,
+    q_des: np.ndarray,
+    q_prev: np.ndarray,
+    tau_scale: float = 1.0,
+) -> tuple[np.ndarray, np.ndarray | None]:
+    q_safe = clamp_joint_limits(q_des, ctx.q_min, ctx.q_max, margin=ctx.limit_margin_rad)
+    q_safe = rate_limit(q_safe, q_prev, max_step=ctx.max_step_rad)
+    tau_ff = ctx.gravity_comp.torque(q_safe) if ctx.gravity_comp is not None else None
+    if tau_ff is not None and tau_scale != 1.0:
+        tau_ff = tau_ff * float(tau_scale)
+    return q_safe, tau_ff
+
+
+def publish_and_report(
+    ctx: ReplayContext,
+    q_safe: np.ndarray,
+    tau_ff: np.ndarray | None,
+    *,
+    label: str,
+    step: int,
+    force_report: bool = False,
+) -> None:
+    publish_command(ctx, q_safe, ctx.kp, ctx.kd, tau_ff)
+    if not force_report and step % ctx.report_interval_steps != 0:
+        return
+    latest = ctx.backend.latest_state()
+    if latest is None:
+        return
+    err = np.abs(q_safe - latest.q)
+    idx = max_error_index(err, ctx.error_indices)
+    print(f"{label} t={step * ctx.dt:.1f}s max_cmd_error={float(err[idx]):.4f}({ctx.index_to_name[idx]})")
+    ctx.log.append(
+        {
+            "stamp": time.time(),
+            "label": label,
+            "max_cmd_error": float(err[idx]),
+            "max_cmd_error_joint": ctx.index_to_name[idx],
+            "max_abs_tau_ff": float(np.max(np.abs(tau_ff))) if tau_ff is not None else 0.0,
+        }
+    )
 
 
 def publish_command(
-    backend: G1Sdk2Backend,
+    ctx: ReplayContext,
     q_des: np.ndarray,
-    mode_machine,
     kp: np.ndarray,
     kd: np.ndarray,
     tau,
-    *,
-    arm_sdk: bool,
 ) -> None:
-    if arm_sdk:
-        backend.publish_arm_sdk_command(
+    if ctx.arm_sdk:
+        ctx.backend.publish_arm_sdk_command(
             q_des,
             kp=kp,
             kd=kd,
@@ -364,7 +372,7 @@ def publish_command(
             joint_indices=ARM_SDK_JOINT_INDICES,
         )
     else:
-        backend.publish_position_command(q_des, mode_machine=mode_machine, kp=kp, kd=kd, tau=tau)
+        ctx.backend.publish_position_command(q_des, mode_machine=ctx.mode_machine, kp=kp, kd=kd, tau=tau)
 
 
 def wait_for_space(prompt: str, confirm_message: str) -> None:
@@ -391,19 +399,13 @@ def wait_for_space(prompt: str, confirm_message: str) -> None:
 
 def hold_command_until_space(
     *,
-    backend: G1Sdk2Backend,
+    ctx: ReplayContext,
     q_hold: np.ndarray,
-    mode_machine,
-    kp: np.ndarray,
-    kd: np.ndarray,
     tau: np.ndarray,
-    arm_sdk: bool,
-    rate_hz: float,
     prompt: str,
     confirm_message: str,
 ) -> None:
     print(prompt, flush=True)
-    dt = 1.0 / float(rate_hz)
     if not sys.stdin.isatty():
         input("stdin is not a TTY; press Enter to continue.")
         return
@@ -413,8 +415,8 @@ def hold_command_until_space(
     try:
         tty.setcbreak(fd)
         while True:
-            publish_command(backend, q_hold, mode_machine, kp, kd, tau, arm_sdk=arm_sdk)
-            readable, _, _ = select.select([sys.stdin], [], [], dt)
+            publish_command(ctx, q_hold, ctx.kp, ctx.kd, tau)
+            readable, _, _ = select.select([sys.stdin], [], [], ctx.dt)
             if not readable:
                 continue
             char = sys.stdin.read(1)
@@ -448,12 +450,19 @@ def main() -> int:
     parser.add_argument("--cycles", type=int, default=0, help="Loop cycles to run; 0 means infinite when --loop is set.")
     parser.add_argument("--arm-sdk", action="store_true", help="Publish upper-body commands on rt/arm_sdk instead of full-body rt/lowcmd.")
     parser.add_argument(
-        "--return-to-start-s",
+        "--no-release-motion-mode",
+        action="store_true",
+        help="For full-body rt/lowcmd only: skip releasing the active Unitree high-level motion mode.",
+    )
+    parser.add_argument(
+        "--return-time-multiplier",
         type=float,
-        default=6.0,
-        help="On normal completion, ramp back to the startup state before releasing commands.",
+        default=2.0,
+        help="Return-to-start duration multiplier relative to --duration-s. Default 2.0 means half speed.",
     )
     args = parser.parse_args()
+    if args.return_time_multiplier <= 0.0:
+        raise SystemExit("--return-time-multiplier must be > 0.")
 
     joint_config = load_yaml(PROJECT_ROOT / "configs" / "g1_29dof_joints.yaml")
     trajectory_config = load_yaml(PROJECT_ROOT / "configs" / "trajectory.yaml")
@@ -487,10 +496,11 @@ def main() -> int:
     )
 
     backend = G1Sdk2Backend(domain_id=args.domain_id, interface=args.interface)
+    release_motion_mode = (not args.arm_sdk) and (not args.no_release_motion_mode)
     backend.initialize(
         enable_commands=not args.arm_sdk,
         enable_arm_sdk=args.arm_sdk,
-        release_motion_mode=False,
+        release_motion_mode=release_motion_mode,
     )
     try:
         sample = backend.wait_for_state(timeout_s=args.timeout)
@@ -514,17 +524,34 @@ def main() -> int:
     segment_steps = max(1, int(math.ceil(segment_duration / dt)))
     q_prev = q_current.copy()
     log = []
+    ctx = ReplayContext(
+        backend=backend,
+        q_min=q_min,
+        q_max=q_max,
+        kp=kp,
+        kd=kd,
+        mode_machine=sample.mode_machine,
+        max_step_rad=args.max_step_rad,
+        limit_margin_rad=args.limit_margin_rad,
+        rate_hz=rate_hz,
+        index_to_name=index_to_name,
+        error_indices=error_indices,
+        log=log,
+        gravity_comp=gravity_comp,
+        arm_sdk=args.arm_sdk,
+    )
 
     print(f"Replaying {args.trajectory} on DDS interface {args.interface}. arm_sdk={args.arm_sdk}.")
     print(
         f"waypoints={len(q_waypoints)} duration_s={total_duration:.2f} settle_s={args.settle_s:.2f} "
-        f"max_step_rad={args.max_step_rad} gain_profile={gain_profile_name} "
+        f"max_step_rad={args.max_step_rad} max_velocity_rad_s={args.max_step_rad * rate_hz:.3f} "
+        f"gain_profile={gain_profile_name} release_motion_mode={release_motion_mode} "
         f"gravity_comp={args.gravity_comp} gravity_comp_scale={args.gravity_comp_scale:.2f} "
         f"gravity_comp_max_tau_nm={args.gravity_comp_max_tau_nm:.1f} "
         f"gravity_comp_initial_max_tau_nm="
         f"{(float(np.max(np.abs(gravity_comp.torque(q_waypoints[0])))) if gravity_comp is not None else 0.0):.2f} "
         f"initial_error={initial_error_value:.3f}({index_to_name[initial_error_index]}) "
-        f"loop={args.loop} cycles={args.cycles}"
+        f"loop={args.loop} cycles={args.cycles} return_time_multiplier={args.return_time_multiplier:.2f}"
     )
 
     forward_pairs = list(zip(q_waypoints[:-1], q_waypoints[1:]))
@@ -539,35 +566,18 @@ def main() -> int:
         )
 
         q_prev = publish_initial_ramp(
-            backend=backend,
+            ctx=ctx,
             q_start=q_current,
             q_target=q_waypoints[0],
-            q_min=q_min,
-            q_max=q_max,
-            kp=kp,
-            kd=kd,
-            mode_machine=sample.mode_machine,
-            max_step_rad=args.max_step_rad,
-            limit_margin_rad=args.limit_margin_rad,
-            rate_hz=rate_hz,
             min_duration_s=args.settle_s,
-            index_to_name=index_to_name,
-            error_indices=error_indices,
-            gravity_comp=gravity_comp,
-            arm_sdk=args.arm_sdk,
         )
         command_started = True
 
         tau_hold = gravity_comp.torque(q_prev) if gravity_comp is not None else np.zeros_like(q_prev)
         hold_command_until_space(
-            backend=backend,
+            ctx=ctx,
             q_hold=q_prev,
-            mode_machine=sample.mode_machine,
-            kp=kp,
-            kd=kd,
             tau=tau_hold,
-            arm_sdk=args.arm_sdk,
-            rate_hz=rate_hz,
             prompt="Stage 2/4: At first waypoint and holding. Press SPACE to start trajectory.",
             confirm_message="Starting trajectory.",
         )
@@ -580,150 +590,66 @@ def main() -> int:
                     while args.cycles <= 0 or cycles_done < args.cycles:
                         cycles_done += 1
                         print(f"cycle={cycles_done} forward")
-                        for segment_index, (q0, q1) in enumerate(forward_pairs):
-                            q_prev = publish_segment(
-                                backend=backend,
-                                q0=q0,
-                                q1=q1,
-                                q_prev=q_prev,
-                                segment_steps=segment_steps,
-                                dt=dt,
-                                q_min=q_min,
-                                q_max=q_max,
-                                kp=kp,
-                                kd=kd,
-                                mode_machine=sample.mode_machine,
-                                max_step_rad=args.max_step_rad,
-                                limit_margin_rad=args.limit_margin_rad,
-                                rate_hz=rate_hz,
-                                index_to_name=index_to_name,
-                                error_indices=error_indices,
-                                log=log,
-                                label=f"cycle={cycles_done} forward segment={segment_index}",
-                                gravity_comp=gravity_comp,
-                                arm_sdk=args.arm_sdk,
-                                stop_checker=stopper.pressed,
-                            )
+                        q_prev = run_segments(
+                            ctx,
+                            forward_pairs,
+                            q_prev,
+                            segment_steps,
+                            label_prefix=f"cycle={cycles_done} forward",
+                            stop_checker=stopper.pressed,
+                        )
                         print(f"cycle={cycles_done} backward")
-                        for segment_index, (q0, q1) in enumerate(reverse_pairs):
-                            q_prev = publish_segment(
-                                backend=backend,
-                                q0=q0,
-                                q1=q1,
-                                q_prev=q_prev,
-                                segment_steps=segment_steps,
-                                dt=dt,
-                                q_min=q_min,
-                                q_max=q_max,
-                                kp=kp,
-                                kd=kd,
-                                mode_machine=sample.mode_machine,
-                                max_step_rad=args.max_step_rad,
-                                limit_margin_rad=args.limit_margin_rad,
-                                rate_hz=rate_hz,
-                                index_to_name=index_to_name,
-                                error_indices=error_indices,
-                                log=log,
-                                label=f"cycle={cycles_done} backward segment={segment_index}",
-                                gravity_comp=gravity_comp,
-                                arm_sdk=args.arm_sdk,
-                                stop_checker=stopper.pressed,
-                            )
+                        q_prev = run_segments(
+                            ctx,
+                            reverse_pairs,
+                            q_prev,
+                            segment_steps,
+                            label_prefix=f"cycle={cycles_done} backward",
+                            stop_checker=stopper.pressed,
+                        )
                     completed = True
                 except StopTrajectory as exc:
                     q_prev = exc.q_current
                     stopped_in_loop = True
         else:
-            for segment_index, (q0, q1) in enumerate(forward_pairs):
-                q_prev = publish_segment(
-                    backend=backend,
-                    q0=q0,
-                    q1=q1,
-                    q_prev=q_prev,
-                    segment_steps=segment_steps,
-                    dt=dt,
-                    q_min=q_min,
-                    q_max=q_max,
-                    kp=kp,
-                    kd=kd,
-                    mode_machine=sample.mode_machine,
-                    max_step_rad=args.max_step_rad,
-                    limit_margin_rad=args.limit_margin_rad,
-                    rate_hz=rate_hz,
-                    index_to_name=index_to_name,
-                    error_indices=error_indices,
-                    log=log,
-                    label=f"segment={segment_index}",
-                    gravity_comp=gravity_comp,
-                    arm_sdk=args.arm_sdk,
-                )
+            q_prev = run_segments(ctx, forward_pairs, q_prev, segment_steps, label_prefix="")
             completed = True
     except KeyboardInterrupt:
         interrupted = True
         print("interrupted; holding briefly, disabling command, then releasing")
     finally:
-        if (completed or stopped_in_loop) and args.return_to_start_s > 0.0:
+        if completed or stopped_in_loop:
             tau_hold = gravity_comp.torque(q_prev) if gravity_comp is not None else np.zeros_like(q_prev)
             if completed and not args.loop:
                 hold_command_until_space(
-                    backend=backend,
+                    ctx=ctx,
                     q_hold=q_prev,
-                    mode_machine=sample.mode_machine,
-                    kp=kp,
-                    kd=kd,
                     tau=tau_hold,
-                    arm_sdk=args.arm_sdk,
-                    rate_hz=rate_hz,
                     prompt="Stage 3/4: Trajectory complete; holding final command for stick removal. Press SPACE to confirm current-position stop.",
                     confirm_message="Current-position stop confirmed.",
                 )
             hold_command_until_space(
-                backend=backend,
+                ctx=ctx,
                 q_hold=q_prev,
-                mode_machine=sample.mode_machine,
-                kp=kp,
-                kd=kd,
                 tau=tau_hold,
-                arm_sdk=args.arm_sdk,
-                rate_hz=rate_hz,
                 prompt="Stage 4/4: Holding current command. Press SPACE to return to startup state and release.",
                 confirm_message="Returning to startup state before release.",
             )
             print("returning to startup state before release", flush=True)
-            return_steps = max(1, int(math.ceil(float(args.return_to_start_s) * rate_hz)))
+            return_duration_s = total_duration * float(args.return_time_multiplier)
+            return_steps = max(1, int(math.ceil(return_duration_s * rate_hz)))
             q_prev = publish_segment(
-                backend=backend,
+                ctx=ctx,
                 q0=q_prev,
                 q1=q_release_target,
                 q_prev=q_prev,
                 segment_steps=return_steps,
-                dt=dt,
-                q_min=q_min,
-                q_max=q_max,
-                kp=kp,
-                kd=kd,
-                mode_machine=sample.mode_machine,
-                max_step_rad=args.max_step_rad,
-                limit_margin_rad=args.limit_margin_rad,
-                rate_hz=rate_hz,
-                index_to_name=index_to_name,
-                error_indices=error_indices,
-                log=log,
                 label="return_to_startup_state",
-                gravity_comp=gravity_comp,
-                arm_sdk=args.arm_sdk,
             )
         if command_started:
             graceful_release(
-                backend=backend,
-                q_hold=q_prev,
-                mode_machine=sample.mode_machine,
-                rate_hz=rate_hz,
-                hold_s=SHUTDOWN_HOLD_S,
-                hold_kp=SHUTDOWN_HOLD_KP,
-                hold_kd=SHUTDOWN_HOLD_KD,
+                ctx=ctx,
                 disable_repeats=SHUTDOWN_DISABLE_REPEATS,
-                arm_sdk=args.arm_sdk,
             )
 
     log_dir = PROJECT_ROOT / "logs"

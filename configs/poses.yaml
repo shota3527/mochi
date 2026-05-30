@@ -102,20 +102,20 @@ knee_double_v0_start:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    left_shoulder_pitch_joint: -1.2371016839910505
-    left_shoulder_roll_joint: 0.43284455023999696
-    left_shoulder_yaw_joint: -0.21837531998218399
-    left_elbow_joint: -0.04363236676818595
-    left_wrist_roll_joint: -1.8345092437700945
-    left_wrist_pitch_joint: 1.06647008010561
-    left_wrist_yaw_joint: -0.2579053646198653
-    right_shoulder_pitch_joint: -0.3872224096705719
-    right_shoulder_roll_joint: -0.3851275519509942
-    right_shoulder_yaw_joint: 0.5992482276624101
-    right_elbow_joint: -0.46685977557237957
-    right_wrist_roll_joint: 0.9786275052319615
-    right_wrist_pitch_joint: 0.6950660888572963
-    right_wrist_yaw_joint: 0.9690768701365304
+    left_shoulder_pitch_joint: -1.2734156382034334
+    left_shoulder_roll_joint: 0.45150007122712604
+    left_shoulder_yaw_joint: -0.31683744640521266
+    left_elbow_joint: 0.062474508085841866
+    left_wrist_roll_joint: -1.7099064345947448
+    left_wrist_pitch_joint: 0.983595482933459
+    left_wrist_yaw_joint: -0.6876250086008344
+    right_shoulder_pitch_joint: -0.4091114277548897
+    right_shoulder_roll_joint: -0.39889330639479414
+    right_shoulder_yaw_joint: 0.6008057981839167
+    right_elbow_joint: -0.4491384678607366
+    right_wrist_roll_joint: 0.9952057140278437
+    right_wrist_pitch_joint: 0.6895404108344144
+    right_wrist_yaw_joint: 0.973002303607818
   dual_hold_geometry:
     source: configs/trajectory.yaml:knee_double_v0
     left_grip_distance_m: 0.2
@@ -134,20 +134,20 @@ knee_double_v0_end:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    left_shoulder_pitch_joint: -0.8266209488342678
-    left_shoulder_roll_joint: 0.3687456446358429
-    left_shoulder_yaw_joint: -0.3783238365431408
-    left_elbow_joint: 0.09046978015068895
-    left_wrist_roll_joint: -1.7129339036442885
-    left_wrist_pitch_joint: 1.006174820733196
-    left_wrist_yaw_joint: -0.18187233691227098
-    right_shoulder_pitch_joint: -0.07275680641681048
-    right_shoulder_roll_joint: -0.33839556807592525
-    right_shoulder_yaw_joint: 0.7548685308147878
-    right_elbow_joint: -0.17013973038649893
-    right_wrist_roll_joint: 0.963525588891549
-    right_wrist_pitch_joint: 0.5673172148800302
-    right_wrist_yaw_joint: 1.118527243195528
+    left_shoulder_pitch_joint: -0.7919915312742358
+    left_shoulder_roll_joint: 0.3541119130267239
+    left_shoulder_yaw_joint: -0.5035249961441053
+    left_elbow_joint: 0.15756239000387634
+    left_wrist_roll_joint: -1.5646485276389375
+    left_wrist_pitch_joint: 0.8771975723399209
+    left_wrist_yaw_joint: -0.8968284134612354
+    right_shoulder_pitch_joint: 0.0015820027692655817
+    right_shoulder_roll_joint: -0.37406598615276965
+    right_shoulder_yaw_joint: 0.8106725895352201
+    right_elbow_joint: -0.2326775779734347
+    right_wrist_roll_joint: 0.9335457060125187
+    right_wrist_pitch_joint: 0.5179055053494084
+    right_wrist_yaw_joint: 1.0972050966787592
   dual_hold_geometry:
     source: configs/trajectory.yaml:knee_double_v0
     left_grip_distance_m: 0.2
@@ -221,3 +221,123 @@ knee_double_v1_end:
     grip_roll_phase_deg: -120.0
     closed_loop_only: true
     full_pose_locked: false
+knee_double_v2_start:
+  memo: Start pose for knee_double_v2 expanded kneeling swing; lower body copied from knee_double_v1_start.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -1.6434124102655339
+    left_shoulder_roll_joint: 0.5784792325607058
+    left_shoulder_yaw_joint: -0.4958207604421019
+    left_elbow_joint: 0.637978459018902
+    left_wrist_roll_joint: -1.7319876837854828
+    left_wrist_pitch_joint: 0.9870114564914376
+    left_wrist_yaw_joint: -1.0505712916826615
+    right_shoulder_pitch_joint: -0.847142639268404
+    right_shoulder_roll_joint: -0.4495015820976976
+    right_shoulder_yaw_joint: 0.5750170903054177
+    right_elbow_joint: -0.2835773518402233
+    right_wrist_roll_joint: 1.5187116051245202
+    right_wrist_pitch_joint: 0.8208867390293765
+    right_wrist_yaw_joint: 0.7005747152427116
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v2
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+knee_double_v2_end:
+  memo: End pose for knee_double_v2 expanded kneeling swing; lower body copied from knee_double_v1_end.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -0.6718321508663767
+    left_shoulder_roll_joint: 0.37547924125442633
+    left_shoulder_yaw_joint: -0.9473682895940834
+    left_elbow_joint: 0.3874929455107612
+    left_wrist_roll_joint: -1.4820107192121024
+    left_wrist_pitch_joint: 0.43213621562634374
+    left_wrist_yaw_joint: -1.22252091221228
+    right_shoulder_pitch_joint: -0.007251098336589699
+    right_shoulder_roll_joint: -0.2563420484293427
+    right_shoulder_yaw_joint: 1.0389654419931238
+    right_elbow_joint: 0.4416525278539613
+    right_wrist_roll_joint: 0.8609021869500533
+    right_wrist_pitch_joint: 0.035237144217475064
+    right_wrist_yaw_joint: 1.3921974433879467
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v2
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+standing_double_v2_start:
+  memo: Start pose for standing_double_v2 forward-optimized arm-sdk swing.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -1.6468416869458753
+    left_shoulder_roll_joint: 0.5814052613447827
+    left_shoulder_yaw_joint: -0.5258297834450965
+    left_elbow_joint: 0.6336787241924338
+    left_wrist_roll_joint: -1.7631893663473257
+    left_wrist_pitch_joint: 0.9575617247358358
+    left_wrist_yaw_joint: -1.040898779323152
+    right_shoulder_pitch_joint: -0.8457117633174333
+    right_shoulder_roll_joint: -0.4699286821057105
+    right_shoulder_yaw_joint: 0.567584796267793
+    right_elbow_joint: -0.28945276890988725
+    right_wrist_roll_joint: 1.5268388282205656
+    right_wrist_pitch_joint: 0.8316748540385552
+    right_wrist_yaw_joint: 0.7118202729888252
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
+standing_double_v2_end:
+  memo: End pose for standing_double_v2 forward-optimized arm-sdk swing.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: -0.3
+    left_shoulder_pitch_joint: -0.9223358528000024
+    left_shoulder_roll_joint: 0.42077266391798895
+    left_shoulder_yaw_joint: -0.7721019642943077
+    left_elbow_joint: 0.4033117888321614
+    left_wrist_roll_joint: -1.761431357196991
+    left_wrist_pitch_joint: 0.7347134234466701
+    left_wrist_yaw_joint: -1.0297563220973498
+    right_shoulder_pitch_joint: -0.0986760759197907
+    right_shoulder_roll_joint: -0.44890839486630707
+    right_shoulder_yaw_joint: 0.893963333701852
+    right_elbow_joint: -0.21917834432950775
+    right_wrist_roll_joint: 1.2027519909725424
+    right_wrist_pitch_joint: 0.5195429748069029
+    right_wrist_yaw_joint: 0.983442076970064
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
