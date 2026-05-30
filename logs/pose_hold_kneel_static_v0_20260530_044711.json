@@ -1,0 +1,114 @@
+[
+  {
+    "stamp": 1780084017.9130905,
+    "phase": "ramp",
+    "max_cmd_error": 0.0,
+    "max_cmd_error_joint": "left_hip_pitch",
+    "max_target_error": 6.379556660718322e-08,
+    "max_target_error_joint": "left_knee"
+  },
+  {
+    "stamp": 1780084018.9779532,
+    "phase": "ramp",
+    "max_cmd_error": 0.5213592052459717,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5213592052459717,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084020.0434816,
+    "phase": "ramp",
+    "max_cmd_error": 0.4881068468093872,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.4881068468093872,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084021.1117463,
+    "phase": "ramp",
+    "max_cmd_error": 0.5183943510055542,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5183943510055542,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084022.1765945,
+    "phase": "hold",
+    "max_cmd_error": 0.5201026797294617,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5201026797294617,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084023.2391367,
+    "phase": "hold",
+    "max_cmd_error": 0.5202398896217346,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5202398896217346,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084024.3029447,
+    "phase": "hold",
+    "max_cmd_error": 0.5203008651733398,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5203008651733398,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084024.1934216,
+    "phase": "hold",
+    "max_cmd_error": 0.5203680396080017,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5203680396080017,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084025.2582386,
+    "phase": "hold",
+    "max_cmd_error": 0.5204085111618042,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5204085111618042,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084026.3226993,
+    "phase": "hold",
+    "max_cmd_error": 0.5204377174377441,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5204377174377441,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084027.3859613,
+    "phase": "hold",
+    "max_cmd_error": 0.5204786658287048,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5204786658287048,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084028.4507163,
+    "phase": "hold",
+    "max_cmd_error": 0.5205152630805969,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5205152630805969,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084029.5139432,
+    "phase": "hold",
+    "max_cmd_error": 0.5205382108688354,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5205382108688354,
+    "max_target_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780084030.5775917,
+    "phase": "hold",
+    "max_cmd_error": 0.5205759406089783,
+    "max_cmd_error_joint": "waist_pitch",
+    "max_target_error": 0.5205759406089783,
+    "max_target_error_joint": "waist_pitch"
+  }
+]

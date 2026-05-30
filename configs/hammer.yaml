@@ -1,0 +1,37 @@
+wood_density_kg_m3: 700.0
+hammer_total_mass_kg: 1.0724
+hammer_wood_mass_kg: 0.8524
+hammer_head_mass_kg: 0.5938
+hammer_handle_mass_kg: 0.2586
+adapter_and_clamp_mass_kg: 0.22
+handle_length_m: 0.60
+wrist_to_handle_root_m: [0.0415, -0.003, 0.0]
+default_grip_roll_phase_deg: 0.0
+wrist_to_com_distance_m: 0.497
+center_of_mass_from_wrist_m: [0.1246, -0.003, 0.4808]
+center_of_mass_from_handle_root_m: [0.0831, 0.0, 0.4808]
+adapter:
+  shape: box
+  size_m: [0.05, 0.044, 0.044]
+  mass_kg: 0.08
+clamp:
+  upper_mass_kg: 0.06
+  lower_mass_kg: 0.06
+  antirotation_pin_mass_kg: 0.02
+handle:
+  shape: capsule
+  radius_m: 0.014
+  length_m: 0.60
+  mass_kg: 0.2586
+  preferred_profiles: [hex, d_cut, cross_pin, sleeved_round_with_anti_rotation]
+head:
+  enabled: false
+  shape: cylinder
+  length_m: 0.30
+  diameter_m: 0.06
+  mass_kg: 0.5938
+  tail_fixed_to_handle_front: true
+  axis_local: tool_x
+checks:
+  mark_dangerous_joint_margin_below_rad: 0.10
+  static_wrist_moment_formula: hammer_mass * 9.81 * wrist_to_com_distance

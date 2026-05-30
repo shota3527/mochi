@@ -1,0 +1,86 @@
+[
+  {
+    "stamp": 1780083781.0451157,
+    "phase": "ramp",
+    "max_cmd_error": 0.0,
+    "max_target_error": 6.379556660718322e-08
+  },
+  {
+    "stamp": 1780083782.1148958,
+    "phase": "ramp",
+    "max_cmd_error": 0.5216064453125,
+    "max_target_error": 0.5216064453125
+  },
+  {
+    "stamp": 1780083783.1918867,
+    "phase": "ramp",
+    "max_cmd_error": 0.4887934923171997,
+    "max_target_error": 0.4887934923171997
+  },
+  {
+    "stamp": 1780083784.2643726,
+    "phase": "ramp",
+    "max_cmd_error": 0.5185126662254333,
+    "max_target_error": 0.5185126662254333
+  },
+  {
+    "stamp": 1780083785.3322628,
+    "phase": "hold",
+    "max_cmd_error": 0.5201171636581421,
+    "max_target_error": 0.5201171636581421
+  },
+  {
+    "stamp": 1780083786.396707,
+    "phase": "hold",
+    "max_cmd_error": 0.5202451348304749,
+    "max_target_error": 0.5202451348304749
+  },
+  {
+    "stamp": 1780083787.4613128,
+    "phase": "hold",
+    "max_cmd_error": 0.5203052163124084,
+    "max_target_error": 0.5203052163124084
+  },
+  {
+    "stamp": 1780083788.5264258,
+    "phase": "hold",
+    "max_cmd_error": 0.5203757286071777,
+    "max_target_error": 0.5203757286071777
+  },
+  {
+    "stamp": 1780083789.5932052,
+    "phase": "hold",
+    "max_cmd_error": 0.5204129815101624,
+    "max_target_error": 0.5204129815101624
+  },
+  {
+    "stamp": 1780083790.6587458,
+    "phase": "hold",
+    "max_cmd_error": 0.5204482078552246,
+    "max_target_error": 0.5204482078552246
+  },
+  {
+    "stamp": 1780083791.7230113,
+    "phase": "hold",
+    "max_cmd_error": 0.520481288433075,
+    "max_target_error": 0.520481288433075
+  },
+  {
+    "stamp": 1780083792.7875304,
+    "phase": "hold",
+    "max_cmd_error": 0.5205211639404297,
+    "max_target_error": 0.5205211639404297
+  },
+  {
+    "stamp": 1780083793.851221,
+    "phase": "hold",
+    "max_cmd_error": 0.5205501317977905,
+    "max_target_error": 0.5205501317977905
+  },
+  {
+    "stamp": 1780083794.9136314,
+    "phase": "hold",
+    "max_cmd_error": 0.520578920841217,
+    "max_target_error": 0.520578920841217
+  }
+]

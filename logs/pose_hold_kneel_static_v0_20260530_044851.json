@@ -1,0 +1,114 @@
+[
+  {
+    "stamp": 1780084117.8073127,
+    "phase": "ramp",
+    "max_cmd_error": 0.0,
+    "max_cmd_error_joint": "left_hip_pitch",
+    "max_target_error": 6.379556660718322e-08,
+    "max_target_error_joint": "left_knee"
+  },
+  {
+    "stamp": 1780084117.6970518,
+    "phase": "ramp",
+    "max_cmd_error": 0.9746214747428894,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.9746214747428894,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084118.7680326,
+    "phase": "ramp",
+    "max_cmd_error": 0.7468194365501404,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.7468194365501404,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084119.8358595,
+    "phase": "ramp",
+    "max_cmd_error": 0.7337043881416321,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.7337043881416321,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084120.9031196,
+    "phase": "hold",
+    "max_cmd_error": 0.7040382623672485,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.7040382623672485,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084121.9709191,
+    "phase": "hold",
+    "max_cmd_error": 0.6708405017852783,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.6708405017852783,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084123.0338793,
+    "phase": "hold",
+    "max_cmd_error": 0.6235556602478027,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.6235556602478027,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084124.1015143,
+    "phase": "hold",
+    "max_cmd_error": 0.4657997190952301,
+    "max_cmd_error_joint": "right_wrist_pitch",
+    "max_target_error": 0.4657997190952301,
+    "max_target_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780084125.1655982,
+    "phase": "hold",
+    "max_cmd_error": 0.157527357339859,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.157527357339859,
+    "max_target_error_joint": "right_elbow"
+  },
+  {
+    "stamp": 1780084126.2353513,
+    "phase": "hold",
+    "max_cmd_error": 0.18210886418819427,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.18210886418819427,
+    "max_target_error_joint": "right_elbow"
+  },
+  {
+    "stamp": 1780084127.2984138,
+    "phase": "hold",
+    "max_cmd_error": 0.18323257565498352,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.18323257565498352,
+    "max_target_error_joint": "right_elbow"
+  },
+  {
+    "stamp": 1780084128.3666613,
+    "phase": "hold",
+    "max_cmd_error": 0.18358264863491058,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.18358264863491058,
+    "max_target_error_joint": "right_elbow"
+  },
+  {
+    "stamp": 1780084129.4327452,
+    "phase": "hold",
+    "max_cmd_error": 0.18383337557315826,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.18383337557315826,
+    "max_target_error_joint": "right_elbow"
+  },
+  {
+    "stamp": 1780084130.500898,
+    "phase": "hold",
+    "max_cmd_error": 0.18403364717960358,
+    "max_cmd_error_joint": "right_elbow",
+    "max_target_error": 0.18403364717960358,
+    "max_target_error_joint": "right_elbow"
+  }
+]

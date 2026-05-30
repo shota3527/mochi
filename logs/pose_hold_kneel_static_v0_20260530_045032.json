@@ -1,0 +1,114 @@
+[
+  {
+    "stamp": 1780084217.2837625,
+    "phase": "ramp",
+    "max_cmd_error": 0.0,
+    "max_cmd_error_joint": "left_hip_pitch",
+    "max_target_error": 6.379556660718322e-08,
+    "max_target_error_joint": "left_knee"
+  },
+  {
+    "stamp": 1780084218.358356,
+    "phase": "ramp",
+    "max_cmd_error": 0.17534184455871582,
+    "max_cmd_error_joint": "left_hip_pitch",
+    "max_target_error": 0.17534184455871582,
+    "max_target_error_joint": "left_hip_pitch"
+  },
+  {
+    "stamp": 1780084219.424772,
+    "phase": "ramp",
+    "max_cmd_error": 0.11610742658376694,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.11610742658376694,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084220.4877536,
+    "phase": "ramp",
+    "max_cmd_error": 0.11606982350349426,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.11606982350349426,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084221.5523667,
+    "phase": "hold",
+    "max_cmd_error": 0.11860993504524231,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.11860993504524231,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084222.6144884,
+    "phase": "hold",
+    "max_cmd_error": 0.1196550726890564,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.1196550726890564,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084223.680144,
+    "phase": "hold",
+    "max_cmd_error": 0.12011793255805969,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12011793255805969,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084224.7448702,
+    "phase": "hold",
+    "max_cmd_error": 0.12030892819166183,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12030892819166183,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084225.8094301,
+    "phase": "hold",
+    "max_cmd_error": 0.12037701159715652,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12037701159715652,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084226.873452,
+    "phase": "hold",
+    "max_cmd_error": 0.1203923225402832,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.1203923225402832,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084227.9375026,
+    "phase": "hold",
+    "max_cmd_error": 0.12038656324148178,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12038656324148178,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084228.999263,
+    "phase": "hold",
+    "max_cmd_error": 0.12037406116724014,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12037406116724014,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084230.0638046,
+    "phase": "hold",
+    "max_cmd_error": 0.1203608438372612,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.1203608438372612,
+    "max_target_error_joint": "right_shoulder_pitch"
+  },
+  {
+    "stamp": 1780084231.1261778,
+    "phase": "hold",
+    "max_cmd_error": 0.12034916132688522,
+    "max_cmd_error_joint": "right_shoulder_pitch",
+    "max_target_error": 0.12034916132688522,
+    "max_target_error_joint": "right_shoulder_pitch"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "stamp": 1780100464.9912295,
+    "segment": 0,
+    "max_cmd_error": 0.009329895973205549,
+    "max_cmd_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780100466.0551896,
+    "segment": 1,
+    "max_cmd_error": 0.4396743091912597,
+    "max_cmd_error_joint": "right_wrist_pitch"
+  },
+  {
+    "stamp": 1780100467.1219642,
+    "segment": 2,
+    "max_cmd_error": 0.14952837718661927,
+    "max_cmd_error_joint": "right_shoulder_yaw"
+  },
+  {
+    "stamp": 1780100468.1856072,
+    "segment": 3,
+    "max_cmd_error": 0.15535433481588534,
+    "max_cmd_error_joint": "left_elbow"
+  }
+]

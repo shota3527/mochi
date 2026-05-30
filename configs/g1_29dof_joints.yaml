@@ -1,0 +1,34 @@
+robot: unitree_g1_edu_29dof
+source:
+  joint_order: /home/shota/dev/unitree/unitree_mujoco/unitree_robots/g1/g1_joint_index_dds.md
+  limits: /home/shota/dev/unitree/unitree_mujoco/unitree_robots/g1/g1_29dof.xml
+joints:
+  - {index: 0, name: left_hip_pitch, q_min: -2.5307, q_max: 2.8798}
+  - {index: 1, name: left_hip_roll, q_min: -0.5236, q_max: 2.9671}
+  - {index: 2, name: left_hip_yaw, q_min: -2.7576, q_max: 2.7576}
+  - {index: 3, name: left_knee, q_min: -0.087267, q_max: 2.8798}
+  - {index: 4, name: left_ankle_pitch, q_min: -0.87267, q_max: 0.5236}
+  - {index: 5, name: left_ankle_roll, q_min: -0.2618, q_max: 0.2618}
+  - {index: 6, name: right_hip_pitch, q_min: -2.5307, q_max: 2.8798}
+  - {index: 7, name: right_hip_roll, q_min: -2.9671, q_max: 0.5236}
+  - {index: 8, name: right_hip_yaw, q_min: -2.7576, q_max: 2.7576}
+  - {index: 9, name: right_knee, q_min: -0.087267, q_max: 2.8798}
+  - {index: 10, name: right_ankle_pitch, q_min: -0.87267, q_max: 0.5236}
+  - {index: 11, name: right_ankle_roll, q_min: -0.2618, q_max: 0.2618}
+  - {index: 12, name: waist_yaw, q_min: -2.618, q_max: 2.618}
+  - {index: 13, name: waist_roll, q_min: -0.52, q_max: 0.52}
+  - {index: 14, name: waist_pitch, q_min: -0.52, q_max: 0.52}
+  - {index: 15, name: left_shoulder_pitch, q_min: -3.0892, q_max: 2.6704}
+  - {index: 16, name: left_shoulder_roll, q_min: -1.5882, q_max: 2.2515}
+  - {index: 17, name: left_shoulder_yaw, q_min: -2.618, q_max: 2.618}
+  - {index: 18, name: left_elbow, q_min: -1.0472, q_max: 2.0944}
+  - {index: 19, name: left_wrist_roll, q_min: -1.97222, q_max: 1.97222}
+  - {index: 20, name: left_wrist_pitch, q_min: -1.61443, q_max: 1.61443}
+  - {index: 21, name: left_wrist_yaw, q_min: -1.61443, q_max: 1.61443}
+  - {index: 22, name: right_shoulder_pitch, q_min: -3.0892, q_max: 2.6704}
+  - {index: 23, name: right_shoulder_roll, q_min: -2.2515, q_max: 1.5882}
+  - {index: 24, name: right_shoulder_yaw, q_min: -2.618, q_max: 2.618}
+  - {index: 25, name: right_elbow, q_min: -1.0472, q_max: 2.0944}
+  - {index: 26, name: right_wrist_roll, q_min: -1.97222, q_max: 1.97222}
+  - {index: 27, name: right_wrist_pitch, q_min: -1.61443, q_max: 1.61443}
+  - {index: 28, name: right_wrist_yaw, q_min: -1.61443, q_max: 1.61443}

@@ -1,0 +1,231 @@
+default_rate_hz: 100.0
+single_joint_test:
+  duration_s: 2.0
+  max_delta_rad: 0.05
+  default_delta_rad: 0.03
+
+dual_hold_swing_v0:
+  memo: Strict two-hand deadlocked stick swing candidate; sim inspection only.
+  base_pose: hammer_mounted_elbow_65
+  root_world_m: [0.12, 0.0, 0.77]
+  pitch_start_deg: 60.0
+  pitch_end_deg: 35.0
+  duration_s: 4.0
+  right_grip_distance_m: 0.0
+  left_grip_distance_m: 0.12
+  clamp_center_offset_m: 0.0
+  validation:
+    passed: true
+    max_grip_error_m: 0.001438200916950612
+    max_axis_error: 0.0018449947742629569
+    min_joint_margin_rad: 0.3094737254786284
+    max_neighbor_joint_step_rad: 0.25003664688717175
+    max_torso_contacts: 0
+  waypoints:
+    - pitch_deg: 60.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.2241600403867447
+        left_shoulder_roll_joint: 0.2586673066078632
+        left_shoulder_yaw_joint: -0.8635373449790764
+        left_elbow_joint: -0.010274969864109746
+        left_wrist_roll_joint: -0.7519349208206542
+        left_wrist_pitch_joint: 0.2771522098305517
+        left_wrist_yaw_joint: -0.3519910638436918
+        right_shoulder_pitch_joint: -0.23180841742172129
+        right_shoulder_roll_joint: -0.13906865336528426
+        right_shoulder_yaw_joint: 1.5060049369166284
+        right_elbow_joint: 0.6999321440396408
+        right_wrist_roll_joint: 0.9494520707505563
+        right_wrist_pitch_joint: -0.5660056195724171
+        right_wrist_yaw_joint: 0.014740980841473544
+    - pitch_deg: 55.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.2821454940832854
+        left_shoulder_roll_joint: 0.26536082746603823
+        left_shoulder_yaw_joint: -0.8916224512177128
+        left_elbow_joint: 0.04932586443172599
+        left_wrist_roll_joint: -0.875103961364414
+        left_wrist_pitch_joint: 0.28841555485946885
+        left_wrist_yaw_joint: -0.2516685896862286
+        right_shoulder_pitch_joint: -0.24126235255843767
+        right_shoulder_roll_joint: -0.15754626503170335
+        right_shoulder_yaw_joint: 1.505289795050039
+        right_elbow_joint: 0.645645320580416
+        right_wrist_roll_joint: 1.022708142377581
+        right_wrist_pitch_joint: -0.488265578618335
+        right_wrist_yaw_joint: 0.015050241804085733
+    - pitch_deg: 50.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.3512844421437938
+        left_shoulder_roll_joint: 0.2750863304305606
+        left_shoulder_yaw_joint: -0.9392333975494777
+        left_elbow_joint: 0.12598474779619162
+        left_wrist_roll_joint: -1.0120233131417176
+        left_wrist_pitch_joint: 0.27865887435714953
+        left_wrist_yaw_joint: -0.1905854140702718
+        right_shoulder_pitch_joint: -0.2525088399634159
+        right_shoulder_roll_joint: -0.17346467105269098
+        right_shoulder_yaw_joint: 1.5039457757437815
+        right_elbow_joint: 0.5992306422111832
+        right_wrist_roll_joint: 1.0977746761106173
+        right_wrist_pitch_joint: -0.4136110661825219
+        right_wrist_yaw_joint: 0.015328222407884297
+    - pitch_deg: 45.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.43644007681850405
+        left_shoulder_roll_joint: 0.28946219939759843
+        left_shoulder_yaw_joint: -1.0235657200967696
+        left_elbow_joint: 0.214881272491886
+        left_wrist_roll_joint: -1.1746048965041618
+        left_wrist_pitch_joint: 0.24150789589037175
+        left_wrist_yaw_joint: -0.14977616530297297
+        right_shoulder_pitch_joint: -0.26532255852981
+        right_shoulder_roll_joint: -0.18696247082776318
+        right_shoulder_yaw_joint: 1.5021125236900774
+        right_elbow_joint: 0.5604066681695548
+        right_wrist_roll_joint: 1.1746763115657994
+        right_wrist_pitch_joint: -0.34175598302602705
+        right_wrist_yaw_joint: 0.015534103199766072
+    - pitch_deg: 40.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.5641526952949306
+        left_shoulder_roll_joint: 0.3142272611244977
+        left_shoulder_yaw_joint: -1.2031417858009354
+        left_elbow_joint: 0.30291950440031484
+        left_wrist_roll_joint: -1.4127096276342
+        left_wrist_pitch_joint: 0.14280712462405695
+        left_wrist_yaw_joint: -0.07540269694666846
+        right_shoulder_pitch_joint: -0.2794976243439948
+        right_shoulder_roll_joint: -0.19816366392623383
+        right_shoulder_yaw_joint: 1.4999330293956292
+        right_elbow_joint: 0.5289599576137788
+        right_wrist_roll_joint: 1.2533378094741991
+        right_wrist_pitch_joint: -0.2723713025763637
+        right_wrist_yaw_joint: 0.015822661737357156
+    - pitch_deg: 35.0
+      joints_rad:
+        left_shoulder_pitch_joint: -0.6931611974246152
+        left_shoulder_roll_joint: 0.3127212492029646
+        left_shoulder_yaw_joint: -1.4005209955362365
+        left_elbow_joint: 0.384855385902076
+        left_wrist_roll_joint: -1.6627462745213717
+        left_wrist_pitch_joint: 0.052255629832336004
+        left_wrist_yaw_joint: -0.019083205600106307
+        right_shoulder_pitch_joint: -0.2947988465319682
+        right_shoulder_roll_joint: -0.20716623781114157
+        right_shoulder_yaw_joint: 1.4974956789453766
+        right_elbow_joint: 0.5046824192936191
+        right_wrist_roll_joint: 1.333518638862553
+        right_wrist_pitch_joint: -0.20502843795602535
+        right_wrist_yaw_joint: 0.016166204793062862
+
+kneel_dual_hold_swing_v0:
+  memo: Slow kneeling two-hand hammer swing candidate with full stick pose locked; right clamp grips rear end of stick.
+  base_pose: kneel_static_v0
+  root_world_m: [0.14, 0.0, 0.530718]
+  root_world_note: Stored as the first waypoint wood-stick rear/tool-root origin; the reused joint waypoints move this root with pitch.
+  pitch_start_deg: 60.0
+  pitch_end_deg: 40.0
+  duration_s: 4.0
+  right_grip_distance_m: 0.0
+  left_grip_distance_m: 0.20
+  clamp_center_offset_m: 0.0
+  grip_roll_phase_deg: -120.0
+  right_roll_phase_deg: 25.0
+  left_roll_phase_deg: 145.0
+  relative_roll_deg: 120.0
+  validation:
+    full_pose_locked: true
+    max_grip_error_m: 0.000000
+    max_axis_error: 0.000000
+    max_cross_axis_error: 0.000000
+    max_relative_roll_error_deg: 0.0000
+    max_torso_contacts: 0
+    min_arm_joint_margin_rad: 0.337
+    max_neighbor_joint_step_rad: 0.144
+  waypoints:
+    - pitch_deg: 60.0
+      stick_rear_world_m: [0.1400, 0.0, 0.530718]
+      joints_rad:
+        left_shoulder_pitch_joint: -1.14652987234
+        left_shoulder_roll_joint: 0.10724699502
+        left_shoulder_yaw_joint: -0.10494787801
+        left_elbow_joint: 0.08572733324
+        left_wrist_roll_joint: -1.54340617904
+        left_wrist_pitch_joint: 1.20849589797
+        left_wrist_yaw_joint: -0.61385748270
+        right_shoulder_pitch_joint: -0.21724986299
+        right_shoulder_roll_joint: -0.20904225154
+        right_shoulder_yaw_joint: 0.65730289476
+        right_elbow_joint: -0.50563657576
+        right_wrist_roll_joint: 0.91379557678
+        right_wrist_pitch_joint: 0.78990604730
+        right_wrist_yaw_joint: 0.78598106011
+    - pitch_deg: 55.0
+      stick_rear_world_m: [0.134114, 0.0, 0.534468]
+      joints_rad:
+        left_shoulder_pitch_joint: -1.13939917464
+        left_shoulder_roll_joint: 0.08229550702
+        left_shoulder_yaw_joint: -0.07329531424
+        left_elbow_joint: 0.15814334840
+        left_wrist_roll_joint: -1.55558200089
+        left_wrist_pitch_joint: 1.23620571141
+        left_wrist_yaw_joint: -0.60142719145
+        right_shoulder_pitch_joint: -0.19224727108
+        right_shoulder_roll_joint: -0.18893884049
+        right_shoulder_yaw_joint: 0.63336606272
+        right_elbow_joint: -0.53259370055
+        right_wrist_roll_joint: 1.01582129907
+        right_wrist_pitch_joint: 0.85862486690
+        right_wrist_yaw_joint: 0.70470110479
+    - pitch_deg: 50.0
+      stick_rear_world_m: [0.128577, 0.0, 0.538717]
+      joints_rad:
+        left_shoulder_pitch_joint: -1.13229972971
+        left_shoulder_roll_joint: 0.05817465873
+        left_shoulder_yaw_joint: -0.04088271027
+        left_elbow_joint: 0.23009929577
+        left_wrist_roll_joint: -1.56767961967
+        left_wrist_pitch_joint: 1.26252726556
+        left_wrist_yaw_joint: -0.58551586899
+        right_shoulder_pitch_joint: -0.16794704699
+        right_shoulder_roll_joint: -0.16597535479
+        right_shoulder_yaw_joint: 0.60837920798
+        right_elbow_joint: -0.55385441093
+        right_wrist_roll_joint: 1.12964845619
+        right_wrist_pitch_joint: 0.92050746265
+        right_wrist_yaw_joint: 0.60938276401
+    - pitch_deg: 45.0
+      stick_rear_world_m: [0.123431, 0.0, 0.543431]
+      joints_rad:
+        left_shoulder_pitch_joint: -1.12513248962
+        left_shoulder_roll_joint: 0.04291074144
+        left_shoulder_yaw_joint: -0.02054705947
+        left_elbow_joint: 0.30149215351
+        left_wrist_roll_joint: -1.59069922403
+        left_wrist_pitch_joint: 1.27729257284
+        left_wrist_yaw_joint: -0.56680302204
+        right_shoulder_pitch_joint: -0.14653123535
+        right_shoulder_roll_joint: -0.14434516159
+        right_shoulder_yaw_joint: 0.58762655761
+        right_elbow_joint: -0.56845475006
+        right_wrist_roll_joint: 1.25837654623
+        right_wrist_pitch_joint: 0.96739154324
+        right_wrist_yaw_joint: 0.49738045671
+    - pitch_deg: 40.0
+      stick_rear_world_m: [0.118716, 0.0, 0.548577]
+      joints_rad:
+        left_shoulder_pitch_joint: -1.11732471033
+        left_shoulder_roll_joint: 0.04086554932
+        left_shoulder_yaw_joint: -0.02237735441
+        left_elbow_joint: 0.37165235200
+        left_wrist_roll_joint: -1.63276148691
+        left_wrist_pitch_joint: 1.27504600309
+        left_wrist_yaw_joint: -0.54712002064
+        right_shoulder_pitch_joint: -0.13159611052
+        right_shoulder_roll_joint: -0.13168115961
+        right_shoulder_yaw_joint: 0.58006995931
+        right_elbow_joint: -0.57707913486
+        right_wrist_roll_joint: 1.40211738826
+        right_wrist_pitch_joint: 0.98573659515
+        right_wrist_yaw_joint: 0.37016779900

@@ -1,0 +1,26 @@
+[
+  {
+    "stamp": 1780100453.821166,
+    "segment": 0,
+    "max_cmd_error": 0.0,
+    "max_cmd_error_joint": "left_hip_pitch"
+  },
+  {
+    "stamp": 1780100454.8913352,
+    "segment": 1,
+    "max_cmd_error": 0.10202570866930416,
+    "max_cmd_error_joint": "right_wrist_roll"
+  },
+  {
+    "stamp": 1780100455.9573538,
+    "segment": 2,
+    "max_cmd_error": 0.21585286578930418,
+    "max_cmd_error_joint": "right_wrist_roll"
+  },
+  {
+    "stamp": 1780100457.0235896,
+    "segment": 3,
+    "max_cmd_error": 0.1194965132347473,
+    "max_cmd_error_joint": "right_shoulder_pitch"
+  }
+]

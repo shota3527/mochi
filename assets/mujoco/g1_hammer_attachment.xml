@@ -1,0 +1,17 @@
+<mujoco model="g1_hammer_attachment_primitives">
+  <!-- Primitive-only placeholder for the hand-replacing hammer adapter.
+       Attach downstream of the wrist yaw link; keep the forearm and wrist module. -->
+  <asset>
+    <material name="hammer_adapter_dark" rgba="0.10 0.10 0.10 1" />
+    <material name="hammer_handle" rgba="0.55 0.42 0.25 1" />
+    <material name="hammer_head" rgba="0.45 0.45 0.47 1" />
+  </asset>
+  <worldbody>
+    <body name="hammer_adapter_reference" pos="0 0 0">
+      <geom name="adapter_box" type="box" size="0.0225 0.0175 0.0175" material="hammer_adapter_dark" mass="0.15" />
+      <geom name="handle_capsule" type="capsule" fromto="0.025 0 0 0.345 0 0" size="0.014" material="hammer_handle" mass="0.20" />
+      <geom name="head_box" type="box" pos="0.36 0 0" size="0.045 0.0175 0.0225" material="hammer_head" mass="0.85" />
+      <site name="hammer_com_estimate" pos="0.18 0 0" size="0.01" rgba="1 0 0 1" />
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,6 @@
+command_limit_margin_rad: 0.08
+near_limit_margin_rad: 0.06
+danger_margin_rad: 0.10
+max_command_step_rad: 0.01
+upper_body_kp: 20.0
+upper_body_kd: 1.0

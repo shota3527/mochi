@@ -1,0 +1,26 @@
+[
+  {
+    "stamp": 1780102473.9595523,
+    "segment": 0,
+    "max_cmd_error": 0.5207011699676514,
+    "max_cmd_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780102475.0202982,
+    "segment": 1,
+    "max_cmd_error": 0.5239077210426331,
+    "max_cmd_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780102475.5150542,
+    "segment": 2,
+    "max_cmd_error": 0.5218744874000549,
+    "max_cmd_error_joint": "waist_pitch"
+  },
+  {
+    "stamp": 1780102476.5775433,
+    "segment": 3,
+    "max_cmd_error": 0.5213374495506287,
+    "max_cmd_error_joint": "waist_pitch"
+  }
+]
