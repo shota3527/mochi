@@ -233,15 +233,19 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
     left_clamp = """                          <body name="left_hammer_clamp" pos="0.0415 0.003 0">
                             <!-- Same clamp geometry as the right side. The clamp center
                                  for IK and grip bookkeeping is the tool root. -->
-                            <geom name="left_hammer_adapter" type="box" pos="0 0 0.030"
-                              size="0.020 0.018 0.020" rgba="0.25 0.35 0.42 0.35"
-                              mass="0.08"
+                            <geom name="left_hammer_adapter_upper" type="box" pos="0 0.035 0.030"
+                              size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
+                              mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="left_hammer_clamp_upper" type="box" pos="0 0.022 0"
+                            <geom name="left_hammer_adapter_lower" type="box" pos="0 -0.035 0.030"
+                              size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
+                              mass="0.04"
+                              contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
+                            <geom name="left_hammer_clamp_upper" type="box" pos="0 0.035 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="left_hammer_clamp_lower" type="box" pos="0 -0.022 0"
+                            <geom name="left_hammer_clamp_lower" type="box" pos="0 -0.035 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
@@ -256,15 +260,19 @@ def patch_g1_right_hand_to_hammer(grip_roll_phase_deg: float | None = None) -> P
     hammer_tool = f"""                          <body name="right_hammer_tool" pos="0.0415 -0.003 0">
                             <!-- Same clamp geometry as the left side. The wood handle
                                  rear end and clamp center are at this wrist/tool root. -->
-                            <geom name="right_hammer_adapter" type="box" pos="0 0 0.030"
-                              size="0.020 0.018 0.020" rgba="0.25 0.35 0.42 0.35"
-                              mass="0.08"
+                            <geom name="right_hammer_adapter_upper" type="box" pos="0 0.035 0.030"
+                              size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
+                              mass="0.04"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="right_hammer_clamp_upper" type="box" pos="0 0.022 0"
+                            <geom name="right_hammer_adapter_lower" type="box" pos="0 -0.035 0.030"
+                              size="0.020 0.006 0.020" rgba="0.25 0.35 0.42 0.35"
+                              mass="0.04"
+                              contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
+                            <geom name="right_hammer_clamp_upper" type="box" pos="0 0.035 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>
-                            <geom name="right_hammer_clamp_lower" type="box" pos="0 -0.022 0"
+                            <geom name="right_hammer_clamp_lower" type="box" pos="0 -0.035 0"
                               size="0.022 0.006 0.052" rgba="0.25 0.35 0.42 0.38"
                               mass="0.06"
                               contype="0" conaffinity="0" friction="0.8 0.02 0.002"/>

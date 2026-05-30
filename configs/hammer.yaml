@@ -25,7 +25,7 @@ handle:
   mass_kg: 0.2586
   preferred_profiles: [hex, d_cut, cross_pin, sleeved_round_with_anti_rotation]
 head:
-  enabled: false
+  enabled: true
   shape: cylinder
   length_m: 0.30
   diameter_m: 0.06

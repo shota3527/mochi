@@ -128,6 +128,7 @@ class G1Sdk2Backend:
         mode_machine: int | None,
         kp,
         kd,
+        tau=None,
     ) -> None:
         if self._low_cmd_publisher is None:
             raise RuntimeError("Command publisher was not enabled.")
@@ -135,10 +136,15 @@ class G1Sdk2Backend:
         q_des = np.asarray(q_des, dtype=float)
         kp = np.asarray(kp, dtype=float)
         kd = np.asarray(kd, dtype=float)
+        if tau is None:
+            tau = np.zeros(self.num_motors, dtype=float)
+        tau = np.asarray(tau, dtype=float)
         if q_des.shape != (self.num_motors,):
             raise ValueError(f"q_des must have shape ({self.num_motors},)")
         if kp.shape != (self.num_motors,) or kd.shape != (self.num_motors,):
             raise ValueError(f"kp and kd must have shape ({self.num_motors},)")
+        if tau.shape != (self.num_motors,):
+            raise ValueError(f"tau must have shape ({self.num_motors},)")
 
         cmd = unitree_hg_msg_dds__LowCmd_()
         if hasattr(cmd, "mode_pr"):
@@ -148,7 +154,7 @@ class G1Sdk2Backend:
 
         for i in range(self.num_motors):
             cmd.motor_cmd[i].mode = 1
-            cmd.motor_cmd[i].tau = 0.0
+            cmd.motor_cmd[i].tau = float(tau[i])
             cmd.motor_cmd[i].q = float(q_des[i])
             cmd.motor_cmd[i].dq = 0.0
             cmd.motor_cmd[i].kp = float(kp[i])

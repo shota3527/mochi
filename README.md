@@ -144,6 +144,16 @@ python apps/replay_trajectory.py \
   --enable-command
 ```
 
+To watch the hammer swing forward and backward repeatedly:
+
+```bash
+python apps/replay_trajectory.py \
+  --interface eth3 \
+  --trajectory kneel_dual_hold_swing_v0 \
+  --loop \
+  --enable-command
+```
+
 The default scene includes a primitive mochi-pounding target in front of the robot:
 
 ```text
