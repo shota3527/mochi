@@ -1,0 +1,82 @@
+<mujoco model="g1_29dof_mochitsuki_scene">
+  <include file="g1_29dof.xml"/>
+
+  <statistic center="0.55 0 0.85" extent="2.1"/>
+
+  <visual>
+    <headlight diffuse="0.65 0.65 0.65" ambient="0.35 0.35 0.35" specular="0.1 0.1 0.1"/>
+    <rgba haze="0.55 0.67 0.78 1"/>
+    <global azimuth="-140" elevation="-18" offwidth="1280" offheight="720"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.45 0.62 0.78" rgb2="0.82 0.88 0.91" width="512" height="3072"/>
+    <texture type="2d" name="tatami_checker" builtin="checker" rgb1="0.46 0.53 0.38" rgb2="0.37 0.45 0.31" width="256" height="256"/>
+    <material name="tatami" texture="tatami_checker" texrepeat="6 6" texuniform="true" reflectance="0.0"/>
+    <material name="wood_light" rgba="0.66 0.56 0.37 1" reflectance="0.12"/>
+    <material name="wood_dark" rgba="0.30 0.18 0.10 1" reflectance="0.06"/>
+    <material name="adapter_rubber" rgba="0.05 0.055 0.055 1" reflectance="0.02"/>
+    <material name="adapter_pad" rgba="0.16 0.17 0.17 1" reflectance="0.03"/>
+    <material name="adapter_bolt" rgba="0.58 0.59 0.57 1" reflectance="0.22"/>
+    <material name="shota_adapter_shell" rgba="0.25 0.35 0.42 0.55" reflectance="0.05"/>
+    <material name="shota_adapter_pin" rgba="0.10 0.12 0.13 0.75" reflectance="0.08"/>
+    <material name="mochi_white" rgba="0.96 0.94 0.86 1" reflectance="0.18"/>
+    <material name="impact_red" rgba="0.85 0.12 0.08 1" emission="0.15"/>
+  </asset>
+
+  <worldbody>
+    <light name="key_light" pos="1.4 -2.4 3.0" dir="-0.35 0.55 -1" directional="true" diffuse="0.85 0.78 0.68"/>
+    <light name="fill_light" pos="-2.2 1.4 2.2" dir="0.6 -0.35 -1" directional="true" diffuse="0.35 0.42 0.55"/>
+    <camera name="mochitsuki_camera" pos="2.75 -2.45 1.65" xyaxes="0.75277 0.65828 0 -0.15895 0.18177 0.97041" fovy="46"/>
+    <camera name="grip_camera" pos="1.95 -1.55 1.28" xyaxes="0.78436 0.62031 0 -0.11258 0.14235 0.98339" fovy="36"/>
+    <camera name="hand_front_camera" pos="1.95 1.45 1.35" xyaxes="-0.76181 0.64780 0 -0.14712 -0.17302 0.97387" fovy="43"/>
+    <camera name="hand_rear_camera" pos="-0.75 -1.05 1.28" xyaxes="0.58783 -0.80899 0 0.18343 0.13328 0.97396" fovy="46"/>
+    <camera name="hand_side_camera" pos="-0.20 1.75 1.22" xyaxes="-0.89139 -0.45325 0 0.07649 -0.15044 0.98566" fovy="44"/>
+    <camera name="overhead_camera" pos="0.72 -0.08 2.72" xyaxes="1.00000 0.00000 0 0.00000 0.99955 0.02999" fovy="46"/>
+
+    <geom name="demo_floor" type="plane" size="4 4 0.05" material="tatami"/>
+
+    <body name="usu_mortar" pos="0.78 0 0">
+      <geom name="usu_outer" type="cylinder" size="0.34 0.28" pos="0 0 0.28" material="wood_light"/>
+      <geom name="usu_inner_shadow" type="cylinder" size="0.265 0.012" pos="0 0 0.565" material="wood_dark" contype="0" conaffinity="0"/>
+      <geom name="usu_rim" type="cylinder" size="0.355 0.018" pos="0 0 0.57" material="wood_dark" contype="0" conaffinity="0"/>
+      <geom name="mochi_lump" type="ellipsoid" size="0.215 0.175 0.070" pos="0 0 0.615" material="mochi_white" contype="0" conaffinity="0"/>
+      <geom name="impact_splash" type="ellipsoid" size="0.15 0.11 0.018" pos="0.035 0 0.675" material="mochi_white" contype="0" conaffinity="0"/>
+    </body>
+
+    <body name="kine_hammer" pos="0.78 0 0.92">
+      <freejoint name="kine_free"/>
+      <geom name="kine_head" type="cylinder" pos="0 0 0" size="0.0275 0.20" material="wood_light" mass="0.62"/>
+      <geom name="kine_head_end_low" type="cylinder" pos="0 0 -0.202" size="0.0278 0.003" material="wood_dark" mass="0.01" contype="0" conaffinity="0"/>
+      <geom name="kine_head_end_high" type="cylinder" pos="0 0 0.202" size="0.0278 0.003" material="wood_dark" mass="0.01" contype="0" conaffinity="0"/>
+      <geom name="kine_handle" type="capsule" fromto="0 0 0 0 0.54 0" size="0.017" material="wood_light" mass="0.34"/>
+      <!-- shota3527/mochi clamp geometry, transformed from source tool +Z to this hammer local +Y. -->
+      <geom name="lower_adapter_shota_clamp_upper" type="box" pos="0 0.500 0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_clamp_lower" type="box" pos="0 0.500 -0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_adapter_upper" type="box" pos="0 0.530 0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_adapter_lower" type="box" pos="0 0.530 -0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_shota_antirotation_pin" type="cylinder" pos="0 0.500 0" size="0.004 0.030" material="shota_adapter_pin" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_hand_receiver" type="box" pos="-0.061 0.500 0" size="0.0225 0.044 0.0175" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_bridge_upper" type="box" pos="-0.031 0.506 0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_bridge_lower" type="box" pos="-0.031 0.506 -0.020" size="0.031 0.034 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="lower_adapter_cross_pin" type="cylinder" pos="-0.032 0.500 0" size="0.004 0.030" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_clamp_upper" type="box" pos="0 0.290 0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_clamp_lower" type="box" pos="0 0.290 -0.024" size="0.022 0.052 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_adapter_upper" type="box" pos="0 0.320 0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_adapter_lower" type="box" pos="0 0.320 -0.024" size="0.020 0.020 0.006" material="shota_adapter_shell" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_shota_antirotation_pin" type="cylinder" pos="0 0.290 0" size="0.004 0.030" material="shota_adapter_pin" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_hand_receiver" type="box" pos="-0.061 0.290 0" size="0.0225 0.038 0.0175" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_bridge_upper" type="box" pos="-0.031 0.296 0.020" size="0.031 0.030 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_bridge_lower" type="box" pos="-0.031 0.296 -0.020" size="0.031 0.030 0.005" material="adapter_pad" density="0" contype="0" conaffinity="0"/>
+      <geom name="upper_adapter_cross_pin" type="cylinder" pos="-0.032 0.290 0" size="0.004 0.026" material="adapter_bolt" density="0" contype="0" conaffinity="0"/>
+      <geom name="kine_handle_tip" type="sphere" pos="0 0.54 0" size="0.018" material="wood_light" mass="0.02" contype="0" conaffinity="0"/>
+      <site name="lower_adapter" pos="-0.062 0.50 0" size="0.004" rgba="0 0 0 0"/>
+      <site name="upper_adapter" pos="-0.062 0.29 0" size="0.004" rgba="0 0 0 0"/>
+      <site name="kine_center" pos="0 0 0" size="0.01" rgba="0.9 0.1 0.1 1"/>
+    </body>
+
+    <body name="strike_target" pos="0.78 0 0.71">
+      <geom name="strike_target_ring" type="cylinder" size="0.18 0.004" material="impact_red" contype="0" conaffinity="0" rgba="0.9 0.1 0.05 0"/>
+    </body>
+  </worldbody>
+</mujoco>

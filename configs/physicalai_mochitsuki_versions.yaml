@@ -1,0 +1,28 @@
+physicalai_mochitsuki_versions:
+  v2:
+    source: PhysicalAI git tag v2
+    source_commit: a6992b03107cb69ef125e9c21365c69bad34c6d4
+    script: demos/physicalai_mochitsuki/versions/v2/mochitsuki_demo.py
+    scene: demos/physicalai_mochitsuki/versions/v2/scene_mochitsuki.xml
+    status: historical_reference
+    trajectory_format: embedded_python_keyframes
+    adapter_mapping: shota3527_mochi_clamp_pin_geometry_preserve_v2_grips
+    local_check: passes_with_speed_and_acceleration_warnings
+  v3:
+    source: PhysicalAI frozen v3 snapshot
+    script: demos/physicalai_mochitsuki/versions/v3/mochitsuki_demo.py
+    scene: demos/physicalai_mochitsuki/versions/v3/scene_mochitsuki.xml
+    render_script: demos/physicalai_mochitsuki/versions/v3/render_mochitsuki_demo.sh
+    status: frozen_baseline
+    trajectory_format: embedded_python_keyframes
+    adapter_mapping: shota3527_mochi_clamp_pin_geometry
+    local_check: passes_with_speed_acceleration_and_torque_warnings
+  latest:
+    source: PhysicalAI current mainline snapshot
+    script: demos/physicalai_mochitsuki/versions/latest/mochitsuki_demo.py
+    scene: demos/physicalai_mochitsuki/versions/latest/scene_mochitsuki.xml
+    render_script: demos/physicalai_mochitsuki/versions/latest/render_mochitsuki_demo.sh
+    status: preferred_port_forward
+    trajectory_format: embedded_python_keyframes
+    adapter_mapping: shota3527_mochi_clamp_pin_geometry
+    local_check: passes_without_dynamic_warnings
