@@ -220,7 +220,7 @@ def main() -> int:
     parser.add_argument("--gravity-comp", action="store_true", help="Add sim-only MuJoCo gravity/bias torque feedforward.")
     parser.add_argument("--gravity-comp-scale", type=float, default=1.0)
     parser.add_argument("--gravity-comp-sign", type=float, default=-1.0)
-    parser.add_argument("--gravity-comp-groups", default="lower,waist")
+    parser.add_argument("--gravity-comp-groups", default="waist")
     parser.add_argument("--gravity-comp-pose", default="kneel_hammer_ready_v0")
     parser.add_argument("--loop", action="store_true", help="Replay forward and backward repeatedly until Ctrl+C.")
     parser.add_argument("--cycles", type=int, default=0, help="Loop cycles to run; 0 means infinite when --loop is set.")
