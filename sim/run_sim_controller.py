@@ -39,6 +39,7 @@ def main():
     parser.add_argument("--interface", default="eth3")
     parser.add_argument("--domain-id", type=int, default=1)
     parser.add_argument("--run", action="store_true", help="Start unpaused.")
+    parser.add_argument("--zero-gravity", action="store_true", help="Disable gravity for motor-command plumbing checks.")
     args = parser.parse_args()
 
     poses = yaml.safe_load(POSES_CONFIG.read_text(encoding="utf-8"))
@@ -46,6 +47,8 @@ def main():
     initial_qpos = build_initial_qpos(args.pose, pose)
     scene_path = prepare_scene_path(initial_qpos, grip_roll_phase_deg=pose_grip_roll_phase(pose))
     model = mujoco.MjModel.from_xml_path(str(scene_path))
+    if args.zero_gravity:
+        model.opt.gravity[:] = 0.0
     data = mujoco.MjData(model)
 
     mujoco.mj_resetDataKeyframe(model, data, 0)
@@ -59,7 +62,7 @@ def main():
     print(
         f"G1 first-frame viewer: pose={args.pose} scene={scene_path} "
         f"domain_id={args.domain_id} paused={sim_state['paused']} "
-        f"right_elbow={right_elbow_q:.6f}",
+        f"right_elbow={right_elbow_q:.6f} gravity={model.opt.gravity}",
         flush=True,
     )
 
