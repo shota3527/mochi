@@ -136,6 +136,15 @@ source .venv/bin/activate
 python sim/run_sim_controller.py --interface eth3
 ```
 
+Hammer variants are selected with `--hammer-variant`:
+
+```bash
+python sim/run_sim_controller.py --interface eth3 --hammer-variant full_600_300
+python sim/run_sim_controller.py --interface eth3 --hammer-variant easy_450_150
+python sim/run_sim_controller.py --interface eth3 --hammer-variant compact_450_300
+python sim/run_sim_controller.py --interface eth3 --hammer-variant handle_only_450
+```
+
 Then read state from a second terminal:
 
 ```bash
@@ -356,17 +365,17 @@ Primitive parts:
 
 - wrist-compatible short adapter: box
 - split clamp: boxes plus anti-rotation pin
-- wooden handle: capsule, `0.45 m` long
-- wooden head: cylinder, `0.15 m` long and `0.06 m` diameter
+- wooden handle: capsule
+- wooden head: cylinder, `0.06 m` diameter when enabled
 
 The handle/head angle is fixed hammer geometry: the handle axis is tool `+Z`, the wooden head axis is tool `+X`, and the two stay at `90 deg` inside one rigid MuJoCo body. Do not tune that angle with robot joint poses.
 
-The handle and head use hardwood density `700 kg/m^3` for mass estimates:
+The handle and head use hardwood density `700 kg/m^3` for mass estimates. Current variants in `configs/hammer.yaml`:
 
-- handle mass: about `0.194 kg`
-- wooden head mass: about `0.297 kg`
-- adapter and clamp mass: about `0.220 kg`
-- total tool mass: about `0.711 kg`
+- `full_600_300`: `0.60 m` handle + `0.30 m` head, total about `1.072 kg`
+- `easy_450_150`: `0.45 m` handle + `0.15 m` head, total about `0.711 kg`
+- `compact_450_300`: `0.45 m` handle + `0.30 m` head, total about `1.008 kg`
+- `handle_only_450`: `0.45 m` handle, no head, total about `0.414 kg`
 
 The tool is mounted on `right_wrist_yaw_link`, local position `[0.0735, 0.0, 0.0]`. The wooden head is fixed at the front of the handle.
 
@@ -390,13 +399,10 @@ sim/
 
 backends/
   sdk2_python_backend.py
-  mujoco_backend.py
 
 core/
   safety_filter.py
-  trajectory.py
-  state_machine.py
-  hammer_model.py
+  stick_ik.py
 
 configs/
   g1_29dof_joints.yaml

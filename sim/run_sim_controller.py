@@ -43,15 +43,21 @@ def main():
     parser.add_argument("--interface", default="eth3")
     parser.add_argument("--domain-id", type=int, default=1)
     parser.add_argument("--run", action="store_true", help="Start unpaused.")
+    parser.add_argument(
+        "--hammer-variant",
+        default=None,
+        help="Hammer geometry variant from configs/hammer.yaml. Default uses default_variant.",
+    )
     args = parser.parse_args()
 
     poses = yaml.safe_load(POSES_CONFIG.read_text(encoding="utf-8"))
     pose = poses[args.pose]
-    initial_qpos = build_initial_qpos(args.pose, pose)
+    initial_qpos = build_initial_qpos(args.pose, pose, hammer_variant=args.hammer_variant)
     scene_path = prepare_scene_path(
         initial_qpos,
         grip_roll_phase_deg=pose_grip_roll_phase(pose),
         left_weld_distance_m=pose_left_weld_distance(pose),
+        hammer_variant=args.hammer_variant,
     )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
     data = mujoco.MjData(model)
@@ -72,7 +78,8 @@ def main():
     print(
         f"G1 first-frame viewer: pose={args.pose} scene={scene_path} "
         f"domain_id={args.domain_id} paused={sim_state['paused']} "
-        f"right_elbow={right_elbow_q:.6f} hip_fixed=True waist_fixed=False",
+        f"right_elbow={right_elbow_q:.6f} hip_fixed=True waist_fixed=False "
+        f"hammer_variant={resolve_hammer_variant_name(args.hammer_variant)}",
         flush=True,
     )
 
@@ -203,10 +210,11 @@ def publish_low_state(data, num_motors: int, msg, publisher) -> None:
     publisher.Write(msg)
 
 
-def build_initial_qpos(pose_name: str, pose: dict):
+def build_initial_qpos(pose_name: str, pose: dict, hammer_variant: str | None = None):
     scene_path = prepare_scene_path(
         grip_roll_phase_deg=pose_grip_roll_phase(pose),
         left_weld_distance_m=pose_left_weld_distance(pose),
+        hammer_variant=hammer_variant,
     )
     model = mujoco.MjModel.from_xml_path(str(scene_path))
     qpos = model.qpos0.copy()
@@ -223,7 +231,7 @@ def build_initial_qpos(pose_name: str, pose: dict):
 
 
 def hammer_default_grip_roll_phase() -> float:
-    hammer_config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
+    hammer_config = load_hammer_config()
     return float(hammer_config.get("default_grip_roll_phase_deg", 0.0))
 
 
@@ -242,11 +250,13 @@ def prepare_scene_path(
     initial_qpos=None,
     grip_roll_phase_deg: float | None = None,
     left_weld_distance_m: float | None = None,
+    hammer_variant: str | None = None,
 ) -> Path:
     xml = MOCHI_G1_SCENE.read_text(encoding="utf-8")
     robot_xml = patch_g1_right_hand_to_hammer(
         grip_roll_phase_deg=grip_roll_phase_deg,
         left_weld_distance_m=left_weld_distance_m,
+        hammer_variant=hammer_variant,
     )
     xml = xml.replace(
         '<include file="/home/shota/dev/unitree/unitree_mujoco/unitree_robots/g1/g1_29dof.xml"/>',
@@ -286,10 +296,11 @@ def prepare_scene_path(
 def patch_g1_right_hand_to_hammer(
     grip_roll_phase_deg: float | None = None,
     left_weld_distance_m: float | None = None,
+    hammer_variant: str | None = None,
 ) -> Path:
     """Generate a G1 XML with both rubber hands replaced by matching clamps."""
     original = UNITREE_G1_29DOF_XML.read_text(encoding="utf-8")
-    hammer_config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
+    hammer_config = load_hammer_config(hammer_variant)
     wrist_to_handle_root_m = [float(v) for v in hammer_config["wrist_to_handle_root_m"]]
     right_tool_pos = f"{wrist_to_handle_root_m[0]:.6f} {wrist_to_handle_root_m[1]:.6f} {wrist_to_handle_root_m[2]:.6f}"
     left_tool_pos = f"{wrist_to_handle_root_m[0]:.6f} {-wrist_to_handle_root_m[1]:.6f} {wrist_to_handle_root_m[2]:.6f}"
@@ -408,6 +419,44 @@ def patch_g1_right_hand_to_hammer(
     generated = Path(tempfile.gettempdir()) / "g1_29dof_mochi_hammer.xml"
     generated.write_text(patched, encoding="utf-8")
     return generated
+
+
+def resolve_hammer_variant_name(hammer_variant: str | None = None) -> str:
+    hammer_config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
+    if hammer_variant:
+        return hammer_variant
+    return str(hammer_config.get("default_variant", "base"))
+
+
+def load_hammer_config(hammer_variant: str | None = None) -> dict:
+    """Load hammer.yaml and apply a named primitive-geometry variant."""
+    config = yaml.safe_load(HAMMER_CONFIG.read_text(encoding="utf-8"))
+    variant_name = resolve_hammer_variant_name(hammer_variant)
+    variants = config.get("variants", {})
+    if variant_name == "base":
+        return config
+    if variant_name not in variants:
+        known = ", ".join(sorted(variants)) or "none"
+        raise SystemExit(f"Unknown hammer variant {variant_name!r}. Known variants: {known}")
+
+    variant = variants[variant_name]
+    config["selected_variant"] = variant_name
+    config["handle_length_m"] = float(variant["handle_length_m"])
+    config["hammer_total_mass_kg"] = float(variant["hammer_total_mass_kg"])
+    config["hammer_wood_mass_kg"] = float(variant["hammer_wood_mass_kg"])
+    config["hammer_head_mass_kg"] = float(variant["head_mass_kg"])
+    config["hammer_handle_mass_kg"] = float(variant["handle_mass_kg"])
+
+    config.setdefault("handle", {})
+    config["handle"]["length_m"] = float(variant["handle_length_m"])
+    config["handle"]["mass_kg"] = float(variant["handle_mass_kg"])
+
+    config.setdefault("head", {})
+    config["head"]["enabled"] = bool(variant["head_enabled"])
+    config["head"]["length_m"] = float(variant["head_length_m"])
+    config["head"]["diameter_m"] = float(variant["head_diameter_m"])
+    config["head"]["mass_kg"] = float(variant["head_mass_kg"])
+    return config
 
 
 if __name__ == "__main__":

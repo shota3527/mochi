@@ -1,4 +1,5 @@
 wood_density_kg_m3: 700.0
+default_variant: easy_450_150
 hammer_total_mass_kg: 0.7108
 hammer_wood_mass_kg: 0.4908
 hammer_head_mass_kg: 0.2969
@@ -35,3 +36,44 @@ head:
 checks:
   mark_dangerous_joint_margin_below_rad: 0.10
   static_wrist_moment_formula: hammer_mass * 9.81 * wrist_to_com_distance
+variants:
+  full_600_300:
+    memo: Original long mochi mallet concept; 600 mm handle plus 300 mm wooden head.
+    handle_length_m: 0.60
+    handle_mass_kg: 0.2586
+    head_enabled: true
+    head_length_m: 0.30
+    head_diameter_m: 0.06
+    head_mass_kg: 0.5938
+    hammer_wood_mass_kg: 0.8524
+    hammer_total_mass_kg: 1.0724
+  easy_450_150:
+    memo: Easy hardware hammer; 450 mm handle plus 150 mm wooden head.
+    handle_length_m: 0.45
+    handle_mass_kg: 0.1940
+    head_enabled: true
+    head_length_m: 0.15
+    head_diameter_m: 0.06
+    head_mass_kg: 0.2969
+    hammer_wood_mass_kg: 0.4908
+    hammer_total_mass_kg: 0.7108
+  compact_450_300:
+    memo: Short handle with full 300 mm wooden head.
+    handle_length_m: 0.45
+    handle_mass_kg: 0.1940
+    head_enabled: true
+    head_length_m: 0.30
+    head_diameter_m: 0.06
+    head_mass_kg: 0.5938
+    hammer_wood_mass_kg: 0.7878
+    hammer_total_mass_kg: 1.0078
+  handle_only_450:
+    memo: 450 mm handle-only check; no wooden head.
+    handle_length_m: 0.45
+    handle_mass_kg: 0.1940
+    head_enabled: false
+    head_length_m: 0.0
+    head_diameter_m: 0.06
+    head_mass_kg: 0.0
+    hammer_wood_mass_kg: 0.1940
+    hammer_total_mass_kg: 0.4140
