@@ -44,9 +44,9 @@ def main() -> int:
 
     print("G1 lowstate sample")
     print(f"domain_id={args.domain_id} interface={args.interface} mode_machine={sample.mode_machine}")
-    print("idx  joint_name                 q(rad)       dq(rad/s)")
-    for joint, q, dq in zip(joints, sample.q, sample.dq):
-        print(f"{joint['index']:>2}   {joint['name']:<24} {q:> .7f}  {dq:> .7f}")
+    print("idx  joint_name                 q(rad)       dq(rad/s)     tau_est(Nm)")
+    for joint, q, dq, tau in zip(joints, sample.q, sample.dq, sample.tau_est):
+        print(f"{joint['index']:>2}   {joint['name']:<24} {q:> .7f}  {dq:> .7f}  {tau:> .7f}")
 
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)

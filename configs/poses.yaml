@@ -1,26 +1,33 @@
 hammer_mounted_elbow_65:
-  memo: Current visual inspection pose after hammer geometry was accepted.
+  memo: Current visual inspection pose after hammer geometry was accepted; both elbows at 65 deg.
   base_z_m: 0.793
   joints_rad:
+    left_elbow_joint: 1.1344640138
     right_elbow_joint: 1.1344640138
+  elbow_joint_rad: 1.1344640138
+  elbow_joint_deg: 65.0
+  left_elbow_joint_rad: 1.1344640138
+  left_elbow_joint_deg: 65.0
   right_elbow_joint_rad: 1.1344640138
   right_elbow_joint_deg: 65.0
   hammer_mount:
     body: right_wrist_yaw_link
-    original_hand_root_local_m: [0.0415, -0.003, 0.0]
+    original_hand_root_local_m:
+    - 0.0415
+    - -0.003
+    - 0.0
   hammer_geometry:
     handle_axis_local: tool_z
-    handle_length_m: 0.60
+    handle_length_m: 0.45
     head_axis_local: tool_x
     head_handle_angle_deg: 90.0
     angle_is_fixed_tool_geometry: true
-    head_length_m: 0.30
+    head_length_m: 0.15
     head_diameter_m: 0.06
     head_tail_fixed_at_handle_front: true
   notes:
-    - Clamp is semi-transparent and non-colliding.
-    - Handle and head keep collision enabled.
-
+  - Clamp is semi-transparent and non-colliding.
+  - Handle and head keep collision enabled.
 standing_dual_hold_v0:
   memo: Standing centered two-hand stick-hold inspection pose solved from stick target and dual-arm IK.
   base_z_m: 0.793
@@ -30,7 +37,7 @@ standing_dual_hold_v0:
     left_shoulder_yaw_joint: -0.79340211478
     left_elbow_joint: 0.82217166424
     left_wrist_roll_joint: -0.73045136397
-    left_wrist_pitch_joint: 0.05598237660
+    left_wrist_pitch_joint: 0.0559823766
     left_wrist_yaw_joint: -0.15552008044
     right_shoulder_pitch_joint: -0.06504085338
     right_shoulder_roll_joint: 0.20106900597
@@ -38,116 +45,52 @@ standing_dual_hold_v0:
     right_elbow_joint: 1.24713523433
     right_wrist_roll_joint: 0.41235964591
     right_wrist_pitch_joint: -0.40194573404
-    right_wrist_yaw_joint: 0.11975551680
+    right_wrist_yaw_joint: 0.1197555168
   dual_hold_geometry:
-    source: apps/solve_standing_dual_hold_pose.py
-    stick_root_world_m: [0.1200, 0.0000, 0.6900]
-    stick_axis_world: [0.7071, 0.0000, 0.7071]
-    right_grip_distance_m: 0.000
-    left_grip_distance_m: 0.120
-    clamp_center_offset_m: 0.000
-    elbow_clearance_y_target_m: 0.140
+    source: planner/solve_standing_dual_hold_pose.py
+    stick_root_world_m:
+    - 0.12
+    - 0.0
+    - 0.69
+    stick_axis_world:
+    - 0.7071
+    - 0.0
+    - 0.7071
+    right_grip_distance_m: 0.0
+    left_grip_distance_m: 0.12
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    elbow_clearance_y_target_m: 0.14
     ik_right_tool_root_error_m: 0.0357
     ik_right_grip_error_m: 0.0346
     ik_left_grip_error_m: 0.0043
-    ik_right_axis_error: 0.0160
+    ik_right_axis_error: 0.016
   notes:
-    - Visual inspection pose only; not a trajectory.
-    - Right and left hands use matching clamp center targets on the stick centerline.
-    - Current hammer model is the headless load-test variant unless the wooden head is restored in sim/run_sim_controller.py.
-
+  - Visual inspection pose only; not a trajectory.
+  - Right and left hands use matching clamp center targets on the stick centerline.
+  - Current hammer model is the headless load-test variant unless the wooden head is restored in sim/run_sim_controller.py.
 kneel_static_v0:
-  memo: Static kneeling inspection pose for stable hammering, with knees opened 10 deg from hard limit. Not a command trajectory.
-  base_z_m: 0.355
+  memo: Static kneeling inspection pose for stable hammering, with knees opened 8 deg from hard limit. Not a command trajectory.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
   joints_rad:
-    left_hip_pitch_joint: -1.0
-    left_knee_joint: 2.70526034059
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
     left_ankle_pitch_joint: 0.5236
-    right_hip_pitch_joint: -1.0
-    right_knee_joint: 2.70526034059
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
     right_elbow_joint: 0.0
   limits_used_rad:
-    knee: [-0.087267, 2.8798]
-    ankle_pitch: [-0.87267, 0.5236]
-    ankle_roll: [-0.2618, 0.2618]
-
-kneel_hammer_ready_v0:
-  memo: Kneeling two-hand hammer-ready pose. Right clamp grips the rear end of the wood stick.
-  base_z_m: 0.355
-  joints_rad:
-    left_hip_pitch_joint: -1.0
-    left_knee_joint: 2.70526034059
-    left_ankle_pitch_joint: 0.5236
-    right_hip_pitch_joint: -1.0
-    right_knee_joint: 2.70526034059
-    right_ankle_pitch_joint: 0.5236
-    left_shoulder_pitch_joint: -1.14652987234
-    left_shoulder_roll_joint: 0.10724699502
-    left_shoulder_yaw_joint: -0.10494787801
-    left_elbow_joint: 0.08572733324
-    left_wrist_roll_joint: -1.54340617904
-    left_wrist_pitch_joint: 1.20849589797
-    left_wrist_yaw_joint: -0.61385748270
-    right_shoulder_pitch_joint: -0.21724986299
-    right_shoulder_roll_joint: -0.20904225154
-    right_shoulder_yaw_joint: 0.65730289476
-    right_elbow_joint: -0.50563657576
-    right_wrist_roll_joint: 0.91379557678
-    right_wrist_pitch_joint: 0.78990604730
-    right_wrist_yaw_joint: 0.78598106011
-  dual_hold_geometry:
-    source: core/stick_ik.py
-    stick_rear_world_m: [0.1400, 0.0000, 0.530718]
-    stick_axis_world: [0.5000, 0.0000, 0.8660]
-    right_grip_distance_m: 0.000
-    left_grip_distance_m: 0.200
-    clamp_center_offset_m: 0.000
-    grip_roll_phase_deg: -120.0
-    right_roll_phase_deg: 25.0
-    left_roll_phase_deg: 145.0
-    relative_roll_deg: 120.0
-    ik_right_grip_error_m: 0.000000
-    ik_left_grip_error_m: 0.000000
-
-kneel_hammer_down_v0:
-  memo: Kneeling two-hand hammer-down pose. Right clamp grips the rear end of the wood stick.
-  base_z_m: 0.355
-  joints_rad:
-    left_hip_pitch_joint: -1.0
-    left_knee_joint: 2.70526034059
-    left_ankle_pitch_joint: 0.5236
-    right_hip_pitch_joint: -1.0
-    right_knee_joint: 2.70526034059
-    right_ankle_pitch_joint: 0.5236
-    left_shoulder_pitch_joint: -1.11732471033
-    left_shoulder_roll_joint: 0.04086554932
-    left_shoulder_yaw_joint: -0.02237735441
-    left_elbow_joint: 0.37165235200
-    left_wrist_roll_joint: -1.63276148691
-    left_wrist_pitch_joint: 1.27504600309
-    left_wrist_yaw_joint: -0.54712002064
-    right_shoulder_pitch_joint: -0.13159611052
-    right_shoulder_roll_joint: -0.13168115961
-    right_shoulder_yaw_joint: 0.58006995931
-    right_elbow_joint: -0.57707913486
-    right_wrist_roll_joint: 1.40211738826
-    right_wrist_pitch_joint: 0.98573659515
-    right_wrist_yaw_joint: 0.37016779900
-  dual_hold_geometry:
-    source: core/stick_ik.py
-    stick_rear_world_m: [0.118716, 0.0000, 0.548577]
-    stick_axis_world: [0.7660, 0.0000, 0.6428]
-    right_grip_distance_m: 0.000
-    left_grip_distance_m: 0.200
-    clamp_center_offset_m: 0.000
-    grip_roll_phase_deg: -120.0
-    right_roll_phase_deg: 25.0
-    left_roll_phase_deg: 145.0
-    relative_roll_deg: 120.0
-    ik_right_grip_error_m: 0.000000
-    ik_left_grip_error_m: 0.000000
-
+    knee:
+    - -0.087267
+    - 2.8798
+    ankle_pitch:
+    - -0.87267
+    - 0.5236
+    ankle_roll:
+    - -0.2618
+    - 0.2618
 pose_hold_test:
   memo: Sim-only joint position hold test settings. Requires --enable-command.
   pose: kneel_static_v0
@@ -157,6 +100,140 @@ pose_hold_test:
   max_step_rad: 0.015
   limit_margin_rad: 0.0
   gains:
-    default: {kp: 35.0, kd: 1.0}
-    lower_body: {kp: 60.0, kd: 2.0}
-    knees: {kp: 90.0, kd: 3.0}
+    default:
+      kp: 35.0
+      kd: 1.0
+    lower_body:
+      kp: 60.0
+      kd: 2.0
+    knees:
+      kp: 90.0
+      kd: 3.0
+knee_double_v0_start:
+  memo: Start pose for knee_double_v0 locked-stick kneeling swing.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    left_shoulder_pitch_joint: -1.14652987234
+    left_shoulder_roll_joint: 0.10724699502
+    left_shoulder_yaw_joint: -0.10494787801
+    left_elbow_joint: 0.08572733324
+    left_wrist_roll_joint: -1.54340617904
+    left_wrist_pitch_joint: 1.20849589797
+    left_wrist_yaw_joint: -0.6138574827
+    right_shoulder_pitch_joint: -0.21724986299
+    right_shoulder_roll_joint: -0.20904225154
+    right_shoulder_yaw_joint: 0.65730289476
+    right_elbow_joint: -0.50563657576
+    right_wrist_roll_joint: 0.91379557678
+    right_wrist_pitch_joint: 0.7899060473
+    right_wrist_yaw_joint: 0.78598106011
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v0
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: false
+    full_pose_locked: true
+knee_double_v0_end:
+  memo: End pose for knee_double_v0 locked-stick kneeling swing.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    left_shoulder_pitch_joint: -1.11732471033
+    left_shoulder_roll_joint: 0.04086554932
+    left_shoulder_yaw_joint: -0.02237735441
+    left_elbow_joint: 0.371652352
+    left_wrist_roll_joint: -1.63276148691
+    left_wrist_pitch_joint: 1.27504600309
+    left_wrist_yaw_joint: -0.54712002064
+    right_shoulder_pitch_joint: -0.13159611052
+    right_shoulder_roll_joint: -0.13168115961
+    right_shoulder_yaw_joint: 0.58006995931
+    right_elbow_joint: -0.57707913486
+    right_wrist_roll_joint: 1.40211738826
+    right_wrist_pitch_joint: 0.98573659515
+    right_wrist_yaw_joint: 0.370167799
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v0
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: false
+    full_pose_locked: true
+knee_double_v1_start:
+  memo: Start pose for knee_double_v1 height-targeted kneeling swing; lower body copied from knee_double_v0_start.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    left_shoulder_pitch_joint: -1.2867175675922862
+    left_shoulder_roll_joint: 0.46038363979263364
+    left_shoulder_yaw_joint: -0.38354525857449423
+    left_elbow_joint: -0.03192094809564736
+    left_wrist_roll_joint: -1.8462491262921763
+    left_wrist_pitch_joint: 0.8482858369950671
+    left_wrist_yaw_joint: -0.5505401825326734
+    right_shoulder_pitch_joint: -0.45316206817792076
+    right_shoulder_roll_joint: -0.2755506681288546
+    right_shoulder_yaw_joint: 0.680613018541441
+    right_elbow_joint: -0.4872781512171593
+    right_wrist_roll_joint: 1.0015560955809986
+    right_wrist_pitch_joint: 0.7869417601939569
+    right_wrist_yaw_joint: 0.7957515722962845
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v1
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+knee_double_v1_end:
+  memo: End pose for knee_double_v1 height-targeted kneeling swing; lower body copied from knee_double_v0_end.
+  base_z_m: 0.335
+  base_pitch_deg: 9.0
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    left_shoulder_pitch_joint: -0.9257042490921384
+    left_shoulder_roll_joint: 0.3817118697456338
+    left_shoulder_yaw_joint: -0.677816938093909
+    left_elbow_joint: 0.11827645313125958
+    left_wrist_roll_joint: -1.7965704065023589
+    left_wrist_pitch_joint: 0.7400953703984474
+    left_wrist_yaw_joint: -0.4695120155088873
+    right_shoulder_pitch_joint: -0.022804936516740884
+    right_shoulder_roll_joint: -0.26496673686488253
+    right_shoulder_yaw_joint: 0.8508549267219181
+    right_elbow_joint: -0.2567578620276261
+    right_wrist_roll_joint: 0.9506631257993519
+    right_wrist_pitch_joint: 0.547036771217895
+    right_wrist_yaw_joint: 0.9595209659719286
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v1
+    left_grip_distance_m: 0.2
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false

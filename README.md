@@ -109,7 +109,7 @@ To inspect the current kneel candidate:
 python sim/run_sim_controller.py --interface eth3 --pose kneel_static_v0
 ```
 
-`kneel` is based on the knee/ankle limit-fold pose, with both knees opened 10 deg from the hard knee limit to reduce interference. It is the baseline for stable hammering inspection.
+`kneel` is based on the knee/ankle limit-fold pose, with both knees opened 8 deg from the hard knee limit to reduce interference. It is the baseline for stable hammering inspection.
 
 If the viewer prints Mesa/Zink errors such as:
 
@@ -137,21 +137,89 @@ This publishes DDS low-level joint position commands in simulation. It is not a 
 
 To replay the locked kneeling hammer trajectory:
 
+Terminal 1 must start the simulator at the matching first waypoint pose:
+
+```bash
+python sim/run_sim_controller.py --interface eth3 --pose knee_double_v0_start
+```
+
+Terminal 2:
+
 ```bash
 python apps/replay_trajectory.py \
   --interface eth3 \
-  --trajectory kneel_dual_hold_swing_v0 \
-  --enable-command
+  --trajectory knee_double_v0 \
+  --gravity-comp
 ```
+
+`replay_trajectory.py` first ramps from the current joint state to the first
+waypoint with the configured `--max-step-rad` limit, then starts the hammer
+trajectory. This lets the simulator recover from a mismatched initial pose
+without a hard start.
 
 To watch the hammer swing forward and backward repeatedly:
 
 ```bash
 python apps/replay_trajectory.py \
   --interface eth3 \
-  --trajectory kneel_dual_hold_swing_v0 \
+  --trajectory knee_double_v0 \
+  --loop
+```
+
+Trajectory replay always uses a staged SPACE-key workflow:
+
+1. Press SPACE to ramp to the first waypoint.
+2. Press SPACE to start the trajectory.
+3. At the final pose, press SPACE to confirm the current-position stop for stick removal.
+4. Press SPACE to return to the first waypoint and release.
+
+There are two command paths:
+
+`--arm-sdk` publishes upper-body commands on `rt/arm_sdk`, matching Unitree's G1
+arm SDK example. It sets `motor_cmd[29].q = 1` while active and disables it on
+exit. The built-in high-level motion mode stays running, so this is the path for
+our first G1 workflow test.
+
+Without `--arm-sdk`, the app publishes full-body low-level commands on
+`rt/lowcmd`. This is not the path for the first real standing test.
+
+```bash
+python apps/replay_trajectory.py \
+  --interface eth3 \
+  --trajectory real_link_hammer_mounted_elbow_v0 \
+  --arm-sdk
+```
+
+Optional gravity feedforward is deliberately scoped for tuning. It sends torque
+only to waist joints, shoulder joints, and elbows. Hips, knees, ankles, and
+wrists still receive `0 Nm` feedforward.
+
+```text
+tau_ff[selected_joints] = scale * qfrc_bias[selected_dofs]
+```
+
+It uses the official Unitree `g1_29dof.xml` model, updates the configured motor
+joint angles before each torque calculation, and reads MuJoCo `qfrc_bias` at
+zero velocity. It does not load the mochi scene and never includes
+hammer/clamp/tool bodies, so the term represents robot body support, not tool
+payload. Replay limits each feedforward joint to `8 Nm` by default.
+
+The MuJoCo calculation model is fixed to the official default G1 model for this
+replay app. The hammering pose still comes from `configs/poses.yaml` and the
+trajectory config; only the feedforward model stays tool-free.
+
+Replay gains live in `configs/gain_profiles.yaml`. The `official` profile is
+copied from Unitree's G1 low-level example. The default project profile is
+`double_hand`: hip pitch and waist gains are 1.5x, shoulder/elbow gains use
+the stable two-hand swing profile, hip roll/yaw, knees, and ankles keep the original baseline, and wrist gains stay at the original arm-SDK values.
+Trajectories default to `double_hand`.
+
+```bash
+python apps/replay_trajectory.py \
+  --interface eth3 \
+  --trajectory knee_double_v1 \
   --loop \
-  --enable-command
+  --gravity-comp
 ```
 
 The default scene includes a primitive mochi-pounding target in front of the robot:
@@ -279,17 +347,17 @@ Primitive parts:
 
 - wrist-compatible short adapter: box
 - split clamp: boxes plus anti-rotation pin
-- wooden handle: capsule, `0.60 m` long
-- wooden head: cylinder, `0.30 m` long and `0.06 m` diameter
+- wooden handle: capsule, `0.45 m` long
+- wooden head: cylinder, `0.15 m` long and `0.06 m` diameter
 
 The handle/head angle is fixed hammer geometry: the handle axis is tool `+Z`, the wooden head axis is tool `+X`, and the two stay at `90 deg` inside one rigid MuJoCo body. Do not tune that angle with robot joint poses.
 
 The handle and head use hardwood density `700 kg/m^3` for mass estimates:
 
-- handle mass: about `0.259 kg`
-- wooden head mass: about `0.594 kg`
+- handle mass: about `0.194 kg`
+- wooden head mass: about `0.297 kg`
 - adapter and clamp mass: about `0.220 kg`
-- total tool mass: about `1.072 kg`
+- total tool mass: about `0.711 kg`
 
 The tool is mounted at the original right hand root on `right_wrist_yaw_link`, local position `[0.0415, -0.003, 0.0]`. The wooden head is fixed at the front of the handle.
 

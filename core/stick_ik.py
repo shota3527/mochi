@@ -75,6 +75,21 @@ class DualHoldIKResult:
 
 
 @dataclass(frozen=True)
+class ClosedLoopIKResult:
+    joint_values: dict[str, float]
+    cost: float
+    loop_grip_error_m: float
+    loop_axis_error: float
+    head_axis_error: float
+    hand_center_y_error_m: float
+    right_grip_m: np.ndarray
+    left_grip_m: np.ndarray
+    right_axis_m: np.ndarray
+    left_axis_m: np.ndarray
+    head_axis_m: np.ndarray
+
+
+@dataclass(frozen=True)
 class IKWeights:
     """Weights for strict deadlocked two-hand stick IK."""
 
@@ -369,4 +384,130 @@ def solve_dual_hold_ik(
         right_cross_axis_error=float(np.linalg.norm(right_cross - targets.right_cross_axis_m)),
         left_cross_axis_error=float(np.linalg.norm(left_cross - targets.left_cross_axis_m)),
         targets=targets,
+    )
+
+
+def solve_dual_hold_closed_loop_ik(
+    model,
+    data,
+    *,
+    left_grip_distance_m: float = 0.20,
+    clamp_center_offset_m: float = 0.0,
+    right_tool_body: str = "right_hammer_tool",
+    left_tool_body: str = "left_hammer_clamp",
+    hammer_grip_body: str = "right_hammer_grip",
+    left_elbow_body: str = "left_elbow_link",
+    right_elbow_body: str = "right_elbow_link",
+    left_clearance_bodies: tuple[str, ...] = (),
+    right_clearance_bodies: tuple[str, ...] = (),
+    head_axis_target_m=(0.0, 0.0, -1.0),
+    elbow_clearance_y_m: float = 0.14,
+    elbow_clearance_weight: float = 5.0,
+    regularization_weight: float = 0.04,
+    loop_grip_weight: float = 120.0,
+    loop_axis_weight: float = 35.0,
+    head_axis_weight: float = 3.0,
+    hand_center_y_target_m: float | None = None,
+    hand_center_y_weight: float = 5.0,
+    initial_joint_values: dict[str, float] | None = None,
+    use_extra_starts: bool = True,
+    max_nfev: int = 5000,
+) -> ClosedLoopIKResult:
+    """Solve both arms without pinning the stick to a world-space root.
+
+    The right hand carries the hammer. The left hand is constrained to the
+    right-hand stick line at `left_grip_distance_m`, both clamp axes stay
+    aligned, and the hammer head axis is biased toward `head_axis_target_m`.
+    """
+    right_tool_body_id = model.body(right_tool_body).id
+    left_tool_body_id = model.body(left_tool_body).id
+    hammer_grip_body_id = model.body(hammer_grip_body).id
+    left_elbow_body_id = model.body(left_elbow_body).id
+    right_elbow_body_id = model.body(right_elbow_body).id
+    left_clearance_body_ids = [model.body(name).id for name in left_clearance_bodies]
+    right_clearance_body_ids = [model.body(name).id for name in right_clearance_bodies]
+    head_axis_target = normalize(head_axis_target_m)
+
+    joint_names = LEFT_ARM_JOINTS + RIGHT_ARM_JOINTS
+    addrs = joint_qpos_addrs(model, joint_names)
+    lower, upper = joint_ranges(model, joint_names)
+    q0 = data.qpos[addrs].copy()
+    nominal = arm_nominal_q(lower, upper)
+    starts = build_starts(q0, nominal, lower, upper, joint_names, initial_joint_values, use_extra_starts)
+    regularization_center = starts[0] if initial_joint_values else nominal
+
+    def apply(x: np.ndarray) -> None:
+        data.qpos[addrs] = x
+        mujoco.mj_forward(model, data)
+
+    def residual(x: np.ndarray) -> np.ndarray:
+        apply(x)
+        right_axis, right_grip = body_axis_and_grip(model, data, right_tool_body, clamp_center_offset_m)
+        left_axis, left_grip = body_axis_and_grip(model, data, left_tool_body, clamp_center_offset_m)
+        right_left_grip = right_grip + right_axis * float(left_grip_distance_m)
+        hand_center_y = 0.5 * (right_grip[1] + left_grip[1])
+        head_axis = data.xmat[hammer_grip_body_id].reshape(3, 3)[:, 0]
+        hand_center_residual = (
+            np.array([(hand_center_y - float(hand_center_y_target_m)) * hand_center_y_weight])
+            if hand_center_y_target_m is not None and hand_center_y_weight > 0.0
+            else np.empty(0)
+        )
+        return np.concatenate(
+            [
+                (left_grip - right_left_grip) * loop_grip_weight,
+                (left_axis - right_axis) * loop_axis_weight,
+                (head_axis - head_axis_target) * head_axis_weight,
+                hand_center_residual,
+                np.array(
+                    [
+                        max(0.0, elbow_clearance_y_m - data.xpos[left_elbow_body_id][1]),
+                        max(0.0, elbow_clearance_y_m + data.xpos[right_elbow_body_id][1]),
+                    ]
+                )
+                * elbow_clearance_weight,
+                np.array(
+                    [max(0.0, elbow_clearance_y_m - data.xpos[body_id][1]) for body_id in left_clearance_body_ids]
+                    + [max(0.0, elbow_clearance_y_m + data.xpos[body_id][1]) for body_id in right_clearance_body_ids],
+                    dtype=float,
+                )
+                * elbow_clearance_weight,
+                (x - regularization_center) * regularization_weight,
+            ]
+        )
+
+    best = None
+    for start in starts:
+        result = least_squares(
+            residual,
+            np.clip(start, lower, upper),
+            bounds=(lower, upper),
+            max_nfev=max_nfev,
+            xtol=1e-10,
+            ftol=1e-10,
+            gtol=1e-10,
+        )
+        if best is None or result.cost < best.cost:
+            best = result
+
+    assert best is not None
+    apply(best.x)
+    right_axis, right_grip = body_axis_and_grip(model, data, right_tool_body, clamp_center_offset_m)
+    left_axis, left_grip = body_axis_and_grip(model, data, left_tool_body, clamp_center_offset_m)
+    right_left_grip = right_grip + right_axis * float(left_grip_distance_m)
+    head_axis = data.xmat[hammer_grip_body_id].reshape(3, 3)[:, 0].copy()
+    hand_center_y = 0.5 * (right_grip[1] + left_grip[1])
+    hand_center_y_target = hand_center_y if hand_center_y_target_m is None else float(hand_center_y_target_m)
+
+    return ClosedLoopIKResult(
+        joint_values={name: float(value) for name, value in zip(joint_names, best.x)},
+        cost=float(best.cost),
+        loop_grip_error_m=float(np.linalg.norm(left_grip - right_left_grip)),
+        loop_axis_error=float(np.linalg.norm(left_axis - right_axis)),
+        head_axis_error=float(np.linalg.norm(head_axis - head_axis_target)),
+        hand_center_y_error_m=float(hand_center_y - hand_center_y_target),
+        right_grip_m=right_grip.copy(),
+        left_grip_m=left_grip.copy(),
+        right_axis_m=right_axis.copy(),
+        left_axis_m=left_axis.copy(),
+        head_axis_m=head_axis,
     )

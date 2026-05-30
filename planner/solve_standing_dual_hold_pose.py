@@ -64,7 +64,7 @@ def print_pose_block(
     for joint_name, value in result.joint_values.items():
         print(f"    {joint_name}: {value:.11f}")
     print("  dual_hold_geometry:")
-    print("    source: apps/solve_standing_dual_hold_pose.py")
+    print("    source: planner/solve_standing_dual_hold_pose.py")
     print(f"    stick_root_world_m: [{stick.root_m[0]:.4f}, {stick.root_m[1]:.4f}, {stick.root_m[2]:.4f}]")
     print(f"    stick_axis_world: [{stick.axis_m[0]:.4f}, {stick.axis_m[1]:.4f}, {stick.axis_m[2]:.4f}]")
     print(f"    right_grip_distance_m: {right_distance:.3f}")

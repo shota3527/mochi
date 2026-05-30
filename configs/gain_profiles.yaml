@@ -1,0 +1,72 @@
+source:
+  joint_order: configs/g1_29dof_joints.yaml
+  official_low_level_example: /home/shota/dev/unitree/unitree_sdk2_python/example/g1/low_level/g1_low_level_example.py
+  arm_sdk_example: /home/shota/dev/unitree/unitree_sdk2_python/example/g1/high_level/g1_arm7_sdk_dds_example.py
+  note: One explicit kp/kd value is listed for every G1 29DOF joint. Replay uses only the fully expanded joints map.
+
+profiles:
+  official:
+    memo: Unitree G1 low-level example gains copied from g1_low_level_example.py.
+    joints:
+      left_hip_pitch: {kp: 60.0, kd: 1.0}
+      left_hip_roll: {kp: 60.0, kd: 1.0}
+      left_hip_yaw: {kp: 60.0, kd: 1.0}
+      left_knee: {kp: 100.0, kd: 2.0}
+      left_ankle_pitch: {kp: 40.0, kd: 1.0}
+      left_ankle_roll: {kp: 40.0, kd: 1.0}
+      right_hip_pitch: {kp: 60.0, kd: 1.0}
+      right_hip_roll: {kp: 60.0, kd: 1.0}
+      right_hip_yaw: {kp: 60.0, kd: 1.0}
+      right_knee: {kp: 100.0, kd: 2.0}
+      right_ankle_pitch: {kp: 40.0, kd: 1.0}
+      right_ankle_roll: {kp: 40.0, kd: 1.0}
+      waist_yaw: {kp: 60.0, kd: 1.0}
+      waist_roll: {kp: 40.0, kd: 1.0}
+      waist_pitch: {kp: 40.0, kd: 1.0}
+      left_shoulder_pitch: {kp: 40.0, kd: 1.0}
+      left_shoulder_roll: {kp: 40.0, kd: 1.0}
+      left_shoulder_yaw: {kp: 40.0, kd: 1.0}
+      left_elbow: {kp: 40.0, kd: 1.0}
+      left_wrist_roll: {kp: 40.0, kd: 1.0}
+      left_wrist_pitch: {kp: 40.0, kd: 1.0}
+      left_wrist_yaw: {kp: 40.0, kd: 1.0}
+      right_shoulder_pitch: {kp: 40.0, kd: 1.0}
+      right_shoulder_roll: {kp: 40.0, kd: 1.0}
+      right_shoulder_yaw: {kp: 40.0, kd: 1.0}
+      right_elbow: {kp: 40.0, kd: 1.0}
+      right_wrist_roll: {kp: 40.0, kd: 1.0}
+      right_wrist_pitch: {kp: 40.0, kd: 1.0}
+      right_wrist_yaw: {kp: 40.0, kd: 1.0}
+
+  double_hand:
+    memo: Default two-hand hammer profile. Hip pitch and waist gains are 1.5x; shoulder/elbow gains use the stable two-hand swing profile; hip roll/yaw, knees, and ankles stay at the original baseline; wrists keep the original arm-SDK gains.
+    joints:
+      left_hip_pitch: {kp: 120.0, kd: 2}
+      left_hip_roll: {kp: 60.0, kd: 1.0}
+      left_hip_yaw: {kp: 60.0, kd: 1.0}
+      left_knee: {kp: 100.0, kd: 2.0}
+      left_ankle_pitch: {kp: 40.0, kd: 1.0}
+      left_ankle_roll: {kp: 40.0, kd: 1.0}
+      right_hip_pitch: {kp: 120.0, kd: 2}
+      right_hip_roll: {kp: 60.0, kd: 1.0}
+      right_hip_yaw: {kp: 60.0, kd: 1.0}
+      right_knee: {kp: 100.0, kd: 2.0}
+      right_ankle_pitch: {kp: 40.0, kd: 1.0}
+      right_ankle_roll: {kp: 40.0, kd: 1.0}
+      waist_yaw: {kp: 90.0, kd: 1.5}
+      waist_roll: {kp: 120.0, kd: 3.0}
+      waist_pitch: {kp: 150.0, kd: 3.0}
+      left_shoulder_pitch: {kp: 100.0, kd: 2.5}
+      left_shoulder_roll: {kp: 100.0, kd: 2.5}
+      left_shoulder_yaw: {kp: 100.0, kd: 2.5}
+      left_elbow: {kp: 100.0, kd: 2.5}
+      left_wrist_roll: {kp: 60.0, kd: 1.5}
+      left_wrist_pitch: {kp: 60.0, kd: 1.5}
+      left_wrist_yaw: {kp: 60.0, kd: 1.5}
+      right_shoulder_pitch: {kp: 100.0, kd: 2.5}
+      right_shoulder_roll: {kp: 100.0, kd: 2.5}
+      right_shoulder_yaw: {kp: 100.0, kd: 2.5}
+      right_elbow: {kp: 100.0, kd: 2.5}
+      right_wrist_roll: {kp: 60.0, kd: 1.5}
+      right_wrist_pitch: {kp: 60.0, kd: 1.5}
+      right_wrist_yaw: {kp: 60.0, kd: 1.5}

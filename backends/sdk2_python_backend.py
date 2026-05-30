@@ -12,6 +12,7 @@ from unitree_sdk2py.core.channel import (
     ChannelPublisher,
     ChannelSubscriber,
 )
+from unitree_sdk2py.comm.motion_switcher.motion_switcher_client import MotionSwitcherClient
 from unitree_sdk2py.idl.default import unitree_hg_msg_dds__LowCmd_
 from unitree_sdk2py.idl.unitree_hg.msg.dds_ import LowCmd_, LowState_
 from unitree_sdk2py.utils.crc import CRC
@@ -19,7 +20,10 @@ from unitree_sdk2py.utils.crc import CRC
 
 TOPIC_LOWCMD = "rt/lowcmd"
 TOPIC_LOWSTATE = "rt/lowstate"
+TOPIC_ARMSDK = "rt/arm_sdk"
 G1_29DOF_NUM_MOTORS = 29
+G1_ARMSDK_ENABLE_INDEX = 29
+G1_ARMSDK_NUM_MOTOR_CMDS = 35
 
 
 @dataclass
@@ -49,12 +53,22 @@ class G1Sdk2Backend:
         self._initialized = False
         self._low_state_subscriber = None
         self._low_cmd_publisher = None
+        self._arm_sdk_publisher = None
+        self._motion_switcher = None
 
-    def initialize(self, enable_commands: bool = False) -> None:
+    def initialize(
+        self,
+        enable_commands: bool = False,
+        release_motion_mode: bool = False,
+        enable_arm_sdk: bool = False,
+    ) -> None:
         if self.interface:
             ChannelFactoryInitialize(self.domain_id, self.interface)
         else:
             ChannelFactoryInitialize(self.domain_id)
+
+        if enable_commands and release_motion_mode:
+            self.release_motion_mode()
 
         self._low_state_subscriber = ChannelSubscriber(TOPIC_LOWSTATE, LowState_)
         self._low_state_subscriber.Init(self._low_state_handler, 10)
@@ -63,7 +77,30 @@ class G1Sdk2Backend:
             self._low_cmd_publisher = ChannelPublisher(TOPIC_LOWCMD, LowCmd_)
             self._low_cmd_publisher.Init()
 
+        if enable_arm_sdk:
+            self._arm_sdk_publisher = ChannelPublisher(TOPIC_ARMSDK, LowCmd_)
+            self._arm_sdk_publisher.Init()
+
         self._initialized = True
+
+    def release_motion_mode(self, timeout_s: float = 5.0, poll_s: float = 1.0) -> None:
+        """Release active high-level Unitree motion mode before low-level control."""
+        self._motion_switcher = MotionSwitcherClient()
+        self._motion_switcher.SetTimeout(float(timeout_s))
+        self._motion_switcher.Init()
+
+        status, result = self._motion_switcher.CheckMode()
+        if status != 0:
+            raise RuntimeError(f"MotionSwitcher CheckMode failed with status {status}.")
+        while result and result.get("name"):
+            print(f"Releasing Unitree motion mode: {result['name']}", flush=True)
+            status, _ = self._motion_switcher.ReleaseMode()
+            if status != 0:
+                raise RuntimeError(f"MotionSwitcher ReleaseMode failed with status {status}.")
+            time.sleep(float(poll_s))
+            status, result = self._motion_switcher.CheckMode()
+            if status != 0:
+                raise RuntimeError(f"MotionSwitcher CheckMode failed with status {status}.")
 
     def _low_state_handler(self, msg: LowState_) -> None:
         q = np.array([msg.motor_state[i].q for i in range(self.num_motors)], dtype=float)
@@ -162,3 +199,73 @@ class G1Sdk2Backend:
 
         cmd.crc = self._crc.Crc(cmd)
         self._low_cmd_publisher.Write(cmd)
+
+    def publish_disable_command(self, mode_machine: int | None = None) -> None:
+        if self._low_cmd_publisher is None:
+            raise RuntimeError("Command publisher was not enabled.")
+
+        cmd = unitree_hg_msg_dds__LowCmd_()
+        if hasattr(cmd, "mode_pr"):
+            cmd.mode_pr = 0
+        if mode_machine is not None and hasattr(cmd, "mode_machine"):
+            cmd.mode_machine = mode_machine
+
+        for i in range(self.num_motors):
+            cmd.motor_cmd[i].mode = 0
+            cmd.motor_cmd[i].tau = 0.0
+            cmd.motor_cmd[i].q = 0.0
+            cmd.motor_cmd[i].dq = 0.0
+            cmd.motor_cmd[i].kp = 0.0
+            cmd.motor_cmd[i].kd = 0.0
+
+        cmd.crc = self._crc.Crc(cmd)
+        self._low_cmd_publisher.Write(cmd)
+
+    def publish_arm_sdk_command(
+        self,
+        q_des,
+        kp,
+        kd,
+        tau=None,
+        weight: float = 1.0,
+        joint_indices: list[int] | tuple[int, ...] | None = None,
+    ) -> None:
+        if self._arm_sdk_publisher is None:
+            raise RuntimeError("Arm SDK publisher was not enabled.")
+
+        q_des = np.asarray(q_des, dtype=float)
+        kp = np.asarray(kp, dtype=float)
+        kd = np.asarray(kd, dtype=float)
+        if tau is None:
+            tau = np.zeros(self.num_motors, dtype=float)
+        tau = np.asarray(tau, dtype=float)
+        if q_des.shape != (self.num_motors,):
+            raise ValueError(f"q_des must have shape ({self.num_motors},)")
+        if kp.shape != (self.num_motors,) or kd.shape != (self.num_motors,):
+            raise ValueError(f"kp and kd must have shape ({self.num_motors},)")
+        if tau.shape != (self.num_motors,):
+            raise ValueError(f"tau must have shape ({self.num_motors},)")
+
+        if joint_indices is None:
+            joint_indices = tuple(range(12, self.num_motors))
+
+        cmd = unitree_hg_msg_dds__LowCmd_()
+        cmd.motor_cmd[G1_ARMSDK_ENABLE_INDEX].q = float(np.clip(weight, 0.0, 1.0))
+        for i in joint_indices:
+            cmd.motor_cmd[i].mode = 1
+            cmd.motor_cmd[i].tau = float(tau[i])
+            cmd.motor_cmd[i].q = float(q_des[i])
+            cmd.motor_cmd[i].dq = 0.0
+            cmd.motor_cmd[i].kp = float(kp[i])
+            cmd.motor_cmd[i].kd = float(kd[i])
+
+        cmd.crc = self._crc.Crc(cmd)
+        self._arm_sdk_publisher.Write(cmd)
+
+    def publish_arm_sdk_disable(self) -> None:
+        if self._arm_sdk_publisher is None:
+            raise RuntimeError("Arm SDK publisher was not enabled.")
+        cmd = unitree_hg_msg_dds__LowCmd_()
+        cmd.motor_cmd[G1_ARMSDK_ENABLE_INDEX].q = 0.0
+        cmd.crc = self._crc.Crc(cmd)
+        self._arm_sdk_publisher.Write(cmd)

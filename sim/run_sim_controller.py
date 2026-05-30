@@ -29,8 +29,12 @@ POSES_CONFIG = PROJECT_ROOT / "configs" / "poses.yaml"
 HAMMER_CONFIG = PROJECT_ROOT / "configs" / "hammer.yaml"
 TOPIC_LOWCMD = "rt/lowcmd"
 TOPIC_LOWSTATE = "rt/lowstate"
+TOPIC_ARMSDK = "rt/arm_sdk"
 SIM_DT = 0.005
 VIEWER_DT = 0.02
+LOWER_BODY_JOINTS = tuple(range(12))
+ARM_SDK_JOINTS = tuple(range(12, 29))
+ARM_SDK_ENABLE_INDEX = 29
 
 
 def main():
@@ -59,7 +63,13 @@ def main():
     mujoco.mj_forward(model, data)
 
     lock = threading.Lock()
-    sim_state = {"paused": not args.run, "auto_started_from_lowcmd": args.run}
+    sim_state = {
+        "paused": not args.run,
+        "auto_started_from_lowcmd": args.run,
+        "arm_sdk_active": False,
+        "butt_fixture_active": False,
+        "butt_fixture_qpos": data.qpos.copy(),
+    }
     right_elbow_id = model.joint("right_elbow_joint").id
     right_elbow_q = data.qpos[model.jnt_qposadr[right_elbow_id]]
 
@@ -110,15 +120,20 @@ def simulation_thread(viewer, model, data, lock: threading.Lock, sim_state: dict
 
     low_cmd_subscriber = ChannelSubscriber(TOPIC_LOWCMD, LowCmd_)
     low_cmd_subscriber.Init(lambda msg: apply_low_cmd(msg, data, model.nu, lock, sim_state), 10)
+    arm_sdk_subscriber = ChannelSubscriber(TOPIC_ARMSDK, LowCmd_)
+    arm_sdk_subscriber.Init(lambda msg: apply_arm_sdk_cmd(msg, data, model.nu, lock, sim_state), 10)
     print(f"DDS initialized: interface={args.interface}", flush=True)
 
     while viewer.is_running():
         step_start = time.perf_counter()
         with lock:
+            apply_sim_butt_fixture(data, sim_state)
             if sim_state["paused"]:
                 mujoco.mj_forward(model, data)
             else:
                 mujoco.mj_step(model, data)
+                apply_sim_butt_fixture(data, sim_state)
+                mujoco.mj_forward(model, data)
             publish_low_state(data, model.nu, low_state, low_state_publisher)
         sleep_time = model.opt.timestep - (time.perf_counter() - step_start)
         if sleep_time > 0:
@@ -148,6 +163,40 @@ def apply_low_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_state: d
             )
 
 
+def apply_arm_sdk_cmd(msg, data, num_motors: int, lock: threading.Lock, sim_state: dict) -> None:
+    with lock:
+        weight = float(max(0.0, min(1.0, msg.motor_cmd[ARM_SDK_ENABLE_INDEX].q)))
+        sim_state["arm_sdk_active"] = weight > 0.0
+        if sim_state["arm_sdk_active"]:
+            sim_state["butt_fixture_active"] = True
+            if sim_state["paused"] and not sim_state["auto_started_from_lowcmd"]:
+                sim_state["paused"] = False
+                sim_state["auto_started_from_lowcmd"] = True
+                print("paused=False (arm_sdk received)", flush=True)
+
+        q = data.sensordata[:num_motors]
+        dq = data.sensordata[num_motors : 2 * num_motors]
+        for i in ARM_SDK_JOINTS:
+            data.ctrl[i] = weight * (
+                msg.motor_cmd[i].tau
+                + msg.motor_cmd[i].kp * (msg.motor_cmd[i].q - q[i])
+                + msg.motor_cmd[i].kd * (msg.motor_cmd[i].dq - dq[i])
+            )
+
+
+def apply_sim_butt_fixture(data, sim_state: dict) -> None:
+    if not sim_state.get("butt_fixture_active"):
+        return
+    fixture_qpos = sim_state.get("butt_fixture_qpos")
+    if fixture_qpos is None:
+        return
+    data.qpos[:7] = fixture_qpos[:7]
+    data.qvel[:6] = 0.0
+    for i in LOWER_BODY_JOINTS:
+        data.qpos[7 + i] = fixture_qpos[7 + i]
+        data.qvel[6 + i] = 0.0
+
+
 def publish_low_state(data, num_motors: int, msg, publisher) -> None:
     q = data.sensordata[:num_motors]
     dq = data.sensordata[num_motors : 2 * num_motors]
@@ -170,6 +219,9 @@ def build_initial_qpos(pose_name: str, pose: dict):
     qpos = model.qpos0.copy()
     if "base_z_m" in pose:
         qpos[2] = float(pose["base_z_m"])
+    if "base_pitch_deg" in pose:
+        half_pitch = math.radians(float(pose["base_pitch_deg"])) * 0.5
+        qpos[3:7] = [math.cos(half_pitch), 0.0, math.sin(half_pitch), 0.0]
     for joint_name, q in pose.get("joints_rad", {}).items():
         joint_id = model.joint(joint_name).id
         qpos[model.jnt_qposadr[joint_id]] = float(q)
@@ -198,11 +250,11 @@ def prepare_scene_path(
     grip_roll_phase_deg: float | None = None,
     left_weld_distance_m: float | None = None,
 ) -> Path:
+    xml = MOCHI_G1_SCENE.read_text(encoding="utf-8")
     robot_xml = patch_g1_right_hand_to_hammer(
         grip_roll_phase_deg=grip_roll_phase_deg,
         left_weld_distance_m=left_weld_distance_m,
     )
-    xml = MOCHI_G1_SCENE.read_text(encoding="utf-8")
     xml = xml.replace(
         '<include file="/home/shota/dev/unitree/unitree_mujoco/unitree_robots/g1/g1_29dof.xml"/>',
         f'<include file="{robot_xml.name}"/>',
@@ -249,6 +301,14 @@ def patch_g1_right_hand_to_hammer(
         grip_roll_phase_deg = hammer_default_grip_roll_phase()
     half_phase = math.radians(grip_roll_phase_deg) * 0.5
     grip_roll_quat = f"{math.cos(half_phase):.7f} 0 0 {math.sin(half_phase):.7f}"
+    handle = hammer_config["handle"]
+    head = hammer_config["head"]
+    handle_length_m = float(handle["length_m"])
+    handle_radius_m = float(handle["radius_m"])
+    handle_mass_kg = float(handle["mass_kg"])
+    head_length_m = float(head["length_m"])
+    head_radius_m = float(head["diameter_m"]) * 0.5
+    head_mass_kg = float(head["mass_kg"])
     head_enabled = bool(hammer_config.get("head", {}).get("enabled", True))
     left_grip_site = ""
     if left_weld_distance_m is not None:
@@ -258,9 +318,10 @@ def patch_g1_right_hand_to_hammer(
                                 size="0.010" rgba="0.1 0.5 1 1"/>
 """
     head_geom = (
-        """                              <geom name="right_hammer_head" type="cylinder"
-                                fromto="0 0 0.60 0.30 0 0.60" size="0.030"
-                                rgba="0.58 0.34 0.14 1" mass="0.5938"
+        f"""                              <geom name="right_hammer_head" type="cylinder"
+                                fromto="0 0 {handle_length_m:.6f} {head_length_m:.6f} 0 {handle_length_m:.6f}"
+                                size="{head_radius_m:.6f}"
+                                rgba="0.58 0.34 0.14 1" mass="{head_mass_kg:.4f}"
                                 contype="1" conaffinity="1"
                                 friction="1.0 0.02 0.002" solref="0.02 1" solimp="0.9 0.95 0.001"/>
 """
@@ -333,8 +394,8 @@ def patch_g1_right_hand_to_hammer(
                                  head local +X, fixed at 90 deg. -->
                             <body name="right_hammer_grip" pos="0 0 0" quat="{grip_roll_quat}">
                               <geom name="right_hammer_handle" type="capsule"
-                                fromto="0 0 0 0 0 0.60" size="0.014"
-                                rgba="0.62 0.38 0.16 1" mass="0.2586"
+                                fromto="0 0 0 0 0 {handle_length_m:.6f}" size="{handle_radius_m:.6f}"
+                                rgba="0.62 0.38 0.16 1" mass="{handle_mass_kg:.4f}"
                                 contype="1" conaffinity="1"
                                 friction="1.0 0.02 0.002" solref="0.02 1" solimp="0.9 0.95 0.001"/>
 {left_grip_site.rstrip()}
