@@ -1,9 +1,9 @@
 profile: sim
 base_config: run_base.yaml
-trajectory: standing_double_v2a
+trajectory: knee_double_v1b
 
 interface: eth3
 domain_id: 1
-pose: standing_double_v2_start
+pose: knee_double_v1b_start
 hammer_variant: full_600_300
 run: false

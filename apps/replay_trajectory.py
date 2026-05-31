@@ -901,50 +901,6 @@ def publish_command(
     ctx.last_q_cmd = np.asarray(q_des, dtype=float).copy()
 
 
-def arm_sdk_to_current_pose(
-    *,
-    ctx: ReplayContext,
-    q_current: np.ndarray,
-    duration_s: float,
-) -> np.ndarray:
-    q_hold = latest_q_or_fallback(ctx, q_current)
-    zero = np.zeros_like(q_hold)
-    steps = max(1, int(round(float(duration_s) / ctx.dt)))
-    zero_gain_steps = max(1, steps // 4)
-    print(f"arming arm_sdk at current pose over {duration_s:.2f}s", flush=True)
-
-    for _ in range(zero_gain_steps):
-        ctx.backend.publish_arm_sdk_command(
-            q_hold,
-            kp=zero,
-            kd=zero,
-            tau=zero,
-            dq_des=zero,
-            weight=1.0,
-            joint_indices=ARM_SDK_JOINT_INDICES,
-        )
-        ctx.last_q_cmd = q_hold.copy()
-        time.sleep(ctx.dt)
-
-    ramp_steps = max(1, steps - zero_gain_steps)
-    for step in range(ramp_steps):
-        alpha = smoothstep((step + 1) / ramp_steps)
-        kp = ctx.kp * alpha
-        kd = ctx.kd * alpha
-        ctx.backend.publish_arm_sdk_command(
-            q_hold,
-            kp=kp,
-            kd=kd,
-            tau=zero,
-            dq_des=zero,
-            weight=1.0,
-            joint_indices=ARM_SDK_JOINT_INDICES,
-        )
-        ctx.last_q_cmd = q_hold.copy()
-        time.sleep(ctx.dt)
-    return q_hold
-
-
 def wait_menu_choice(prompt: str, choices: dict[str, str]) -> str:
     menu = " ".join(f"[{key}] {text}" for key, text in choices.items())
     print(f"{prompt}\n{menu}", flush=True)
@@ -1101,7 +1057,6 @@ def main() -> int:
     impact_phase_s = float(run_config.get("impact_phase_s", DEFAULT_IMPACT_PHASE_S))
     transition_phase_s = float(run_config.get("transition_phase_s", 0.2))
     standby_yaw_switch_s = float(standby_yaw_cfg.get("switch_duration_s", INITIAL_RAMP_S))
-    arm_sdk_arming_s = float(run_config.get("arm_sdk_arming_s", 1.0))
     velocity_ff_gain = float(run_config.get("velocity_ff_gain", 0.5))
     time_plan = run_config.get("time_plan") or trajectory.get("time_plan") or {"type": "acceleration"}
     return_time_plan = run_config.get("return_time_plan") or trajectory.get("return_time_plan") or {"type": "trapezoid", "accel_fraction": 0.2}
@@ -1130,8 +1085,7 @@ def main() -> int:
     print(f"Replaying {trajectory_name} on DDS interface {interface}. arm_sdk=True.")
     print(
         f"waypoints={len(q_waypoints)} source_waypoints={len(sparse_q_waypoints)} duration_s={total_duration:.2f} "
-        f"actual_duration_s={playback_steps * dt:.2f} arm_sdk_arming_s={arm_sdk_arming_s:.2f} "
-        f"initial_ramp_s={INITIAL_RAMP_S:.2f} "
+        f"actual_duration_s={playback_steps * dt:.2f} initial_ramp_s={INITIAL_RAMP_S:.2f} "
         f"replay_length={replay_length:.2f} "
         f"time_plan={time_plan.get('type', 'acceleration')} "
         f"return_time_plan={return_time_plan.get('type', 'trapezoid')} "
@@ -1168,14 +1122,9 @@ def main() -> int:
                     continue
 
                 command_started = True
-                q_prev = arm_sdk_to_current_pose(
-                    ctx=ctx,
-                    q_current=q_current,
-                    duration_s=arm_sdk_arming_s,
-                )
                 q_prev = publish_initial_ramp(
                     ctx=ctx,
-                    q_start=q_prev,
+                    q_start=q_current,
                     q_target=q_waypoints[0],
                     min_duration_s=INITIAL_RAMP_S,
                 )
@@ -1191,7 +1140,7 @@ def main() -> int:
                         "h": "Starting hammer trajectory.",
                         "r": "Toggle side-ready waist yaw.",
                         "x": f"Return to {RELEASE_POSE_NAME} and release.",
-                        "q": "Quit now while leaving the current hold command active.",
+                        "q": "Stop publishing and exit without release/disable.",
                     },
                 )
                 if choice == "q":
@@ -1271,7 +1220,7 @@ def main() -> int:
         handle_keyboard_interrupt(ctx=ctx, q_prev=q_prev, command_started=command_started)
     finally:
         if hold_exit_requested:
-            print("exiting from hammer standby without release; last hold command was left active", flush=True)
+            print("exiting from hammer standby; stopped publishing without release/disable", flush=True)
         elif command_started and release_requested and not interrupted:
             try:
                 q_prev = release_to_pose_and_disable(
@@ -1292,7 +1241,7 @@ def main() -> int:
         f.write("\n")
     print(f"saved {path}")
     if hold_exit_requested:
-        print("exited from hammer standby without release")
+        print("exited from hammer standby; stopped publishing without release/disable")
     elif interrupted:
         print("interrupted; arm zero-gain command sent with waist held")
     elif release_requested:

@@ -215,7 +215,7 @@ Trajectory replay uses a small menu with allowed transitions:
 4. After hammering, the app holds the final/current command.
 5. `[b]` manually reverses back to hammer standby; `[h]` can hammer again from standby.
 6. `[x]` from hammer standby or stopped state returns to the real release standby pose and releases.
-7. From hammer standby, `[q]` exits without release and leaves the last hold command active for hardware adjustment.
+7. From hammer standby, `[q]` stops publishing and exits without release/disable.
 8. `Ctrl+C` sends zero gain to shoulders/elbows/wrists while keeping waist held, then exits.
 
 The backward lift, manual reverse, and release return duration are controlled by
@@ -428,7 +428,7 @@ Replay menu workflow:
 [h]: hammer
 [b]: after hammering, manually reverse back to standby
 [x]: from standby or stopped, return to the real release standby pose, then release
-[q]: from standby only, exit without release and leave hold command active
+[q]: from standby only, stop publishing and exit without release/disable
 Ctrl+C: zero shoulder/elbow/wrist gains, keep waist held, then exit
 ```
 
