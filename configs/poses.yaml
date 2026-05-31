@@ -28,6 +28,39 @@ hammer_mounted_elbow_65:
   notes:
   - Clamp is semi-transparent and non-colliding.
   - Handle and head keep collision enabled.
+real_release_standby_20260531_094252:
+  memo: Real robot release standby pose dumped from rt/lowstate before disabling arm SDK.
+  source_log: logs/dump_state_20260531_094252.json
+  joints_rad:
+    left_hip_pitch_joint: -0.3656657
+    left_hip_roll_joint: -0.0177771
+    left_hip_yaw_joint: 0.0141552
+    left_knee_joint: 0.6030505
+    left_ankle_pitch_joint: -0.2572643
+    left_ankle_roll_joint: 0.0153951
+    right_hip_pitch_joint: -0.3719733
+    right_hip_roll_joint: 0.0211485
+    right_hip_yaw_joint: -0.0169407
+    right_knee_joint: 0.6332954
+    right_ankle_pitch_joint: -0.2818905
+    right_ankle_roll_joint: -0.0363891
+    waist_yaw_joint: -0.0009508
+    waist_roll_joint: -0.0048678
+    waist_pitch_joint: -0.0461193
+    left_shoulder_pitch_joint: 0.2890075
+    left_shoulder_roll_joint: 0.2321824
+    left_shoulder_yaw_joint: -0.0133265
+    left_elbow_joint: 0.9752403
+    left_wrist_roll_joint: 0.1016502
+    left_wrist_pitch_joint: -0.0013192
+    left_wrist_yaw_joint: 0.007854
+    right_shoulder_pitch_joint: 0.2923432
+    right_shoulder_roll_joint: -0.2316671
+    right_shoulder_yaw_joint: 0.0246635
+    right_elbow_joint: 0.9731311
+    right_wrist_roll_joint: -0.1290102
+    right_wrist_pitch_joint: -0.0029299
+    right_wrist_yaw_joint: 0.0201412
 standing_dual_hold_v0:
   memo: Standing centered two-hand stick-hold inspection pose solved from stick target and dual-arm IK.
   base_z_m: 0.793
@@ -232,7 +265,7 @@ knee_double_v2_start:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -1.6434124102655339
     left_shoulder_roll_joint: 0.5784792325607058
     left_shoulder_yaw_joint: -0.4958207604421019
@@ -265,7 +298,7 @@ knee_double_v2_end:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -0.6718321508663767
     left_shoulder_roll_joint: 0.37547924125442633
     left_shoulder_yaw_joint: -0.9473682895940834
@@ -291,7 +324,7 @@ standing_double_v2_start:
   memo: Start pose for standing_double_v2 forward-optimized arm-sdk swing.
   base_z_m: 0.793
   joints_rad:
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -1.6468416869458753
     left_shoulder_roll_joint: 0.5814052613447827
     left_shoulder_yaw_joint: -0.5258297834450965
@@ -318,7 +351,7 @@ standing_double_v2_end:
   memo: End pose for standing_double_v2 forward-optimized arm-sdk swing.
   base_z_m: 0.793
   joints_rad:
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -0.9223358528000024
     left_shoulder_roll_joint: 0.42077266391798895
     left_shoulder_yaw_joint: -0.7721019642943077
@@ -342,7 +375,7 @@ standing_double_v2_end:
     full_pose_locked: false
     forward_head_x_optimized: true
 knee_double_v2a_start:
-  memo: Start pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; lower body copied from knee_double_v2 with waist pitch held at -0.3 rad.
+  memo: Start pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; waist pitch held at 0.0 rad.
   base_z_m: 0.335
   base_pitch_deg: 9.0
   joints_rad:
@@ -352,7 +385,7 @@ knee_double_v2a_start:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -1.433884065165686
     left_shoulder_roll_joint: 0.633355718900276
     left_shoulder_yaw_joint: -0.5000038814410294
@@ -375,7 +408,7 @@ knee_double_v2a_start:
     closed_loop_only: true
     full_pose_locked: false
 knee_double_v2a_end:
-  memo: End pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; lower body copied from knee_double_v2 with waist pitch held at -0.3 rad.
+  memo: End pose for knee_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; waist pitch held at 0.0 rad.
   base_z_m: 0.335
   base_pitch_deg: 9.0
   joints_rad:
@@ -385,7 +418,7 @@ knee_double_v2a_end:
     right_hip_pitch_joint: -1.2
     right_knee_joint: 2.74017365984
     right_ankle_pitch_joint: 0.5236
-    waist_pitch_joint: -0.3
+    waist_pitch_joint: 0.0
     left_shoulder_pitch_joint: -0.4570191760086408
     left_shoulder_roll_joint: 0.4008141679655522
     left_shoulder_yaw_joint: -0.8778806216844082
@@ -407,3 +440,177 @@ knee_double_v2a_end:
     grip_roll_phase_deg: -120.0
     closed_loop_only: true
     full_pose_locked: false
+standing_double_v2a_start:
+  memo: Start pose for standing_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; based on standing_double_v2_start.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: 0.0
+    left_shoulder_pitch_joint: -1.4889937254615564
+    left_shoulder_roll_joint: 0.5712510083235101
+    left_shoulder_yaw_joint: -0.5687545227684734
+    left_elbow_joint: 0.35257981637014835
+    left_wrist_roll_joint: -1.849805968992106
+    left_wrist_pitch_joint: 0.8538724734443871
+    left_wrist_yaw_joint: -0.8687199023392282
+    right_shoulder_pitch_joint: -0.8429244992196121
+    right_shoulder_roll_joint: -0.5838252602887415
+    right_shoulder_yaw_joint: 0.6637463673293825
+    right_elbow_joint: -0.32673621056157337
+    right_wrist_roll_joint: 1.5729750817045125
+    right_wrist_pitch_joint: 0.657155446537492
+    right_wrist_yaw_joint: 0.7405650905016584
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2a
+    left_grip_distance_m: 0.16
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
+standing_double_v2a_end:
+  memo: End pose for standing_double_v2a; requires 0.16 m axial spacing between the two hand clamp points; based on standing_double_v2_end.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: 0.0
+    left_shoulder_pitch_joint: -0.7669788358082739
+    left_shoulder_roll_joint: 0.4064308926724798
+    left_shoulder_yaw_joint: -0.8520114800195526
+    left_elbow_joint: 0.33292115505103115
+    left_wrist_roll_joint: -1.5601687128560342
+    left_wrist_pitch_joint: 0.5540667230864118
+    left_wrist_yaw_joint: -1.1374721426325105
+    right_shoulder_pitch_joint: -0.2254218397785146
+    right_shoulder_roll_joint: -0.41422700828742737
+    right_shoulder_yaw_joint: 1.0379176923706466
+    right_elbow_joint: 0.08851255341225177
+    right_wrist_roll_joint: 1.1379196105598377
+    right_wrist_pitch_joint: 0.2701736267689161
+    right_wrist_yaw_joint: 1.163222947133111
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2a
+    left_grip_distance_m: 0.16
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
+standing_double_v2b_start:
+  memo: Start pose for standing_double_v2b; requires 0.15 m axial spacing between the two hand clamp points; based on standing_double_v2_start.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: 0.0
+    left_shoulder_pitch_joint: -1.6435692649432616
+    left_shoulder_roll_joint: 0.5851456783095871
+    left_shoulder_yaw_joint: -0.6065727065101317
+    left_elbow_joint: 0.5453519575240644
+    left_wrist_roll_joint: -1.8409338039252074
+    left_wrist_pitch_joint: 0.9403482107174012
+    left_wrist_yaw_joint: -0.97723301070019
+    right_shoulder_pitch_joint: -0.9469284502661065
+    right_shoulder_roll_joint: -0.4491650630766488
+    right_shoulder_yaw_joint: 0.49626731884819897
+    right_elbow_joint: -0.2306047643547472
+    right_wrist_roll_joint: 1.64098776703617
+    right_wrist_pitch_joint: 0.833903075434109
+    right_wrist_yaw_joint: 0.6417485123733305
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2b
+    left_grip_distance_m: 0.15
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
+standing_double_v2b_end:
+  memo: End pose for standing_double_v2b; requires 0.15 m axial spacing between the two hand clamp points; based on standing_double_v2_end.
+  base_z_m: 0.793
+  joints_rad:
+    waist_pitch_joint: 0.0
+    left_shoulder_pitch_joint: -0.5072615601281515
+    left_shoulder_roll_joint: 0.297481983340935
+    left_shoulder_yaw_joint: -0.9511507246342572
+    left_elbow_joint: 0.584696411153286
+    left_wrist_roll_joint: -1.4521551660776266
+    left_wrist_pitch_joint: 0.10911732701099444
+    left_wrist_yaw_joint: -1.4044467001322083
+    right_shoulder_pitch_joint: -0.28183680700075
+    right_shoulder_roll_joint: -0.27494100617860784
+    right_shoulder_yaw_joint: 1.136837790631335
+    right_elbow_joint: 0.6422672211000958
+    right_wrist_roll_joint: 0.8926183673356529
+    right_wrist_pitch_joint: 0.15817950508749667
+    right_wrist_yaw_joint: 1.5073993863738253
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:standing_double_v2b
+    left_grip_distance_m: 0.15
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+    forward_head_x_optimized: true
+knee_double_v1b_start:
+  memo: Start pose for knee_double_v1b; requires 0.15 m axial spacing between the two hand clamp points; lower body copied from knee_double_v1_start.
+  base_z_m: 0.335
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.08
+    left_shoulder_pitch_joint: -1.462399675028861
+    left_shoulder_roll_joint: 0.5189294092135149
+    left_shoulder_yaw_joint: -0.4411657102430808
+    left_elbow_joint: 0.29527523591274446
+    left_wrist_roll_joint: -1.8367660346999621
+    left_wrist_pitch_joint: 0.9959425282144839
+    left_wrist_yaw_joint: -0.753979786677469
+    right_shoulder_pitch_joint: -0.7254122972932693
+    right_shoulder_roll_joint: -0.3696938845351116
+    right_shoulder_yaw_joint: 0.4397828940749428
+    right_elbow_joint: -0.39336860005434876
+    right_wrist_roll_joint: 1.4992817780229462
+    right_wrist_pitch_joint: 0.8651866347335117
+    right_wrist_yaw_joint: 0.6320331948077924
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v1b
+    left_grip_distance_m: 0.15
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+  base_pitch_deg: 9.0
+knee_double_v1b_end:
+  memo: End pose for knee_double_v1b; requires 0.15 m axial spacing between the two hand clamp points; lower body copied from knee_double_v1_end.
+  base_z_m: 0.335
+  joints_rad:
+    left_hip_pitch_joint: -1.2
+    left_knee_joint: 2.74017365984
+    left_ankle_pitch_joint: 0.5236
+    right_hip_pitch_joint: -1.2
+    right_knee_joint: 2.74017365984
+    right_ankle_pitch_joint: 0.5236
+    waist_pitch_joint: -0.08
+    left_shoulder_pitch_joint: -0.5657328426058414
+    left_shoulder_roll_joint: 0.370144967422077
+    left_shoulder_yaw_joint: -0.7930903830993196
+    left_elbow_joint: 0.19944041290953365
+    left_wrist_roll_joint: -1.3996512419208642
+    left_wrist_pitch_joint: 0.5839665525824499
+    left_wrist_yaw_joint: -1.1089007141563303
+    right_shoulder_pitch_joint: -0.0071711193703684825
+    right_shoulder_roll_joint: -0.31179418039622087
+    right_shoulder_yaw_joint: 0.910053577824222
+    right_elbow_joint: 0.12242634954457396
+    right_wrist_roll_joint: 0.8968249165391766
+    right_wrist_pitch_joint: 0.29204509862969974
+    right_wrist_yaw_joint: 1.2621822820000104
+  dual_hold_geometry:
+    source: configs/trajectory.yaml:knee_double_v1b
+    left_grip_distance_m: 0.15
+    clamp_center_offset_m: 0.0
+    grip_roll_phase_deg: -120.0
+    closed_loop_only: true
+    full_pose_locked: false
+  base_pitch_deg: 9.0

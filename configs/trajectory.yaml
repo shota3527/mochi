@@ -319,7 +319,7 @@ knee_double_v1:
   left_grip_distance_m: 0.2
   clamp_center_offset_m: 0.0
   grip_roll_phase_deg: -120.0
-  waist_pitch_bias_rad: -0.08
+  waist_pitch_bias_rad: 0.0
   validation:
     passed: true
     closed_loop_only: true
@@ -905,7 +905,7 @@ knee_double_v2:
   left_grip_distance_m: 0.2
   clamp_center_offset_m: 0.0
   grip_roll_phase_deg: -120.0
-  waist_pitch_bias_rad: -0.3
+  waist_pitch_bias_rad: 0.0
   validation:
     passed: true
     closed_loop_only: true
@@ -934,7 +934,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.240232
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.6434124102655339
       left_shoulder_roll_joint: 0.5784792325607058
       left_shoulder_yaw_joint: -0.4958207604421019
@@ -962,7 +962,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.184246
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.5989297312193682
       left_shoulder_roll_joint: 0.568447103445259
       left_shoulder_yaw_joint: -0.5540353279436778
@@ -990,7 +990,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.166047
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.5570772568298152
       left_shoulder_roll_joint: 0.5578379543312245
       left_shoulder_yaw_joint: -0.5937502237137422
@@ -1018,7 +1018,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.167822
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.516008422343618
       left_shoulder_roll_joint: 0.5466557910651403
       left_shoulder_yaw_joint: -0.6217870214789368
@@ -1046,7 +1046,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.180848
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.47476230519079
       left_shoulder_roll_joint: 0.5349332962235994
       left_shoulder_yaw_joint: -0.6424829820172823
@@ -1074,7 +1074,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.198745
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.432230038551666
       left_shoulder_roll_joint: 0.5243580391332826
       left_shoulder_yaw_joint: -0.6589958394282972
@@ -1102,7 +1102,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.216448
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.3874776365001007
       left_shoulder_roll_joint: 0.5169061362697289
       left_shoulder_yaw_joint: -0.6739224419348872
@@ -1130,7 +1130,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.234146
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.342117458325513
       left_shoulder_roll_joint: 0.510188651672414
       left_shoulder_yaw_joint: -0.6883347810537045
@@ -1158,7 +1158,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.251852
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.2967776468020877
       left_shoulder_roll_joint: 0.5035572411355422
       left_shoulder_yaw_joint: -0.7026844489486139
@@ -1186,7 +1186,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.269542
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.2517415312198084
       left_shoulder_roll_joint: 0.49681593881846886
       left_shoulder_yaw_joint: -0.7171953763412658
@@ -1214,7 +1214,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.287182
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.2071398216976237
       left_shoulder_roll_joint: 0.48989629293941817
       left_shoulder_yaw_joint: -0.7319842535125205
@@ -1242,7 +1242,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.304739
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.1630244898109205
       left_shoulder_roll_joint: 0.4827705784561752
       left_shoulder_yaw_joint: -0.747108029755679
@@ -1270,7 +1270,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.322182
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.1194055240801197
       left_shoulder_roll_joint: 0.4754255386163772
       left_shoulder_yaw_joint: -0.7625876672693146
@@ -1298,7 +1298,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.339474
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.0762723548309605
       left_shoulder_roll_joint: 0.4678526703625649
       left_shoulder_yaw_joint: -0.7784216347374674
@@ -1326,7 +1326,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.356577
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.033607255740296
       left_shoulder_roll_joint: 0.4600437364470178
       left_shoulder_yaw_joint: -0.7945937074544459
@@ -1354,7 +1354,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.373449
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9913941562538131
       left_shoulder_roll_joint: 0.45198832141322787
       left_shoulder_yaw_joint: -0.8110772601245811
@@ -1382,7 +1382,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.382481
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9496249013779502
       left_shoulder_roll_joint: 0.44367233035162207
       left_shoulder_yaw_joint: -0.8278372648984615
@@ -1410,7 +1410,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.35833
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.908304359334385
       left_shoulder_roll_joint: 0.4350769792681805
       left_shoulder_yaw_joint: -0.844830835170582
@@ -1438,7 +1438,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.334623
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.867455424805746
       left_shoulder_roll_joint: 0.4261780547389238
       left_shoulder_yaw_joint: -0.8620069038046475
@@ -1466,7 +1466,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.311293
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.827124629040116
       left_shoulder_roll_joint: 0.4169453953226444
       left_shoulder_yaw_joint: -0.8793054563506026
@@ -1494,7 +1494,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.288304
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.7873890459497784
       left_shoulder_roll_joint: 0.4073426637600548
       left_shoulder_yaw_joint: -0.8966568171824919
@@ -1522,7 +1522,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.265658
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.7483648600657934
       left_shoulder_roll_joint: 0.39732768439811567
       left_shoulder_yaw_joint: -0.9139815606422941
@@ -1550,7 +1550,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.243423
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.7102177983478691
       left_shoulder_roll_joint: 0.38685392568114657
       left_shoulder_yaw_joint: -0.9311919492705465
@@ -1578,7 +1578,7 @@ knee_double_v2:
     min_joint_margin_rad: 0.222233
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.6718321508663767
       left_shoulder_roll_joint: 0.37547924125442633
       left_shoulder_yaw_joint: -0.9473682895940834
@@ -1635,7 +1635,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.209031
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.6468416869458753
       left_shoulder_roll_joint: 0.5814052613447827
       left_shoulder_yaw_joint: -0.5258297834450965
@@ -1666,7 +1666,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.174013
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.609287645993221
       left_shoulder_roll_joint: 0.5714330976580653
       left_shoulder_yaw_joint: -0.5506959927064801
@@ -1697,7 +1697,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.149743
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.5733348056137382
       left_shoulder_roll_joint: 0.5615601569389193
       left_shoulder_yaw_joint: -0.5710303075160298
@@ -1728,7 +1728,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.133627
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.538159714277432
       left_shoulder_roll_joint: 0.5516164163508258
       left_shoulder_yaw_joint: -0.5874458669970108
@@ -1759,7 +1759,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.123769
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.5032766699851987
       left_shoulder_roll_joint: 0.5415203408196687
       left_shoulder_yaw_joint: -0.6005840665395681
@@ -1790,7 +1790,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.118845
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.4683924662363643
       left_shoulder_roll_joint: 0.531238773458147
       left_shoulder_yaw_joint: -0.6110208374409051
@@ -1821,7 +1821,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.115828
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.431855820680559
       left_shoulder_roll_joint: 0.5235753258612013
       left_shoulder_yaw_joint: -0.6197212693452382
@@ -1852,7 +1852,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.113962
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.393781242125725
       left_shoulder_roll_joint: 0.518307150720283
       left_shoulder_yaw_joint: -0.6275166558788202
@@ -1883,7 +1883,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.113556
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.354980375365735
       left_shoulder_roll_joint: 0.514165658413522
       left_shoulder_yaw_joint: -0.6348972031670346
@@ -1914,7 +1914,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.114732
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.3160150772211883
       left_shoulder_roll_joint: 0.5105024563307049
       left_shoulder_yaw_joint: -0.6421595653200068
@@ -1945,7 +1945,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.117484
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.2773313776362085
       left_shoulder_roll_joint: 0.5069609836429759
       left_shoulder_yaw_joint: -0.6494984631339412
@@ -1976,7 +1976,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.121714
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.2393137066174456
       left_shoulder_roll_joint: 0.503326255125994
       left_shoulder_yaw_joint: -0.6570480268646905
@@ -2007,7 +2007,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.127257
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.202304177804295
       left_shoulder_roll_joint: 0.49945498405424643
       left_shoulder_yaw_joint: -0.6649005799508814
@@ -2038,7 +2038,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.1339
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.1666071186573501
       left_shoulder_roll_joint: 0.49524257211459505
       left_shoulder_yaw_joint: -0.6731152704982775
@@ -2069,7 +2069,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.141408
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.1324885761523116
       left_shoulder_roll_joint: 0.4906069318804153
       left_shoulder_yaw_joint: -0.6817227001956728
@@ -2100,7 +2100,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.14953
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.1001752043905386
       left_shoulder_roll_joint: 0.48548011300152616
       left_shoulder_yaw_joint: -0.6907282336899114
@@ -2131,7 +2131,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.158021
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.0698544219398554
       left_shoulder_roll_joint: 0.4798035934844929
       left_shoulder_yaw_joint: -0.7001152885191853
@@ -2162,7 +2162,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.166647
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.0416762775506445
       left_shoulder_roll_joint: 0.47352539995749926
       left_shoulder_yaw_joint: -0.7098488255926712
@@ -2193,7 +2193,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.175191
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -1.0157568664828733
       left_shoulder_roll_joint: 0.46659824138469747
       left_shoulder_yaw_joint: -0.7198789891413578
@@ -2224,7 +2224,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.183461
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9921828354345334
       left_shoulder_roll_joint: 0.4589782650427951
       left_shoulder_yaw_joint: -0.7301446300758088
@@ -2255,7 +2255,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.191288
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9710165264617432
       left_shoulder_roll_joint: 0.4506242183858724
       left_shoulder_yaw_joint: -0.7405764570528842
@@ -2286,7 +2286,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.198529
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9523013497092984
       left_shoulder_roll_joint: 0.4414968665958642
       left_shoulder_yaw_joint: -0.7510995685321
@@ -2317,7 +2317,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.205062
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.936067208020265
       left_shoulder_roll_joint: 0.4315585271443739
       left_shoulder_yaw_joint: -0.7616352539293199
@@ -2348,7 +2348,7 @@ standing_double_v2:
     min_joint_margin_rad: 0.210789
     torso_contacts: 0
     joints_rad:
-      waist_pitch_joint: -0.3
+      waist_pitch_joint: 0.0
       left_shoulder_pitch_joint: -0.9223358528000024
       left_shoulder_roll_joint: 0.42077266391798895
       left_shoulder_yaw_joint: -0.7721019642943077
@@ -2370,10 +2370,10 @@ standing_double_v2:
     arm_sdk_intended: true
     lower_body_commanded_by_trajectory: false
     forward_head_x_optimized: true
-  waist_pitch_bias_rad: -0.3
+  waist_pitch_bias_rad: 0.0
 knee_double_v2a:
-  memo: Height-targeted kneeling two-hand hammer swing; free stick root with hard closed-loop hand geometry.
-  base_pose: knee_double_v2_start
+  memo: v2a kneeling two-hand hammer swing; left grip distance 0.16 m; end pose keeps the hammer/right hand farther forward for torso clearance; waist pitch held at 0.0 rad.
+  base_pose: knee_double_v2a_start
   start_head_z_m: 0.94
   end_head_z_m: 0.52
   start_head_x_m: null
@@ -2384,691 +2384,2986 @@ knee_double_v2a:
   clamp_center_offset_m: 0.0
   grip_roll_phase_deg: -120.0
   validation:
-    passed: false
+    passed: true
     closed_loop_only: true
     full_pose_locked: false
-    max_loop_grip_mm: 6.6e-05
-    max_loop_axis_error: 7.0e-08
-    max_loop_orientation_error: 3.0e-08
+    max_loop_grip_mm: 7.6e-05
+    max_loop_axis_error: 8.0e-08
+    max_loop_orientation_error: 2.0e-08
     max_head_z_error_m: 1.0e-06
     max_head_x_error_m: 0.0
-    max_head_axis_y_abs: 0.000243
-    max_hand_center_y_mm: 30.242
-    max_hand_grip_y_abs_mm: 54.185
-    min_arm_joint_margin_rad: 0.116976
-    max_neighbor_joint_step_rad: 0.052999
-    max_torso_contacts: 3
+    max_head_axis_y_abs: 0.000249
+    max_hand_center_y_mm: 23.607
+    max_hand_grip_y_abs_mm: 42.381
+    min_arm_joint_margin_rad: 0.147489
+    max_neighbor_joint_step_rad: 0.0532
+    max_torso_contacts: 0
   waypoints:
   - alpha: 0.0
     target_head_z_m: 0.94
     actual_head_z_m: 0.939999
-    actual_head_x_m: 0.480628
+    actual_head_x_m: 0.519469
     head_down_dot: 0.5
-    head_axis_y: 0.000243
-    hand_center_y_mm: 30.242
-    max_hand_grip_y_abs_mm: 54.185
-    loop_grip_mm: 6.6e-05
-    loop_axis_error: 7.0e-08
-    loop_orientation_error: 3.0e-08
-    min_joint_margin_rad: 0.119007
+    head_axis_y: 0.000249
+    hand_center_y_mm: 23.607
+    max_hand_grip_y_abs_mm: 42.381
+    loop_grip_mm: 7.6e-05
+    loop_axis_error: 8.0e-08
+    loop_orientation_error: 2.0e-08
+    min_joint_margin_rad: 0.147489
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.3007535465672613
-      left_shoulder_roll_joint: 0.5990275816066781
-      left_shoulder_yaw_joint: -0.6263133483157689
-      left_elbow_joint: 0.5814434814763257
-      left_wrist_roll_joint: -1.8532134947803525
-      left_wrist_pitch_joint: 0.7038514646325029
-      left_wrist_yaw_joint: -1.1117181071892417
-      right_shoulder_pitch_joint: -1.022090034959817
-      right_shoulder_roll_joint: -0.5258431388300715
-      right_shoulder_yaw_joint: 0.8396391808396375
-      right_elbow_joint: 0.05507793045743041
-      right_wrist_roll_joint: 1.6017724265209279
-      right_wrist_pitch_joint: 0.8315265156055524
-      right_wrist_yaw_joint: 0.9627319051982277
+      left_shoulder_pitch_joint: -1.433884065165686
+      left_shoulder_roll_joint: 0.633355718900276
+      left_shoulder_yaw_joint: -0.5000038814410294
+      left_elbow_joint: 0.4233908953419443
+      left_wrist_roll_joint: -1.8247310260808356
+      left_wrist_pitch_joint: 0.7803099437622644
+      left_wrist_yaw_joint: -0.9779677770871058
+      right_shoulder_pitch_joint: -1.0326403887740496
+      right_shoulder_roll_joint: -0.518594041570906
+      right_shoulder_yaw_joint: 0.6275703653889975
+      right_elbow_joint: -0.10953620197752818
+      right_wrist_roll_joint: 1.5504054271842078
+      right_wrist_pitch_joint: 0.9058660334345374
+      right_wrist_yaw_joint: 0.8332988613139867
+      waist_pitch_joint: 0.0
   - alpha: 0.043478
     target_head_z_m: 0.921739
     actual_head_z_m: 0.921739
-    actual_head_x_m: 0.48538
+    actual_head_x_m: 0.524213
     head_down_dot: 0.515217
-    head_axis_y: -7.0e-06
-    hand_center_y_mm: 25.209
-    max_hand_grip_y_abs_mm: 48.934
-    loop_grip_mm: 2.0e-06
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 19.208
+    max_hand_grip_y_abs_mm: 37.903
+    loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.116976
+    min_joint_margin_rad: 0.152538
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.2553520274094545
-      left_shoulder_roll_joint: 0.5862759428425558
-      left_shoulder_yaw_joint: -0.6506103472513936
-      left_elbow_joint: 0.5453711513260255
-      left_wrist_roll_joint: -1.8552444466325377
-      left_wrist_pitch_joint: 0.6638027908262957
-      left_wrist_yaw_joint: -1.1034606879579034
-      right_shoulder_pitch_joint: -0.9690910635782702
-      right_shoulder_roll_joint: -0.5401430624023953
-      right_shoulder_yaw_joint: 0.8563726572626928
-      right_elbow_joint: 0.03549445531610339
-      right_wrist_roll_joint: 1.5715910177774497
-      right_wrist_pitch_joint: 0.8056490053793328
-      right_wrist_yaw_joint: 0.9872427492064547
+      left_shoulder_pitch_joint: -1.3869583629455902
+      left_shoulder_roll_joint: 0.6200470193500527
+      left_shoulder_yaw_joint: -0.5224483206565524
+      left_elbow_joint: 0.3913624211946402
+      left_wrist_roll_joint: -1.8196823677705423
+      left_wrist_pitch_joint: 0.7421462212970469
+      left_wrist_yaw_joint: -0.9755660751671749
+      right_shoulder_pitch_joint: -0.9794401349304356
+      right_shoulder_roll_joint: -0.5319547219514871
+      right_shoulder_yaw_joint: 0.6450282070830579
+      right_elbow_joint: -0.12375203628958777
+      right_wrist_roll_joint: 1.5122533843708479
+      right_wrist_pitch_joint: 0.8814303904201387
+      right_wrist_yaw_joint: 0.870264590998448
+      waist_pitch_joint: 0.0
   - alpha: 0.086957
     target_head_z_m: 0.903478
     actual_head_z_m: 0.903478
-    actual_head_x_m: 0.489506
+    actual_head_x_m: 0.528289
     head_down_dot: 0.530435
-    head_axis_y: -8.0e-06
-    hand_center_y_mm: 20.851
-    max_hand_grip_y_abs_mm: 44.331
-    loop_grip_mm: 2.0e-06
+    head_axis_y: -1.2e-05
+    hand_center_y_mm: 15.378
+    max_hand_grip_y_abs_mm: 33.993
+    loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.120078
+    min_joint_margin_rad: 0.162596
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.210909089138116
-      left_shoulder_roll_joint: 0.5738335358043373
-      left_shoulder_yaw_joint: -0.6737008861520399
-      left_elbow_joint: 0.5136267133958003
-      left_wrist_roll_joint: -1.8521416100794248
-      left_wrist_pitch_joint: 0.6266978573067573
-      left_wrist_yaw_joint: -1.0989243350779156
-      right_shoulder_pitch_joint: -0.9177797866611956
-      right_shoulder_roll_joint: -0.5508503343129187
-      right_shoulder_yaw_joint: 0.8747037184754425
-      right_elbow_joint: 0.021043725809894734
-      right_wrist_roll_joint: 1.539807267223537
-      right_wrist_pitch_joint: 0.7775380141313791
-      right_wrist_yaw_joint: 1.0116629924319205
+      left_shoulder_pitch_joint: -1.340303400857512
+      left_shoulder_roll_joint: 0.6066487499769466
+      left_shoulder_yaw_joint: -0.5429227996622311
+      left_elbow_joint: 0.3627018069560015
+      left_wrist_roll_joint: -1.8096241309147791
+      left_wrist_pitch_joint: 0.7068826595340094
+      left_wrist_yaw_joint: -0.9759878315778265
+      right_shoulder_pitch_joint: -0.9283622904142532
+      right_shoulder_roll_joint: -0.5426116053110913
+      right_shoulder_yaw_joint: 0.6648206344054497
+      right_elbow_joint: -0.1330673637058359
+      right_wrist_roll_joint: 1.4722525745420765
+      right_wrist_pitch_joint: 0.8541149046186303
+      right_wrist_yaw_joint: 0.9072793022297343
+      waist_pitch_joint: 0.0
   - alpha: 0.130435
     target_head_z_m: 0.885217
     actual_head_z_m: 0.885217
-    actual_head_x_m: 0.493169
+    actual_head_x_m: 0.531932
     head_down_dot: 0.545652
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 17.147
-    max_hand_grip_y_abs_mm: 40.367
+    head_axis_y: -1.2e-05
+    hand_center_y_mm: 12.134
+    max_hand_grip_y_abs_mm: 30.673
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.12663
+    min_joint_margin_rad: 0.175794
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.167567709206788
-      left_shoulder_roll_joint: 0.5618043865383892
-      left_shoulder_yaw_joint: -0.6957238017565835
-      left_elbow_joint: 0.4863080032067527
-      left_wrist_roll_joint: -1.8455902112014044
-      left_wrist_pitch_joint: 0.5927793943376838
-      left_wrist_yaw_joint: -1.097416493412214
-      right_shoulder_pitch_joint: -0.8684618039650668
-      right_shoulder_roll_joint: -0.5582050762786785
-      right_shoulder_yaw_joint: 0.8940673152971945
-      right_elbow_joint: 0.011317193972852751
-      right_wrist_roll_joint: 1.5081212497582175
-      right_wrist_pitch_joint: 0.7483732514838453
-      right_wrist_yaw_joint: 1.0347216272595727
+      left_shoulder_pitch_joint: -1.2944699093106273
+      left_shoulder_roll_joint: 0.5934679723510928
+      left_shoulder_yaw_joint: -0.5619862231380338
+      left_elbow_joint: 0.33809490386472274
+      left_wrist_roll_joint: -1.7964256197618194
+      left_wrist_pitch_joint: 0.6747320927759807
+      left_wrist_yaw_joint: -0.9789470926144452
+      right_shoulder_pitch_joint: -0.8798646083402182
+      right_shoulder_roll_joint: -0.5503994658759375
+      right_shoulder_yaw_joint: 0.6861342128616326
+      right_elbow_joint: -0.1376475582791394
+      right_wrist_roll_joint: 1.4327712150525203
+      right_wrist_pitch_joint: 0.8252580644711345
+      right_wrist_yaw_joint: 0.9423159512422947
+      waist_pitch_joint: 0.0
   - alpha: 0.173913
     target_head_z_m: 0.866957
     actual_head_z_m: 0.866957
-    actual_head_x_m: 0.49638
+    actual_head_x_m: 0.535152
     head_down_dot: 0.56087
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 14.007
-    max_hand_grip_y_abs_mm: 36.959
+    head_axis_y: -1.2e-05
+    hand_center_y_mm: 9.397
+    max_hand_grip_y_abs_mm: 27.866
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.135825
+    min_joint_margin_rad: 0.191365
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.1251038645983487
-      left_shoulder_roll_joint: 0.5501529872203679
-      left_shoulder_yaw_joint: -0.7168428958685207
-      left_elbow_joint: 0.46289005507505393
-      left_wrist_roll_joint: -1.8363953899161773
-      left_wrist_pitch_joint: 0.561628712660762
-      left_wrist_yaw_joint: -1.0983580233941888
-      right_shoulder_pitch_joint: -0.8209854987619276
-      right_shoulder_roll_joint: -0.5625602144073898
-      right_shoulder_yaw_joint: 0.9142615996681176
-      right_elbow_joint: 0.0059810053484382515
-      right_wrist_roll_joint: 1.4767701281740233
-      right_wrist_pitch_joint: 0.7184537350247807
-      right_wrist_yaw_joint: 1.056491163104997
+      left_shoulder_pitch_joint: -1.2493464002965569
+      left_shoulder_roll_joint: 0.5805280999186881
+      left_shoulder_yaw_joint: -0.5799675847409208
+      left_elbow_joint: 0.31716266080197253
+      left_wrist_roll_joint: -1.7808545796617707
+      left_wrist_pitch_joint: 0.6451888737267661
+      left_wrist_yaw_joint: -0.9840635633865759
+      right_shoulder_pitch_joint: -0.833800324827897
+      right_shoulder_roll_joint: -0.5555525518737214
+      right_shoulder_yaw_joint: 0.708624780949834
+      right_elbow_joint: -0.13778127726621037
+      right_wrist_roll_joint: 1.3941479043255787
+      right_wrist_pitch_joint: 0.7952718853307638
+      right_wrist_yaw_joint: 0.9753679703283252
+      waist_pitch_joint: 0.0
   - alpha: 0.217391
     target_head_z_m: 0.848696
     actual_head_z_m: 0.848696
-    actual_head_x_m: 0.499142
+    actual_head_x_m: 0.537951
     head_down_dot: 0.576087
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 11.355
-    max_hand_grip_y_abs_mm: 34.034
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 7.096
+    max_hand_grip_y_abs_mm: 25.508
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.14702
+    min_joint_margin_rad: 0.208692
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.0833462592453749
-      left_shoulder_roll_joint: 0.5388572168108618
-      left_shoulder_yaw_joint: -0.7372107436008317
-      left_elbow_joint: 0.4429032445545687
-      left_wrist_roll_joint: -1.825199733154517
-      left_wrist_pitch_joint: 0.5328384553789609
-      left_wrist_yaw_joint: -1.1012822318100413
-      right_shoulder_pitch_joint: -0.7752044246349538
-      right_shoulder_roll_joint: -0.5642567345566174
-      right_shoulder_yaw_joint: 0.935087784147288
-      right_elbow_joint: 0.0046980347277855855
-      right_wrist_roll_joint: 1.4459600064428055
-      right_wrist_pitch_joint: 0.6880427229922929
-      right_wrist_yaw_joint: 1.0770699337793144
+      left_shoulder_pitch_joint: -1.2048451346856541
+      left_shoulder_roll_joint: 0.5678513015766259
+      left_shoulder_yaw_joint: -0.5971272576435787
+      left_elbow_joint: 0.29954450652858183
+      left_wrist_roll_joint: -1.7635276257798886
+      left_wrist_pitch_joint: 0.6177934080755105
+      left_wrist_yaw_joint: -0.99100867710302
+      right_shoulder_pitch_joint: -0.7900000060858081
+      right_shoulder_roll_joint: -0.5583025414393222
+      right_shoulder_yaw_joint: 0.7319642118912661
+      right_elbow_joint: -0.13379254373870422
+      right_wrist_roll_joint: 1.356649212070173
+      right_wrist_pitch_joint: 0.7645171710153766
+      right_wrist_yaw_joint: 1.0064863626440854
+      waist_pitch_joint: 0.0
   - alpha: 0.26087
     target_head_z_m: 0.830435
     actual_head_z_m: 0.830435
-    actual_head_x_m: 0.501451
+    actual_head_x_m: 0.540322
     head_down_dot: 0.591304
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 9.121
-    max_hand_grip_y_abs_mm: 31.53
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 5.171
+    max_hand_grip_y_abs_mm: 23.542
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.159703
+    min_joint_margin_rad: 0.227277
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.0421597962309528
-      left_shoulder_roll_joint: 0.5279034593507476
-      left_shoulder_yaw_joint: -0.7569602771857961
-      left_elbow_joint: 0.425935616080419
-      left_wrist_roll_joint: -1.8125170536633948
-      left_wrist_pitch_joint: 0.5060307147306446
-      left_wrist_yaw_joint: -1.1058124321581342
-      right_shoulder_pitch_joint: -0.730980098950321
-      right_shoulder_roll_joint: -0.5636140455234447
-      right_shoulder_yaw_joint: 0.9563604092667687
-      right_elbow_joint: 0.007139030622823152
-      right_wrist_roll_joint: 1.4158646511590454
-      right_wrist_pitch_joint: 0.6573686191082588
-      right_wrist_yaw_joint: 1.0965695337012096
+      left_shoulder_pitch_joint: -1.1608931940481826
+      left_shoulder_roll_joint: 0.5554574191294034
+      left_shoulder_yaw_joint: -0.6136673794938118
+      left_elbow_joint: 0.2849096172896337
+      left_wrist_roll_joint: -1.7449425547417265
+      left_wrist_pitch_joint: 0.5921387163364139
+      left_wrist_yaw_joint: -0.9994998336734702
+      right_shoulder_pitch_joint: -0.7482847065801917
+      right_shoulder_roll_joint: -0.5588737320865178
+      right_shoulder_yaw_joint: 0.7558562744953407
+      right_elbow_joint: -0.1260193507334173
+      right_wrist_roll_joint: 1.3204756980823202
+      right_wrist_pitch_joint: 0.7333040460280467
+      right_wrist_yaw_joint: 1.0357617500758165
+      waist_pitch_joint: 0.0
   - alpha: 0.304348
     target_head_z_m: 0.812174
     actual_head_z_m: 0.812174
-    actual_head_x_m: 0.503302
+    actual_head_x_m: 0.542258
     head_down_dot: 0.606522
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 7.247
-    max_hand_grip_y_abs_mm: 29.393
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 3.572
+    max_hand_grip_y_abs_mm: 21.921
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.17346
+    min_joint_margin_rad: 0.246716
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -1.0014336981415046
-      left_shoulder_roll_joint: 0.5172833215673774
-      left_shoulder_yaw_joint: -0.7762025591105222
-      left_elbow_joint: 0.41162998233175657
-      left_wrist_roll_joint: -1.7987599829992458
-      left_wrist_pitch_joint: 0.4808641002763932
-      left_wrist_yaw_joint: -1.1116438991154411
-      right_shoulder_pitch_joint: -0.6881834703260489
-      right_shoulder_roll_joint: -0.5609260433862739
-      right_shoulder_yaw_joint: 0.9779136493129716
-      right_elbow_joint: 0.01298877603562409
-      right_wrist_roll_joint: 1.386625734655198
-      right_wrist_pitch_joint: 0.6266282223360331
-      right_wrist_yaw_joint: 1.1151064972322873
+      left_shoulder_pitch_joint: -1.1174262340360728
+      left_shoulder_roll_joint: 0.543363394848586
+      left_shoulder_yaw_joint: -0.6297425064264907
+      left_elbow_joint: 0.27296070881138534
+      left_wrist_roll_joint: -1.725503845003213
+      left_wrist_pitch_joint: 0.5678690575414117
+      left_wrist_yaw_joint: -1.009294757386035
+      right_shoulder_pitch_joint: -0.7084754342084864
+      right_shoulder_roll_joint: -0.557481062763519
+      right_shoulder_yaw_joint: 0.7800454201036775
+      right_elbow_joint: -0.11479882061027617
+      right_wrist_roll_joint: 1.2857691419213257
+      right_wrist_pitch_joint: 0.701895605876957
+      right_wrist_yaw_joint: 1.0633107205660222
+      waist_pitch_joint: 0.0
   - alpha: 0.347826
     target_head_z_m: 0.793913
     actual_head_z_m: 0.793913
-    actual_head_x_m: 0.504687
+    actual_head_x_m: 0.543712
     head_down_dot: 0.621739
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 5.683
-    max_hand_grip_y_abs_mm: 27.58
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 2.382
+    max_hand_grip_y_abs_mm: 20.747
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.187958
+    min_joint_margin_rad: 0.266186
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.9610736083263676
-      left_shoulder_roll_joint: 0.506991671812236
-      left_shoulder_yaw_joint: -0.7950275051958489
-      left_elbow_joint: 0.3996792283878775
-      left_wrist_roll_joint: -1.784262330801943
-      left_wrist_pitch_joint: 0.4570354652157993
-      left_wrist_yaw_joint: -1.118529884748148
-      right_shoulder_pitch_joint: -0.6466957664037399
-      right_shoulder_roll_joint: -0.5564602472860551
-      right_shoulder_yaw_joint: 0.9996043514665234
-      right_elbow_joint: 0.021948801065598066
-      right_wrist_roll_joint: 1.3583552051545502
-      right_wrist_pitch_joint: 0.5959915291157538
-      right_wrist_yaw_joint: 1.1327958111751715
+      left_shoulder_pitch_joint: -1.074112094209167
+      left_shoulder_roll_joint: 0.5322998767804062
+      left_shoulder_yaw_joint: -0.6455760998946083
+      left_elbow_joint: 0.2628770891490235
+      left_wrist_roll_joint: -1.706034074831367
+      left_wrist_pitch_joint: 0.5444653033283325
+      left_wrist_yaw_joint: -1.0202414779933604
+      right_shoulder_pitch_joint: -0.6706109766752154
+      right_shoulder_roll_joint: -0.5539234104923569
+      right_shoulder_yaw_joint: 0.8044613328601418
+      right_elbow_joint: -0.1004478736493329
+      right_wrist_roll_joint: 1.2526900694414065
+      right_wrist_pitch_joint: 0.6707340273949148
+      right_wrist_yaw_joint: 1.0888006858715313
+      waist_pitch_joint: 0.0
   - alpha: 0.391304
     target_head_z_m: 0.775652
     actual_head_z_m: 0.775652
-    actual_head_x_m: 0.5056
+    actual_head_x_m: 0.544657
     head_down_dot: 0.636957
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 4.387
-    max_hand_grip_y_abs_mm: 26.054
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 1.565
+    max_hand_grip_y_abs_mm: 19.991
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.202923
+    min_joint_margin_rad: 0.285307
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.9209966102944497
-      left_shoulder_roll_joint: 0.4970255922862629
-      left_shoulder_yaw_joint: -0.8135060412596861
-      left_elbow_joint: 0.3898211077333156
-      left_wrist_roll_joint: -1.769296898445203
-      left_wrist_pitch_joint: 0.4342789175301424
-      left_wrist_yaw_joint: -1.1262709558686494
-      right_shoulder_pitch_joint: -0.6064086937507792
-      right_shoulder_roll_joint: -0.5504585029887739
-      right_shoulder_yaw_joint: 1.021312834577155
-      right_elbow_joint: 0.03373795993330587
-      right_wrist_roll_joint: 1.3311385329732308
-      right_wrist_pitch_joint: 0.565606762705237
-      right_wrist_yaw_joint: 1.1497461174813497
+      left_shoulder_pitch_joint: -1.030855744337724
+      left_shoulder_roll_joint: 0.5223725585654324
+      left_shoulder_yaw_joint: -0.6613429750419771
+      left_elbow_joint: 0.2542665106460692
+      left_wrist_roll_joint: -1.6869133289752725
+      left_wrist_pitch_joint: 0.521519142196584
+      left_wrist_yaw_joint: -1.032098567153104
+      right_shoulder_pitch_joint: -0.6344916430227813
+      right_shoulder_roll_joint: -0.548453944478491
+      right_shoulder_yaw_joint: 0.8289454105656268
+      right_elbow_joint: -0.08340123530663665
+      right_wrist_roll_joint: 1.2212855317880733
+      right_wrist_pitch_joint: 0.6400700019843465
+      right_wrist_yaw_joint: 1.1123366907843129
+      waist_pitch_joint: 0.0
   - alpha: 0.434783
     target_head_z_m: 0.757391
     actual_head_z_m: 0.757391
-    actual_head_x_m: 0.50603
+    actual_head_x_m: 0.545094
     head_down_dot: 0.652174
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 3.321
-    max_hand_grip_y_abs_mm: 24.787
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 0.997
+    max_hand_grip_y_abs_mm: 19.528
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.21813
+    min_joint_margin_rad: 0.304108
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.8811283155258018
-      left_shoulder_roll_joint: 0.4873839272304918
-      left_shoulder_yaw_joint: -0.8316928179469837
-      left_elbow_joint: 0.38183306415908597
-      left_wrist_roll_joint: -1.7540895170297943
-      left_wrist_pitch_joint: 0.41236378093453385
-      left_wrist_yaw_joint: -1.1347068208876823
-      right_shoulder_pitch_joint: -0.5672239121143015
-      right_shoulder_roll_joint: -0.5431383855278783
-      right_shoulder_yaw_joint: 1.0429422205392127
-      right_elbow_joint: 0.04809163604303798
-      right_wrist_roll_joint: 1.3050381954524126
-      right_wrist_pitch_joint: 0.5356048119451403
-      right_wrist_yaw_joint: 1.1660562069240774
+      left_shoulder_pitch_joint: -0.9877702817439472
+      left_shoulder_roll_joint: 0.513141204907091
+      left_shoulder_yaw_joint: -0.6771196396021685
+      left_elbow_joint: 0.24720058436660935
+      left_wrist_roll_joint: -1.668112199263464
+      left_wrist_pitch_joint: 0.4988225294090653
+      left_wrist_yaw_joint: -1.0446091048782822
+      right_shoulder_pitch_joint: -0.5997843207070067
+      right_shoulder_roll_joint: -0.5416186658847076
+      right_shoulder_yaw_joint: 0.8532819171222279
+      right_elbow_joint: -0.06406891483530386
+      right_wrist_roll_joint: 1.1915241573395998
+      right_wrist_pitch_joint: 0.6099467460049558
+      right_wrist_yaw_joint: 1.134364437558409
+      waist_pitch_joint: 0.0
   - alpha: 0.478261
     target_head_z_m: 0.73913
     actual_head_z_m: 0.73913
-    actual_head_x_m: 0.505972
+    actual_head_x_m: 0.545025
     head_down_dot: 0.667391
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 2.458
-    max_hand_grip_y_abs_mm: 23.752
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 0.595
+    max_hand_grip_y_abs_mm: 19.273
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.23339
+    min_joint_margin_rad: 0.322585
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.8414013978756864
-      left_shoulder_roll_joint: 0.4780671958892868
-      left_shoulder_yaw_joint: -0.8496289700812559
-      left_elbow_joint: 0.37552740880488406
-      left_wrist_roll_joint: -1.738830166120893
-      left_wrist_pitch_joint: 0.3910922666725513
-      left_wrist_yaw_joint: -1.143709972119866
-      right_shoulder_pitch_joint: -0.5290521215665873
-      right_shoulder_roll_joint: -0.5346949025335838
-      right_shoulder_yaw_joint: 1.0644168362367228
-      right_elbow_joint: 0.06476023086465875
-      right_wrist_roll_joint: 1.2800971245699946
-      right_wrist_pitch_joint: 0.5061030698466163
-      right_wrist_yaw_joint: 1.1818126556760848
+      left_shoulder_pitch_joint: -0.9449155966978843
+      left_shoulder_roll_joint: 0.5043162395362545
+      left_shoulder_yaw_joint: -0.6929373032927616
+      left_elbow_joint: 0.24172647491519358
+      left_wrist_roll_joint: -1.6496345905312129
+      left_wrist_pitch_joint: 0.4762441298639866
+      left_wrist_yaw_joint: -1.0576091255541682
+      right_shoulder_pitch_joint: -0.5662544449898061
+      right_shoulder_roll_joint: -0.5337799122427913
+      right_shoulder_yaw_joint: 0.8773302235563969
+      right_elbow_joint: -0.042754004659926965
+      right_wrist_roll_joint: 1.1633644819225923
+      right_wrist_pitch_joint: 0.5804031598727547
+      right_wrist_yaw_joint: 1.1551972415492884
+      waist_pitch_joint: 0.0
   - alpha: 0.521739
     target_head_z_m: 0.72087
     actual_head_z_m: 0.72087
-    actual_head_x_m: 0.505416
+    actual_head_x_m: 0.54445
     head_down_dot: 0.682609
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 1.769
-    max_hand_grip_y_abs_mm: 22.932
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 0.305
+    max_hand_grip_y_abs_mm: 19.174
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.248538
+    min_joint_margin_rad: 0.340712
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.8017552194573969
-      left_shoulder_roll_joint: 0.46907773583750245
-      left_shoulder_yaw_joint: -0.867344859274283
-      left_elbow_joint: 0.3707468678031074
-      left_wrist_roll_joint: -1.7236818160024117
-      left_wrist_pitch_joint: 0.37029742955578754
-      left_wrist_yaw_joint: -1.1531805909911514
-      right_shoulder_pitch_joint: -0.4918116264065361
-      right_shoulder_roll_joint: -0.5253022099145797
-      right_shoulder_yaw_joint: 1.0856800230714723
-      right_elbow_joint: 0.08350717461703656
-      right_wrist_roll_joint: 1.256341967031539
-      right_wrist_pitch_joint: 0.4772083865314852
-      right_wrist_yaw_joint: 1.1970882128108502
+      left_shoulder_pitch_joint: -0.9023208253672448
+      left_shoulder_roll_joint: 0.4957058433372863
+      left_shoulder_yaw_joint: -0.7087975867279889
+      left_elbow_joint: 0.23787768748135754
+      left_wrist_roll_joint: -1.6315079638524013
+      left_wrist_pitch_joint: 0.45370524631245374
+      left_wrist_yaw_joint: -1.0709971700131633
+      right_shoulder_pitch_joint: -0.533732742930671
+      right_shoulder_roll_joint: -0.5251801143964795
+      right_shoulder_yaw_joint: 0.9009994092912178
+      right_elbow_joint: -0.019690337030768293
+      right_wrist_roll_joint: 1.1367607288713832
+      right_wrist_pitch_joint: 0.5514794808990833
+      right_wrist_yaw_joint: 1.1750588306805665
+      waist_pitch_joint: 0.0
   - alpha: 0.565217
     target_head_z_m: 0.702609
     actual_head_z_m: 0.702609
-    actual_head_x_m: 0.504357
+    actual_head_x_m: 0.543371
     head_down_dot: 0.697826
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 1.236
-    max_hand_grip_y_abs_mm: 22.31
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 0.092
+    max_hand_grip_y_abs_mm: 19.196
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.263432
+    min_joint_margin_rad: 0.358443
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.7621362463388792
-      left_shoulder_roll_joint: 0.46041995567937205
-      left_shoulder_yaw_joint: -0.8848626494364105
-      left_elbow_joint: 0.3673605337560656
-      left_wrist_roll_joint: -1.7087875580458707
-      left_wrist_pitch_joint: 0.3498415902438321
-      left_wrist_yaw_joint: -1.1630422856384648
-      right_shoulder_pitch_joint: -0.45542669221621
-      right_shoulder_roll_joint: -0.5151153151021266
-      right_shoulder_yaw_joint: 1.106691665359346
-      right_elbow_joint: 0.10410673351888362
-      right_wrist_roll_joint: 1.2337862307721414
-      right_wrist_pitch_joint: 0.44901932788480525
-      right_wrist_yaw_joint: 1.2119408292507725
+      left_shoulder_pitch_joint: -0.8599993088407563
+      left_shoulder_roll_joint: 0.4871815667001587
+      left_shoulder_yaw_joint: -0.724682744393758
+      left_elbow_joint: 0.23568126590619082
+      left_wrist_roll_joint: -1.613777188470933
+      left_wrist_pitch_joint: 0.43116530707282863
+      left_wrist_yaw_joint: -1.0847139237206915
+      right_shoulder_pitch_joint: -0.5020931687483682
+      right_shoulder_roll_joint: -0.5159833078235208
+      right_shoulder_yaw_joint: 0.9242316013030074
+      right_elbow_joint: 0.004933290542199974
+      right_wrist_roll_joint: 1.1116665053961414
+      right_wrist_pitch_joint: 0.5232191767302019
+      right_wrist_yaw_joint: 1.1941120018032556
+      waist_pitch_joint: 0.0
   - alpha: 0.608696
     target_head_z_m: 0.684348
     actual_head_z_m: 0.684348
-    actual_head_x_m: 0.502788
+    actual_head_x_m: 0.54179
     head_down_dot: 0.713043
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 0.84
-    max_hand_grip_y_abs_mm: 21.874
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: -0.066
+    max_hand_grip_y_abs_mm: 19.447
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.277944
+    min_joint_margin_rad: 0.375719
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.7224990548491216
-      left_shoulder_roll_joint: 0.45210061287786407
-      left_shoulder_yaw_joint: -0.9021987012477914
-      left_elbow_joint: 0.3652600983021096
-      left_wrist_roll_joint: -1.694276388155647
-      left_wrist_pitch_joint: 0.3296154118448557
-      left_wrist_yaw_joint: -1.1732382773222818
-      right_shoulder_pitch_joint: -0.4198256397097087
-      right_shoulder_roll_joint: -0.5042717374600976
-      right_shoulder_yaw_joint: 1.1274254878858097
-      right_elbow_joint: 0.12634162836500137
-      right_wrist_roll_joint: 1.2124332922510521
-      right_wrist_pitch_joint: 0.4216278562515512
-      right_wrist_yaw_joint: 1.226413139032554
+      left_shoulder_pitch_joint: -0.817958989894996
+      left_shoulder_roll_joint: 0.47865587482181293
+      left_shoulder_yaw_joint: -0.7405624113953121
+      left_elbow_joint: 0.23516247596653864
+      left_wrist_roll_joint: -1.596500814787218
+      left_wrist_pitch_joint: 0.40861377865995285
+      left_wrist_yaw_joint: -1.0987282586668667
+      right_shoulder_pitch_joint: -0.4712380874644464
+      right_shoulder_roll_joint: -0.5063020841213708
+      right_shoulder_yaw_joint: 0.9469905900491071
+      right_elbow_joint: 0.030957066945465964
+      right_wrist_roll_joint: 1.0880374813441818
+      right_wrist_pitch_joint: 0.4956694918314813
+      right_wrist_yaw_joint: 1.2124775503631935
+      waist_pitch_joint: 0.0
   - alpha: 0.652174
     target_head_z_m: 0.666087
     actual_head_z_m: 0.666087
-    actual_head_x_m: 0.500702
+    actual_head_x_m: 0.53971
     head_down_dot: 0.728261
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 0.567
-    max_hand_grip_y_abs_mm: 21.614
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: -0.185
+    max_hand_grip_y_abs_mm: 19.887
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.291952
+    min_joint_margin_rad: 0.384183
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.6828079008765304
-      left_shoulder_roll_joint: 0.4441290791709304
-      left_shoulder_yaw_joint: -0.9193658939656626
-      left_elbow_joint: 0.3643563908758675
-      left_wrist_roll_joint: -1.6802679764897224
-      left_wrist_pitch_joint: 0.30953773661208006
-      left_wrist_yaw_joint: -1.183727840087902
-      right_shoulder_pitch_joint: -0.38493875975551606
-      right_shoulder_roll_joint: -0.4928931019317099
-      right_shoulder_yaw_joint: 1.1478662267634097
-      right_elbow_joint: 0.1500005756678909
-      right_wrist_roll_joint: 1.192279365374707
-      right_wrist_pitch_joint: 0.39512049623350104
-      right_wrist_yaw_joint: 1.2405322855003496
+      left_shoulder_pitch_joint: -0.776209997325953
+      left_shoulder_roll_joint: 0.4700674939744664
+      left_shoulder_yaw_joint: -0.756398202231991
+      left_elbow_joint: 0.23634753306116307
+      left_wrist_roll_joint: -1.5797489115249754
+      left_wrist_pitch_joint: 0.38606643532969814
+      left_wrist_yaw_joint: -1.1130272292795453
+      right_shoulder_pitch_joint: -0.44108814627450194
+      right_shoulder_roll_joint: -0.4962151787925305
+      right_shoulder_yaw_joint: 0.9692539094318839
+      right_elbow_joint: 0.05823910458583351
+      right_wrist_roll_joint: 1.065833716294706
+      right_wrist_pitch_joint: 0.46888134998605024
+      right_wrist_yaw_joint: 1.2302466530069196
+      waist_pitch_joint: 0.0
   - alpha: 0.695652
     target_head_z_m: 0.647826
     actual_head_z_m: 0.647826
-    actual_head_x_m: 0.498094
+    actual_head_x_m: 0.537136
     head_down_dot: 0.743478
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 0.407
-    max_hand_grip_y_abs_mm: 21.521
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: -0.276
+    max_hand_grip_y_abs_mm: 20.34
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.305343
+    min_joint_margin_rad: 0.366941
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.6430387642915517
-      left_shoulder_roll_joint: 0.4365175324227335
-      left_shoulder_yaw_joint: -0.936375814984077
-      left_elbow_joint: 0.3645761251953444
-      left_wrist_roll_joint: -1.6668766201630252
-      left_wrist_pitch_joint: 0.2895562851462373
-      left_wrist_yaw_joint: -1.1944827216344711
-      right_shoulder_pitch_joint: -0.3506961676520721
-      right_shoulder_roll_joint: -0.48108678539886895
-      right_shoulder_yaw_joint: 1.1680067407710681
-      right_elbow_joint: 0.1748756839693441
-      right_wrist_roll_joint: 1.1733166019206245
-      right_wrist_pitch_joint: 0.3695791580569542
-      right_wrist_yaw_joint: 1.2543100045042936
+      left_shoulder_pitch_joint: -0.7347705694421642
+      left_shoulder_roll_joint: 0.46137196892191407
+      left_shoulder_yaw_joint: -0.7721470128265158
+      left_elbow_joint: 0.23926478177663735
+      left_wrist_roll_joint: -1.5636018568410002
+      left_wrist_pitch_joint: 0.36356480622636855
+      left_wrist_yaw_joint: -1.1276084601699794
+      right_shoulder_pitch_joint: -0.41157499000126424
+      right_shoulder_roll_joint: -0.485778879326139
+      right_shoulder_yaw_joint: 0.9910069526745909
+      right_elbow_joint: 0.08664738641205415
+      right_wrist_roll_joint: 1.0450218349969076
+      right_wrist_pitch_joint: 0.44290907258677226
+      right_wrist_yaw_joint: 1.2474888807325306
+      waist_pitch_joint: 0.0
   - alpha: 0.73913
     target_head_z_m: 0.629565
     actual_head_z_m: 0.629565
-    actual_head_x_m: 0.494962
+    actual_head_x_m: 0.534076
     head_down_dot: 0.758696
     head_axis_y: -1.0e-05
-    hand_center_y_mm: 0.351
-    max_hand_grip_y_abs_mm: 21.589
+    hand_center_y_mm: -0.345
+    max_hand_grip_y_abs_mm: 20.811
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.318005
+    min_joint_margin_rad: 0.350173
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.6031819638047197
-      left_shoulder_roll_joint: 0.4292810586307035
-      left_shoulder_yaw_joint: -0.9532409486419958
-      left_elbow_joint: 0.3658588050157002
-      left_wrist_roll_joint: -1.6542145154556867
-      left_wrist_pitch_joint: 0.2696494390660326
-      left_wrist_yaw_joint: -1.2054833577510726
-      right_shoulder_pitch_joint: -0.317025441333375
-      right_shoulder_roll_joint: -0.4689475904088581
-      right_shoulder_yaw_joint: 1.1878449296546256
-      right_elbow_joint: 0.20075962896701932
-      right_wrist_roll_joint: 1.155536372122494
-      right_wrist_pitch_joint: 0.3450816576459793
-      right_wrist_yaw_joint: 1.2677428443394587
+      left_shoulder_pitch_joint: -0.6936721951206511
+      left_shoulder_roll_joint: 0.4525357031665032
+      left_shoulder_yaw_joint: -0.7877636386399847
+      left_elbow_joint: 0.24394471290480751
+      left_wrist_roll_joint: -1.5481496827336836
+      left_wrist_pitch_joint: 0.34117808596433635
+      left_wrist_yaw_joint: -1.1424738440842375
+      right_shoulder_pitch_joint: -0.38263572370912163
+      right_shoulder_roll_joint: -0.4750344946550179
+      right_shoulder_yaw_joint: 1.012238270299926
+      right_elbow_joint: 0.11605344735668915
+      right_wrist_roll_joint: 1.0255773700095334
+      right_wrist_pitch_joint: 0.41781007487347965
+      right_wrist_yaw_joint: 1.2642573078646058
+      waist_pitch_joint: 0.0
   - alpha: 0.782609
     target_head_z_m: 0.611304
     actual_head_z_m: 0.611304
-    actual_head_x_m: 0.491301
+    actual_head_x_m: 0.530539
     head_down_dot: 0.773913
     head_axis_y: -1.0e-05
-    hand_center_y_mm: 0.393
-    max_hand_grip_y_abs_mm: 21.811
+    hand_center_y_mm: -0.396
+    max_hand_grip_y_abs_mm: 21.302
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.329826
+    min_joint_margin_rad: 0.333838
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.5632454837291516
-      left_shoulder_roll_joint: 0.4224376398915381
-      left_shoulder_yaw_joint: -0.9699768753469787
-      left_elbow_joint: 0.3681537822633973
-      left_wrist_roll_joint: -1.6423944804587807
-      left_wrist_pitch_joint: 0.24982935200835815
-      left_wrist_yaw_joint: -1.2167146815935417
-      right_shoulder_pitch_joint: -0.2838491521100629
-      right_shoulder_roll_joint: -0.45655954828897866
-      right_shoulder_yaw_joint: 1.2073804427255153
-      right_elbow_joint: 0.22744248958620647
-      right_wrist_roll_joint: 1.1389330016072479
-      right_wrist_pitch_joint: 0.32170205297636495
-      right_wrist_yaw_joint: 1.2808124281784452
+      left_shoulder_pitch_joint: -0.6529645807504727
+      left_shoulder_roll_joint: 0.4435324406821018
+      left_shoulder_yaw_joint: -0.803203145710144
+      left_elbow_joint: 0.25041889325088357
+      left_wrist_roll_joint: -1.533491670769831
+      left_wrist_pitch_joint: 0.3190072712772375
+      left_wrist_yaw_joint: -1.1576236791094365
+      right_shoulder_pitch_joint: -0.3542082274341596
+      right_shoulder_roll_joint: -0.4640133144468317
+      right_shoulder_yaw_joint: 1.0329354101833563
+      right_elbow_joint: 0.14632678651065695
+      right_wrist_roll_joint: 1.0074875196011501
+      right_wrist_pitch_joint: 0.3936445739740728
+      right_wrist_yaw_joint: 1.2805915295382693
+      waist_pitch_joint: 0.0
   - alpha: 0.826087
     target_head_z_m: 0.593043
     actual_head_z_m: 0.593044
-    actual_head_x_m: 0.487113
+    actual_head_x_m: 0.52654
     head_down_dot: 0.78913
     head_axis_y: -1.0e-05
-    hand_center_y_mm: 0.528
-    max_hand_grip_y_abs_mm: 22.181
+    hand_center_y_mm: -0.433
+    max_hand_grip_y_abs_mm: 21.808
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.320944
+    min_joint_margin_rad: 0.317911
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.5232592782756057
-      left_shoulder_roll_joint: 0.4160080144597793
-      left_shoulder_yaw_joint: -0.9866045851580495
-      left_elbow_joint: 0.3714173236025628
-      left_wrist_roll_joint: -1.631532214607985
-      left_wrist_pitch_joint: 0.23014680254483352
-      left_wrist_yaw_joint: -1.2281611898675002
-      right_shoulder_pitch_joint: -0.25108210812165643
-      right_shoulder_roll_joint: -0.4439979787770673
-      right_shoulder_yaw_joint: 1.2266109389927569
-      right_elbow_joint: 0.2547078801183297
-      right_wrist_roll_joint: 1.1235081679227088
-      right_wrist_pitch_joint: 0.29951088284647737
-      right_wrist_yaw_joint: 1.2934855754752221
+      left_shoulder_pitch_joint: -0.6127210865970947
+      left_shoulder_roll_joint: 0.4343415264741534
+      left_shoulder_yaw_joint: -0.8184233937725794
+      left_elbow_joint: 0.2587179121076255
+      left_wrist_roll_joint: -1.5197359948735216
+      left_wrist_pitch_joint: 0.29719163157279543
+      left_wrist_yaw_joint: -1.1730505592723743
+      right_shoulder_pitch_joint: -0.32622668003244915
+      right_shoulder_roll_joint: -0.4527400221141398
+      right_shoulder_yaw_joint: 1.053080778975819
+      right_elbow_joint: 0.17732923271674572
+      right_wrist_roll_joint: 0.9907546580029232
+      right_wrist_pitch_joint: 0.37047529972852333
+      right_wrist_yaw_joint: 1.2965190311577248
+      waist_pitch_joint: 0.0
   - alpha: 0.869565
     target_head_z_m: 0.574783
     actual_head_z_m: 0.574783
-    actual_head_x_m: 0.4824
+    actual_head_x_m: 0.522097
     head_down_dot: 0.804348
-    head_axis_y: -1.0e-05
-    hand_center_y_mm: 0.755
-    max_hand_grip_y_abs_mm: 22.689
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: -0.457
+    max_hand_grip_y_abs_mm: 22.325
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.308716
+    min_joint_margin_rad: 0.302375
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.4832809964282385
-      left_shoulder_roll_joint: 0.41001539401979004
-      left_shoulder_yaw_joint: -1.0031528787409723
-      left_elbow_joint: 0.37560960451781844
-      left_wrist_roll_joint: -1.6217481286251771
-      left_wrist_pitch_joint: 0.21069853756849932
-      left_wrist_yaw_joint: -1.2398009026080876
-      right_shoulder_pitch_joint: -0.2186282729052689
-      right_shoulder_roll_joint: -0.43133196197920487
-      right_shoulder_yaw_joint: 1.2455276804377873
-      right_elbow_joint: 0.282327895389819
-      right_wrist_roll_joint: 1.1092764151813002
-      right_wrist_pitch_joint: 0.27857541622270166
-      right_wrist_yaw_joint: 1.3057139855788151
+      left_shoulder_pitch_joint: -0.5730452360183902
+      left_shoulder_roll_joint: 0.42494760691132033
+      left_shoulder_yaw_joint: -0.8333880450893179
+      left_elbow_joint: 0.2688681743673949
+      left_wrist_roll_joint: -1.5069993014052159
+      left_wrist_pitch_joint: 0.2759179504468204
+      left_wrist_yaw_joint: -1.1887322635229962
+      right_shoulder_pitch_joint: -0.29861668779616407
+      right_shoulder_roll_joint: -0.44123530614037465
+      right_shoulder_yaw_joint: 1.0726469950954598
+      right_elbow_joint: 0.20890828448763524
+      right_wrist_roll_joint: 0.9754010290272229
+      right_wrist_pitch_joint: 0.3483673357995557
+      right_wrist_yaw_joint: 1.3120549456236132
+      waist_pitch_joint: 0.0
   - alpha: 0.913043
     target_head_z_m: 0.556522
     actual_head_z_m: 0.556522
-    actual_head_x_m: 0.477174
+    actual_head_x_m: 0.51724
     head_down_dot: 0.819565
-    head_axis_y: -1.0e-05
-    hand_center_y_mm: 1.072
-    max_hand_grip_y_abs_mm: 23.327
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: -0.47
+    max_hand_grip_y_abs_mm: 22.84
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.296997
+    min_joint_margin_rad: 0.28723
     torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.4434039137220984
-      left_shoulder_roll_joint: 0.40448504393146983
-      left_shoulder_yaw_joint: -1.0196610487534203
-      left_elbow_joint: 0.38069133464316923
-      left_wrist_roll_joint: -1.6131688768075938
-      left_wrist_pitch_joint: 0.19163817463690014
-      left_wrist_yaw_joint: -1.2515975428174793
-      right_shoulder_pitch_joint: -0.18637701618748376
-      right_shoulder_roll_joint: -0.4186275543735158
-      right_shoulder_yaw_joint: 1.2641099413339607
-      right_elbow_joint: 0.3100558439782668
-      right_wrist_roll_joint: 1.0962723205289104
-      right_wrist_pitch_joint: 0.2589600556109173
-      right_wrist_yaw_joint: 1.317432973315729
+      left_shoulder_pitch_joint: -0.5340791110535354
+      left_shoulder_roll_joint: 0.41534166224666347
+      left_shoulder_yaw_joint: -0.8480704706151689
+      left_elbow_joint: 0.2808871943387418
+      left_wrist_roll_joint: -1.495406170856407
+      left_wrist_pitch_joint: 0.25543351154814786
+      left_wrist_yaw_joint: -1.2046227760479624
+      right_shoulder_pitch_joint: -0.2712893259440244
+      right_shoulder_roll_joint: -0.4295182947040208
+      right_shoulder_yaw_joint: 1.0915912123278908
+      right_elbow_joint: 0.24088812834201828
+      right_wrist_roll_joint: 0.961475338289793
+      right_wrist_pitch_joint: 0.3273881384306446
+      right_wrist_yaw_joint: 1.3271997570410086
+      waist_pitch_joint: 0.0
   - alpha: 0.956522
     target_head_z_m: 0.538261
     actual_head_z_m: 0.538261
-    actual_head_x_m: 0.471451
+    actual_head_x_m: 0.511947
     head_down_dot: 0.834783
-    head_axis_y: -1.0e-05
-    hand_center_y_mm: 1.48
-    max_hand_grip_y_abs_mm: 24.079
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: -0.332
+    max_hand_grip_y_abs_mm: 23.207
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.285872
-    torso_contacts: 1
+    min_joint_margin_rad: 0.272939
+    torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.40376823392228295
-      left_shoulder_roll_joint: 0.39944371416475244
-      left_shoulder_yaw_joint: -1.0361819314424143
-      left_elbow_joint: 0.3866194449430349
-      left_wrist_roll_joint: -1.605928628796661
-      left_wrist_pitch_joint: 0.17319252703902857
-      left_wrist_yaw_joint: -1.2634898518403814
-      right_shoulder_pitch_joint: -0.15419825869052445
-      right_shoulder_roll_joint: -0.40595238208647005
-      right_shoulder_yaw_joint: 1.28231764801838
-      right_elbow_joint: 0.33761495225554733
-      right_wrist_roll_joint: 1.0845603486365092
-      right_wrist_pitch_joint: 0.24072699231553
-      right_wrist_yaw_joint: 1.3285582645998146
+      left_shoulder_pitch_joint: -0.49571883997984
+      left_shoulder_roll_joint: 0.406291895940315
+      left_shoulder_yaw_joint: -0.862631057715394
+      left_elbow_joint: 0.2941347399973891
+      left_wrist_roll_joint: -1.485467077782474
+      left_wrist_pitch_joint: 0.2358382254007701
+      left_wrist_yaw_joint: -1.2207463374175327
+      right_shoulder_pitch_joint: -0.24414366206628654
+      right_shoulder_roll_joint: -0.4171956462311423
+      right_shoulder_yaw_joint: 1.110000551636408
+      right_elbow_joint: 0.2730161546003648
+      right_wrist_roll_joint: 0.948982619629279
+      right_wrist_pitch_joint: 0.307778132427056
+      right_wrist_yaw_joint: 1.3414906387605599
+      waist_pitch_joint: 0.0
   - alpha: 1.0
     target_head_z_m: 0.52
     actual_head_z_m: 0.52
-    actual_head_x_m: 0.465264
+    actual_head_x_m: 0.506008
     head_down_dot: 0.85
-    head_axis_y: -9.0e-06
-    hand_center_y_mm: 1.978
-    max_hand_grip_y_abs_mm: 24.926
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: 0.492
+    max_hand_grip_y_abs_mm: 23.89
     loop_grip_mm: 3.0e-06
     loop_axis_error: 0.0
     loop_orientation_error: 0.0
-    min_joint_margin_rad: 0.275451
-    torso_contacts: 3
+    min_joint_margin_rad: 0.261254
+    torso_contacts: 0
     joints_rad:
-      left_shoulder_pitch_joint: -0.3645777753342526
-      left_shoulder_roll_joint: 0.3949189304761649
-      left_shoulder_yaw_joint: -1.0527855769597183
-      left_elbow_joint: 0.3933409212256343
-      left_wrist_roll_joint: -1.6001702566036475
-      left_wrist_pitch_joint: 0.15568640930695657
-      left_wrist_yaw_joint: -1.2753763566277494
-      right_shoulder_pitch_joint: -0.12193564969700636
-      right_shoulder_roll_joint: -0.3933826380538749
-      right_shoulder_yaw_joint: 1.3000810486946706
-      right_elbow_joint: 0.36467981809721217
-      right_wrist_roll_joint: 1.0742489046413413
-      right_wrist_pitch_joint: 0.223937479066446
-      right_wrist_yaw_joint: 1.3389791099335804
-
+      left_shoulder_pitch_joint: -0.4570191760086408
+      left_shoulder_roll_joint: 0.4008141679655522
+      left_shoulder_yaw_joint: -0.8778806216844082
+      left_elbow_joint: 0.30599435393423613
+      left_wrist_roll_joint: -1.4788016358418314
+      left_wrist_pitch_joint: 0.21653431428186212
+      left_wrist_yaw_joint: -1.2373377196142823
+      right_shoulder_pitch_joint: -0.21696693977396525
+      right_shoulder_roll_joint: -0.4027782746796872
+      right_shoulder_yaw_joint: 1.1284047968130237
+      right_elbow_joint: 0.3048092235275928
+      right_wrist_roll_joint: 0.9376923322210334
+      right_wrist_pitch_joint: 0.2902386299790546
+      right_wrist_yaw_joint: 1.3531762796504805
+      waist_pitch_joint: 0.0
+  waist_pitch_bias_rad: 0.0
+standing_double_v2a:
+  memo: Standing double-hold v2a swing based on standing_double_v2_start; left grip distance 0.16 m; preserves standing v2 head x/z targets.
+  base_pose: standing_double_v2a_start
+  start_head_z_m: 1.542
+  end_head_z_m: 1.23
+  start_head_x_m: 0.255
+  end_head_x_m: 0.43
+  actual_head_z_amplitude_m: 0.311999
+  duration_s: 4.0
+  left_grip_distance_m: 0.16
+  clamp_center_offset_m: 0.0
+  grip_roll_phase_deg: -120.0
+  validation:
+    passed: true
+    closed_loop_only: true
+    full_pose_locked: false
+    max_loop_grip_mm: 3.7e-05
+    max_loop_axis_error: 5.0e-08
+    max_loop_orientation_error: 4.0e-08
+    max_head_z_error_m: 1.0e-06
+    max_head_x_error_m: 1.0e-06
+    max_head_axis_y_abs: 7.5e-05
+    max_hand_center_y_mm: 1.898
+    max_hand_grip_y_abs_mm: 6.249
+    min_arm_joint_margin_rad: 0.121822
+    max_neighbor_joint_step_rad: 0.06175
+    max_torso_contacts: 0
+  waypoints:
+  - alpha: 0.0
+    target_head_z_m: 1.542
+    actual_head_z_m: 1.541999
+    actual_head_x_m: 0.255001
+    head_down_dot: 0.145
+    head_axis_y: 7.5e-05
+    hand_center_y_mm: 1.898
+    max_hand_grip_y_abs_mm: 6.249
+    loop_grip_mm: 3.7e-05
+    loop_axis_error: 5.0e-08
+    loop_orientation_error: 4.0e-08
+    min_joint_margin_rad: 0.122414
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.4889937254615564
+      left_shoulder_roll_joint: 0.5712510083235101
+      left_shoulder_yaw_joint: -0.5687545227684734
+      left_elbow_joint: 0.35257981637014835
+      left_wrist_roll_joint: -1.849805968992106
+      left_wrist_pitch_joint: 0.8538724734443871
+      left_wrist_yaw_joint: -0.8687199023392282
+      right_shoulder_pitch_joint: -0.8429244992196121
+      right_shoulder_roll_joint: -0.5838252602887415
+      right_shoulder_yaw_joint: 0.6637463673293825
+      right_elbow_joint: -0.32673621056157337
+      right_wrist_roll_joint: 1.5729750817045125
+      right_wrist_pitch_joint: 0.657155446537492
+      right_wrist_yaw_joint: 0.7405650905016584
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.255
+    head_x_error_m: 1.0e-06
+  - alpha: 0.043478
+    target_head_z_m: 1.528435
+    actual_head_z_m: 1.528435
+    actual_head_x_m: 0.262609
+    head_down_dot: 0.163913
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: 0.115
+    max_hand_grip_y_abs_mm: 2.514
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.121822
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.4547376109417194
+      left_shoulder_roll_joint: 0.5618992307852101
+      left_shoulder_yaw_joint: -0.5824920899273851
+      left_elbow_joint: 0.3202063496876887
+      left_wrist_roll_joint: -1.850398001355326
+      left_wrist_pitch_joint: 0.8512849777316017
+      left_wrist_yaw_joint: -0.8543535387218996
+      right_shoulder_pitch_joint: -0.7811746015802681
+      right_shoulder_roll_joint: -0.5742888330143676
+      right_shoulder_yaw_joint: 0.6794060488966849
+      right_elbow_joint: -0.3487407123547826
+      right_wrist_roll_joint: 1.537269902294511
+      right_wrist_pitch_joint: 0.619968025453175
+      right_wrist_yaw_joint: 0.745500804607944
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.262609
+    head_x_error_m: 0.0
+  - alpha: 0.086957
+    target_head_z_m: 1.51487
+    actual_head_z_m: 1.51487
+    actual_head_x_m: 0.270217
+    head_down_dot: 0.182826
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.292
+    max_hand_grip_y_abs_mm: 1.372
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.122724
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.41556957020154
+      left_shoulder_roll_joint: 0.5577537308726509
+      left_shoulder_yaw_joint: -0.593107299592677
+      left_elbow_joint: 0.2865686538588036
+      left_wrist_roll_joint: -1.8494960734708072
+      left_wrist_pitch_joint: 0.8451076911500967
+      left_wrist_yaw_joint: -0.8441358469186333
+      right_shoulder_pitch_joint: -0.7288236168873999
+      right_shoulder_roll_joint: -0.5629862785195868
+      right_shoulder_yaw_joint: 0.699321078686397
+      right_elbow_joint: -0.3604038997362832
+      right_wrist_roll_joint: 1.5012539000053458
+      right_wrist_pitch_joint: 0.5886277584894803
+      right_wrist_yaw_joint: 0.7533959497743201
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.270217
+    head_x_error_m: 0.0
+  - alpha: 0.130435
+    target_head_z_m: 1.501304
+    actual_head_z_m: 1.501304
+    actual_head_x_m: 0.277826
+    head_down_dot: 0.201739
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.357
+    max_hand_grip_y_abs_mm: 0.559
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.125211
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.3741428453482507
+      left_shoulder_roll_joint: 0.5549319199363453
+      left_shoulder_yaw_joint: -0.6023734939125619
+      left_elbow_joint: 0.2537017533796674
+      left_wrist_roll_joint: -1.8470087162028561
+      left_wrist_pitch_joint: 0.8356692553918849
+      left_wrist_yaw_joint: -0.8360195308117105
+      right_shoulder_pitch_joint: -0.6818041026148112
+      right_shoulder_roll_joint: -0.5534348036768718
+      right_shoulder_yaw_joint: 0.7205958126597927
+      right_elbow_joint: -0.36638335316708087
+      right_wrist_roll_joint: 1.466967624924918
+      right_wrist_pitch_joint: 0.5616764830994111
+      right_wrist_yaw_joint: 0.7640009589257476
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.277826
+    head_x_error_m: 0.0
+  - alpha: 0.173913
+    target_head_z_m: 1.487739
+    actual_head_z_m: 1.487739
+    actual_head_x_m: 0.285435
+    head_down_dot: 0.220652
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.338
+    max_hand_grip_y_abs_mm: 0.672
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.129815
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.3314864197040805
+      left_shoulder_roll_joint: 0.5523565396120145
+      left_shoulder_yaw_joint: -0.6111082874802218
+      left_elbow_joint: 0.2226274631128583
+      left_wrist_roll_joint: -1.8424046502822493
+      left_wrist_pitch_joint: 0.8234898606666595
+      left_wrist_yaw_joint: -0.8301401036691677
+      right_shoulder_pitch_joint: -0.6387508715747373
+      right_shoulder_roll_joint: -0.5460537047106685
+      right_shoulder_yaw_joint: 0.7423715312156369
+      right_elbow_joint: -0.36793153508334436
+      right_wrist_roll_joint: 1.4345188545814131
+      right_wrist_pitch_joint: 0.5379849108422121
+      right_wrist_yaw_joint: 0.777199654453543
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.285435
+    head_x_error_m: 0.0
+  - alpha: 0.217391
+    target_head_z_m: 1.474174
+    actual_head_z_m: 1.474174
+    actual_head_x_m: 0.293043
+    head_down_dot: 0.239565
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.304
+    max_hand_grip_y_abs_mm: 0.913
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.136738
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2883068961485271
+      left_shoulder_roll_joint: 0.5496690566354763
+      left_shoulder_yaw_joint: -0.6197931150770194
+      left_elbow_joint: 0.19403563222006107
+      left_wrist_roll_joint: -1.8354818130049184
+      left_wrist_pitch_joint: 0.8092628616529933
+      left_wrist_yaw_joint: -0.8267775402689451
+      right_shoulder_pitch_joint: -0.5989934043761324
+      right_shoulder_roll_joint: -0.5404724723818355
+      right_shoulder_yaw_joint: 0.7642502887093493
+      right_elbow_joint: -0.3656479267144257
+      right_wrist_roll_joint: 1.4038575021973132
+      right_wrist_pitch_joint: 0.5166787429408405
+      right_wrist_yaw_joint: 0.7925417540823171
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.293043
+    head_x_error_m: 0.0
+  - alpha: 0.26087
+    target_head_z_m: 1.460609
+    actual_head_z_m: 1.460609
+    actual_head_x_m: 0.300652
+    head_down_dot: 0.258478
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.271
+    max_hand_grip_y_abs_mm: 0.96
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.145979
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2451937495148755
+      left_shoulder_roll_joint: 0.5467112357264902
+      left_shoulder_yaw_joint: -0.6287573473847085
+      left_elbow_joint: 0.1684741377101326
+      left_wrist_roll_joint: -1.8262414275394727
+      left_wrist_pitch_joint: 0.7936377115311861
+      left_wrist_yaw_joint: -0.826136454634523
+      right_shoulder_pitch_joint: -0.562123525241761
+      right_shoulder_roll_joint: -0.5361650154856453
+      right_shoulder_yaw_joint: 0.785981986183602
+      right_elbow_joint: -0.35988390671065357
+      right_wrist_roll_joint: 1.3749129276818435
+      right_wrist_pitch_joint: 0.49709078535591267
+      right_wrist_yaw_joint: 0.8095736397243641
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.300652
+    head_x_error_m: 0.0
+  - alpha: 0.304348
+    target_head_z_m: 1.447043
+    actual_head_z_m: 1.447044
+    actual_head_x_m: 0.308261
+    head_down_dot: 0.277391
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.244
+    max_hand_grip_y_abs_mm: 0.872
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.157392
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2026541490881115
+      left_shoulder_roll_joint: 0.543392844890648
+      left_shoulder_yaw_joint: -0.6382301479128736
+      left_elbow_joint: 0.14637734643242958
+      left_wrist_roll_joint: -1.8148276871592819
+      left_wrist_pitch_joint: 0.7771609903001787
+      left_wrist_yaw_joint: -0.8283055352606153
+      right_shoulder_pitch_joint: -0.5278527090553119
+      right_shoulder_roll_joint: -0.532623562943504
+      right_shoulder_yaw_joint: 0.807377284548604
+      right_elbow_joint: -0.35088290654479987
+      right_wrist_roll_joint: 1.3476331472856715
+      right_wrist_pitch_joint: 0.4787211740008605
+      right_wrist_yaw_joint: 0.8279062964688613
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.308261
+    head_x_error_m: 0.0
+  - alpha: 0.347826
+    target_head_z_m: 1.433478
+    actual_head_z_m: 1.433478
+    actual_head_x_m: 0.31587
+    head_down_dot: 0.296304
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.222
+    max_hand_grip_y_abs_mm: 0.694
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.170737
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.1611136480236468
+      left_shoulder_roll_joint: 0.5396547140828272
+      left_shoulder_yaw_joint: -0.6483590061102202
+      left_elbow_joint: 0.12806786335628687
+      left_wrist_roll_joint: -1.8014825250463824
+      left_wrist_pitch_joint: 0.7602644954661715
+      left_wrist_yaw_joint: -0.8332677848956559
+      right_shoulder_pitch_joint: -0.4959573380926112
+      right_shoulder_roll_joint: -0.5294090614204381
+      right_shoulder_yaw_joint: 0.8282813664277886
+      right_elbow_joint: -0.3388390640612899
+      right_wrist_roll_joint: 1.3219927022125384
+      right_wrist_pitch_joint: 0.4612083156321673
+      right_wrist_yaw_joint: 0.8472215155131292
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.31587
+    head_x_error_m: 0.0
+  - alpha: 0.391304
+    target_head_z_m: 1.419913
+    actual_head_z_m: 1.419913
+    actual_head_x_m: 0.323478
+    head_down_dot: 0.315217
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.205
+    max_hand_grip_y_abs_mm: 0.459
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.185713
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.1209156641198363
+      left_shoulder_roll_joint: 0.5354546817463496
+      left_shoulder_yaw_joint: -0.6592211071673202
+      left_elbow_joint: 0.11376267525963546
+      left_wrist_roll_joint: -1.7865070235160208
+      left_wrist_pitch_joint: 0.7432715852557938
+      left_wrist_yaw_joint: -0.8409249813799708
+      right_shoulder_pitch_joint: -0.46625523565952326
+      right_shoulder_roll_joint: -0.5261643750844106
+      right_shoulder_yaw_joint: 0.8485649242991072
+      right_elbow_joint: -0.323925475391025
+      right_wrist_roll_joint: 1.2979897585850253
+      right_wrist_pitch_joint: 0.44430610851634894
+      right_wrist_yaw_joint: 0.8672648346489431
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.323478
+    head_x_error_m: -0.0
+  - alpha: 0.434783
+    target_head_z_m: 1.406348
+    actual_head_z_m: 1.406348
+    actual_head_x_m: 0.331087
+    head_down_dot: 0.33413
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.191
+    max_hand_grip_y_abs_mm: 0.192
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.20199
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.0823260329550188
+      left_shoulder_roll_joint: 0.5307593847004599
+      left_shoulder_yaw_joint: -0.670834222041596
+      left_elbow_joint: 0.10358681282996432
+      left_wrist_roll_joint: -1.770230136734477
+      left_wrist_pitch_joint: 0.7264123496145949
+      left_wrist_yaw_joint: -0.851123743667929
+      right_shoulder_pitch_joint: -0.4385946241949054
+      right_shoulder_roll_joint: -0.522613397467574
+      right_shoulder_yaw_joint: 0.8681204349242303
+      right_elbow_joint: -0.30630873515753987
+      right_wrist_roll_joint: 1.2756393091440696
+      right_wrist_pitch_joint: 0.4278641764388077
+      right_wrist_yaw_joint: 0.8878360625542532
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.331087
+    head_x_error_m: -0.0
+  - alpha: 0.478261
+    target_head_z_m: 1.392783
+    actual_head_z_m: 1.392783
+    actual_head_x_m: 0.338696
+    head_down_dot: 0.353043
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.18
+    max_hand_grip_y_abs_mm: 0.448
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.219235
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.0455419763495086
+      left_shoulder_roll_joint: 0.5255383378082171
+      left_shoulder_yaw_joint: -0.6831681165823456
+      left_elbow_joint: 0.09759132316033713
+      left_wrist_roll_joint: -1.7529853457967186
+      left_wrist_pitch_joint: 0.709842779284113
+      left_wrist_yaw_joint: -0.8636784419160265
+      right_shoulder_pitch_joint: -0.4128480653869689
+      right_shoulder_roll_joint: -0.518553617123116
+      right_shoulder_yaw_joint: 0.8868603320041024
+      right_elbow_joint: -0.28615624370427
+      right_wrist_roll_joint: 1.2549652620388492
+      right_wrist_pitch_joint: 0.4118095256544363
+      right_wrist_yaw_joint: 0.9087798280308882
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.338696
+    head_x_error_m: -0.0
+  - alpha: 0.521739
+    target_head_z_m: 1.379217
+    actual_head_z_m: 1.379217
+    actual_head_x_m: 0.346304
+    head_down_dot: 0.371957
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.17
+    max_hand_grip_y_abs_mm: 0.711
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.237125
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.010703392477508
+      left_shoulder_roll_joint: 0.5197598784282723
+      left_shoulder_yaw_joint: -0.6961560942912445
+      left_elbow_joint: 0.09577193211027854
+      left_wrist_roll_joint: -1.7350946923306985
+      left_wrist_pitch_joint: 0.6936644150321774
+      left_wrist_yaw_joint: -0.8783894840084935
+      right_shoulder_pitch_joint: -0.3889082177417787
+      right_shoulder_roll_joint: -0.513845616717066
+      right_shoulder_yaw_joint: 0.9047158862931778
+      right_elbow_joint: -0.2636393068357364
+      right_wrist_roll_joint: 1.2359928911278462
+      right_wrist_pitch_joint: 0.3961294293746412
+      right_wrist_yaw_joint: 0.9299768161802088
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.346304
+    head_x_error_m: -0.0
+  - alpha: 0.565217
+    target_head_z_m: 1.365652
+    actual_head_z_m: 1.365652
+    actual_head_x_m: 0.353913
+    head_down_dot: 0.39087
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.16
+    max_hand_grip_y_abs_mm: 0.969
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.255361
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9779044781767459
+      left_shoulder_roll_joint: 0.5133887388789982
+      left_shoulder_yaw_joint: -0.7097057868113653
+      left_elbow_joint: 0.09808600481131874
+      left_wrist_roll_joint: -1.7168586352704396
+      left_wrist_pitch_joint: 0.6779422557860543
+      left_wrist_yaw_joint: -0.895056947227672
+      right_shoulder_pitch_joint: -0.3666841600237234
+      right_shoulder_roll_joint: -0.508401688869267
+      right_shoulder_yaw_joint: 0.9216361630951428
+      right_elbow_joint: -0.2389337532525559
+      right_wrist_roll_joint: 1.218742546805435
+      right_wrist_pitch_joint: 0.3808560069985422
+      right_wrist_yaw_joint: 0.9513359869539221
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.353913
+    head_x_error_m: -0.0
+  - alpha: 0.608696
+    target_head_z_m: 1.352087
+    actual_head_z_m: 1.352087
+    actual_head_x_m: 0.361522
+    head_down_dot: 0.409783
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.15
+    max_hand_grip_y_abs_mm: 1.216
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.27367
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9472044593269753
+      left_shoulder_roll_joint: 0.5063849993355722
+      left_shoulder_yaw_joint: -0.7237087389416474
+      left_elbow_joint: 0.10446671613036285
+      left_wrist_roll_joint: -1.6985501431010663
+      left_wrist_pitch_joint: 0.6627195593025025
+      left_wrist_yaw_joint: -0.9134902321332531
+      right_shoulder_pitch_joint: -0.34609808246166346
+      right_shoulder_roll_joint: -0.5021750821379851
+      right_shoulder_yaw_joint: 0.9375869037307716
+      right_elbow_joint: -0.21221916713298988
+      right_wrist_roll_joint: 1.2032252393138332
+      right_wrist_pitch_joint: 0.3660528173806612
+      right_wrist_yaw_joint: 0.972787838099415
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.361522
+    head_x_error_m: -0.0
+  - alpha: 0.652174
+    target_head_z_m: 1.338522
+    actual_head_z_m: 1.338522
+    actual_head_x_m: 0.36913
+    head_down_dot: 0.428696
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.137
+    max_hand_grip_y_abs_mm: 1.451
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.291808
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9186367300807496
+      left_shoulder_roll_joint: 0.4987040328609703
+      left_shoulder_yaw_joint: -0.7380484032167077
+      left_elbow_joint: 0.11483424782833224
+      left_wrist_roll_joint: -1.6804115775634185
+      left_wrist_pitch_joint: 0.6480291238150799
+      left_wrist_yaw_joint: -0.9335145928478003
+      right_shoulder_pitch_joint: -0.32708234286685245
+      right_shoulder_roll_joint: -0.49515057468188733
+      right_shoulder_yaw_joint: 0.9525490356367333
+      right_elbow_joint: -0.18367751039865746
+      right_wrist_roll_joint: 1.1894401170158606
+      right_wrist_pitch_joint: 0.35180401657300386
+      right_wrist_yaw_joint: 0.994278707712347
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.36913
+    head_x_error_m: -0.0
+  - alpha: 0.695652
+    target_head_z_m: 1.324957
+    actual_head_z_m: 1.324957
+    actual_head_x_m: 0.376739
+    head_down_dot: 0.447609
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.123
+    max_hand_grip_y_abs_mm: 1.67
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.309567
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8922162923848062
+      left_shoulder_roll_joint: 0.49029704307905586
+      left_shoulder_yaw_joint: -0.7526065551664772
+      left_elbow_joint: 0.1291044173442952
+      left_wrist_roll_joint: -1.6626533817518547
+      left_wrist_pitch_joint: 0.6339011227966502
+      left_wrist_yaw_joint: -0.9549753587123617
+      right_shoulder_pitch_joint: -0.30957709671675854
+      right_shoulder_roll_joint: -0.4873368105078052
+      right_shoulder_yaw_joint: 0.9665169321316868
+      right_elbow_joint: -0.15349168640981545
+      right_wrist_roll_joint: 1.177373752700451
+      right_wrist_pitch_joint: 0.33820604371631313
+      right_wrist_yaw_joint: 1.0157659945634896
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.376739
+    head_x_error_m: -0.0
+  - alpha: 0.73913
+    target_head_z_m: 1.311391
+    actual_head_z_m: 1.311391
+    actual_head_x_m: 0.384348
+    head_down_dot: 0.466522
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.106
+    max_hand_grip_y_abs_mm: 1.875
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.326766
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.867945566809483
+      left_shoulder_roll_joint: 0.48111184986239497
+      left_shoulder_yaw_joint: -0.7672681370211379
+      left_elbow_joint: 0.14719531401075928
+      left_wrist_roll_joint: -1.645453893755969
+      left_wrist_pitch_joint: 0.6203679522313095
+      left_wrist_yaw_joint: -0.977740526824164
+      right_shoulder_pitch_joint: -0.29352858176262275
+      right_shoulder_roll_joint: -0.47876040256981506
+      right_shoulder_yaw_joint: 0.9794964644929255
+      right_elbow_joint: -0.12184442840220015
+      right_wrist_roll_joint: 1.1670008456280083
+      right_wrist_pitch_joint: 0.3253618403213767
+      right_wrist_yaw_joint: 1.0372141594515938
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.384348
+    head_x_error_m: -0.0
+  - alpha: 0.782609
+    target_head_z_m: 1.297826
+    actual_head_z_m: 1.297826
+    actual_head_x_m: 0.391956
+    head_down_dot: 0.485435
+    head_axis_y: -0.0
+    hand_center_y_mm: -0.086
+    max_hand_grip_y_abs_mm: 2.067
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.34326
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8458188979416358
+      left_shoulder_roll_joint: 0.47109362521012954
+      left_shoulder_yaw_joint: -0.7819247204372299
+      left_elbow_joint: 0.1690326228898394
+      left_wrist_roll_joint: -1.6289598981739342
+      left_wrist_pitch_joint: 0.6074667094854972
+      left_wrist_yaw_joint: -1.0017022721417586
+      right_shoulder_pitch_joint: -0.27888803087843644
+      right_shoulder_roll_joint: -0.46946165201356155
+      right_shoulder_yaw_joint: 0.9915029829892305
+      right_elbow_joint: -0.08891774556299067
+      right_wrist_roll_joint: 1.1582858981000757
+      right_wrist_pitch_joint: 0.3133772980185137
+      right_wrist_yaw_joint: 1.0585913646168834
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.391957
+    head_x_error_m: -0.0
+  - alpha: 0.826087
+    target_head_z_m: 1.284261
+    actual_head_z_m: 1.284261
+    actual_head_x_m: 0.399565
+    head_down_dot: 0.504348
+    head_axis_y: -0.0
+    hand_center_y_mm: -0.062
+    max_hand_grip_y_abs_mm: 2.245
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.358932
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8258260893942917
+      left_shoulder_roll_joint: 0.4601854214632972
+      left_shoulder_yaw_joint: -0.796476820455257
+      left_elbow_joint: 0.19455421161548295
+      left_wrist_roll_joint: -1.6132877368104108
+      left_wrist_pitch_joint: 0.5952398801237094
+      left_wrist_yaw_joint: -1.0267778178166809
+      right_shoulder_pitch_joint: -0.2656111598655878
+      right_shoulder_roll_joint: -0.4594916371349348
+      right_shoulder_yaw_joint: 1.0025593815431153
+      right_elbow_joint: -0.054893034990565186
+      right_wrist_roll_joint: 1.1511854555150902
+      right_wrist_pitch_joint: 0.3023595945590353
+      right_wrist_yaw_joint: 1.0798665950125916
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.399565
+    head_x_error_m: -0.0
+  - alpha: 0.869565
+    target_head_z_m: 1.270696
+    actual_head_z_m: 1.270696
+    actual_head_x_m: 0.407174
+    head_down_dot: 0.523261
+    head_axis_y: -0.0
+    hand_center_y_mm: -0.034
+    max_hand_grip_y_abs_mm: 2.412
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.373695
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8079552072951309
+      left_shoulder_roll_joint: 0.44832826919888213
+      left_shoulder_yaw_joint: -0.8108351327327711
+      left_elbow_joint: 0.2237144833097771
+      left_wrist_roll_joint: -1.5985247763427248
+      left_wrist_pitch_joint: 0.58373480926739
+      left_wrist_yaw_joint: -1.0529099733484615
+      right_shoulder_pitch_joint: -0.25365817082173436
+      right_shoulder_roll_joint: -0.4489105229509369
+      right_shoulder_yaw_joint: 1.0126943844351919
+      right_elbow_joint: -0.01995193738500497
+      right_wrist_roll_joint: 1.145650611446201
+      right_wrist_pitch_joint: 0.29241710374738134
+      right_wrist_yaw_joint: 1.1010071588013277
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.407174
+    head_x_error_m: -0.0
+  - alpha: 0.913043
+    target_head_z_m: 1.25713
+    actual_head_z_m: 1.25713
+    actual_head_x_m: 0.414783
+    head_down_dot: 0.542174
+    head_axis_y: 0.0
+    hand_center_y_mm: -0.001
+    max_hand_grip_y_abs_mm: 2.569
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.387489
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7921950402649338
+      left_shoulder_roll_joint: 0.43546080345883714
+      left_shoulder_yaw_joint: -0.8249209974771541
+      left_elbow_joint: 0.25648898561671774
+      left_wrist_roll_joint: -1.584731188715793
+      left_wrist_pitch_joint: 0.5730024380988944
+      left_wrist_yaw_joint: -1.0800677055063836
+      right_shoulder_pitch_joint: -0.2429940887529503
+      right_shoulder_roll_joint: -0.4377867240331313
+      right_shoulder_yaw_joint: 1.0219410746074127
+      right_elbow_joint: 0.015722131928976858
+      right_wrist_roll_joint: 1.1416294546289765
+      right_wrist_pitch_joint: 0.2836605237664738
+      right_wrist_yaw_joint: 1.1219764454992471
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.414783
+    head_x_error_m: -0.0
+  - alpha: 0.956522
+    target_head_z_m: 1.243565
+    actual_head_z_m: 1.243565
+    actual_head_x_m: 0.422391
+    head_down_dot: 0.561087
+    head_axis_y: 0.0
+    hand_center_y_mm: 0.038
+    max_hand_grip_y_abs_mm: 2.794
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.400278
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7785372957562146
+      left_shoulder_roll_joint: 0.4215182679247488
+      left_shoulder_yaw_joint: -0.8386660754590852
+      left_elbow_joint: 0.29287964813573625
+      left_wrist_roll_joint: -1.5719419013167173
+      left_wrist_pitch_joint: 0.5630955496684672
+      left_wrist_yaw_joint: -1.1082469648587492
+      right_shoulder_pitch_joint: -0.23358953474446276
+      right_shoulder_roll_joint: -0.42619697282818897
+      right_shoulder_yaw_joint: 1.0303358434182506
+      right_elbow_joint: 0.05194173647310761
+      right_wrist_roll_joint: 1.1390694553756557
+      right_wrist_pitch_joint: 0.27620506730620975
+      right_wrist_yaw_joint: 1.1427318710741907
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.422391
+    head_x_error_m: -0.0
+  - alpha: 1.0
+    target_head_z_m: 1.23
+    actual_head_z_m: 1.23
+    actual_head_x_m: 0.43
+    head_down_dot: 0.58
+    head_axis_y: 1.0e-06
+    hand_center_y_mm: 0.084
+    max_hand_grip_y_abs_mm: 3.028
+    loop_grip_mm: 5.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.412051
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7669788358082739
+      left_shoulder_roll_joint: 0.4064308926724798
+      left_shoulder_yaw_joint: -0.8520114800195526
+      left_elbow_joint: 0.33292115505103115
+      left_wrist_roll_joint: -1.5601687128560342
+      left_wrist_pitch_joint: 0.5540667230864118
+      left_wrist_yaw_joint: -1.1374721426325105
+      right_shoulder_pitch_joint: -0.2254218397785146
+      right_shoulder_roll_joint: -0.41422700828742737
+      right_shoulder_yaw_joint: 1.0379176923706466
+      right_elbow_joint: 0.08851255341225177
+      right_wrist_roll_joint: 1.1379196105598377
+      right_wrist_pitch_joint: 0.2701736267689161
+      right_wrist_yaw_joint: 1.163222947133111
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.43
+    head_x_error_m: -0.0
+  waist_pitch_bias_rad: 0.0
+standing_double_v2b:
+  memo: Standing double-hold v2b based on standing_double_v2; 0.15 m axial hand spacing; end lowered to 1.14 m first, then start raised to 1.58 m with hand grip points biased toward body center.
+  base_pose: standing_double_v2b_start
+  start_head_z_m: 1.58
+  end_head_z_m: 1.14
+  start_head_x_m: 0.255
+  end_head_x_m: 0.43
+  actual_head_z_amplitude_m: 0.44
+  duration_s: 4.0
+  left_grip_distance_m: 0.15
+  clamp_center_offset_m: 0.0
+  grip_roll_phase_deg: -120.0
+  validation:
+    passed: true
+    closed_loop_only: true
+    full_pose_locked: false
+    max_loop_grip_mm: 3.6e-05
+    max_loop_axis_error: 1.0e-08
+    max_loop_orientation_error: 5.0e-08
+    max_head_z_error_m: 0.0
+    max_head_x_error_m: 1.0e-06
+    max_head_axis_y_abs: 0.000117
+    max_hand_center_y_mm: 10.53
+    max_hand_grip_y_abs_mm: 24.524
+    min_arm_joint_margin_rad: 0.10149
+    max_neighbor_joint_step_rad: 0.10067
+    max_torso_contacts: 0
+  waypoints:
+  - alpha: 0.0
+    target_head_z_m: 1.58
+    actual_head_z_m: 1.58
+    actual_head_x_m: 0.255
+    head_down_dot: 0.145
+    head_axis_y: 1.5e-05
+    hand_center_y_mm: 10.53
+    max_hand_grip_y_abs_mm: 13.027
+    loop_grip_mm: 8.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.131286
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.6435692649432616
+      left_shoulder_roll_joint: 0.5851456783095871
+      left_shoulder_yaw_joint: -0.6065727065101317
+      left_elbow_joint: 0.5453519575240644
+      left_wrist_roll_joint: -1.8409338039252074
+      left_wrist_pitch_joint: 0.9403482107174012
+      left_wrist_yaw_joint: -0.97723301070019
+      right_shoulder_pitch_joint: -0.9469284502661065
+      right_shoulder_roll_joint: -0.4491650630766488
+      right_shoulder_yaw_joint: 0.49626731884819897
+      right_elbow_joint: -0.2306047643547472
+      right_wrist_roll_joint: 1.64098776703617
+      right_wrist_pitch_joint: 0.833903075434109
+      right_wrist_yaw_joint: 0.6417485123733305
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.255
+    head_x_error_m: 0.0
+  - alpha: 0.043478
+    target_head_z_m: 1.56087
+    actual_head_z_m: 1.56087
+    actual_head_x_m: 0.262609
+    head_down_dot: 0.163913
+    head_axis_y: -8.0e-06
+    hand_center_y_mm: 3.573
+    max_hand_grip_y_abs_mm: 3.774
+    loop_grip_mm: 8.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.108207
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.5902338568635275
+      left_shoulder_roll_joint: 0.5701178063699579
+      left_shoulder_yaw_joint: -0.6304011738347756
+      left_elbow_joint: 0.47115876570198256
+      left_wrist_roll_joint: -1.8640126179070409
+      left_wrist_pitch_joint: 0.9120195108713801
+      left_wrist_yaw_joint: -0.9299430151217326
+      right_shoulder_pitch_joint: -0.846258942215256
+      right_shoulder_roll_joint: -0.45606388146232
+      right_shoulder_yaw_joint: 0.5056356721626157
+      right_elbow_joint: -0.29124617629564153
+      right_wrist_roll_joint: 1.595296938762508
+      right_wrist_pitch_joint: 0.7922990608782732
+      right_wrist_yaw_joint: 0.6619317622780483
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.262609
+    head_x_error_m: 0.0
+  - alpha: 0.086957
+    target_head_z_m: 1.541739
+    actual_head_z_m: 1.541739
+    actual_head_x_m: 0.270217
+    head_down_dot: 0.182826
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: 0.111
+    max_hand_grip_y_abs_mm: 2.086
+    loop_grip_mm: 8.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.103474
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.5347068771060883
+      left_shoulder_roll_joint: 0.5587403805489967
+      left_shoulder_yaw_joint: -0.6426872008228057
+      left_elbow_joint: 0.40653517742860384
+      left_wrist_roll_joint: -1.868746205212132
+      left_wrist_pitch_joint: 0.897087071997546
+      left_wrist_yaw_joint: -0.8975282886121347
+      right_shoulder_pitch_joint: -0.7568749253675112
+      right_shoulder_roll_joint: -0.45032094703012165
+      right_shoulder_yaw_joint: 0.526429072050103
+      right_elbow_joint: -0.3320616854357577
+      right_wrist_roll_joint: 1.538732325556898
+      right_wrist_pitch_joint: 0.7467126683698633
+      right_wrist_yaw_joint: 0.6848567973595645
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.270217
+    head_x_error_m: 0.0
+  - alpha: 0.130435
+    target_head_z_m: 1.522609
+    actual_head_z_m: 1.522609
+    actual_head_x_m: 0.277826
+    head_down_dot: 0.201739
+    head_axis_y: -1.1e-05
+    hand_center_y_mm: -0.652
+    max_hand_grip_y_abs_mm: 3.975
+    loop_grip_mm: 8.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.10149
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.4717597885954332
+      left_shoulder_roll_joint: 0.5571217760815318
+      left_shoulder_yaw_joint: -0.6515507096368501
+      left_elbow_joint: 0.33968682481748336
+      left_wrist_roll_joint: -1.870730059891129
+      left_wrist_pitch_joint: 0.8785202847163276
+      left_wrist_yaw_joint: -0.8720979614944541
+      right_shoulder_pitch_joint: -0.680878175596643
+      right_shoulder_roll_joint: -0.4409079684584762
+      right_shoulder_yaw_joint: 0.5566441581665207
+      right_elbow_joint: -0.35556400169468616
+      right_wrist_roll_joint: 1.4794304910443956
+      right_wrist_pitch_joint: 0.7056270551916263
+      right_wrist_yaw_joint: 0.710426546942817
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.277826
+    head_x_error_m: 0.0
+  - alpha: 0.173913
+    target_head_z_m: 1.503478
+    actual_head_z_m: 1.503478
+    actual_head_x_m: 0.285435
+    head_down_dot: 0.220652
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: -0.751
+    max_hand_grip_y_abs_mm: 4.769
+    loop_grip_mm: 7.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.104634
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.4049818956101534
+      left_shoulder_roll_joint: 0.5576033345402496
+      left_shoulder_yaw_joint: -0.6595752844340952
+      left_elbow_joint: 0.2749953242726363
+      left_wrist_roll_joint: -1.8675855555575909
+      left_wrist_pitch_joint: 0.8545173303134664
+      left_wrist_yaw_joint: -0.8520306442294422
+      right_shoulder_pitch_joint: -0.6127496092345873
+      right_shoulder_roll_joint: -0.4348729123987728
+      right_shoulder_yaw_joint: 0.590634431365924
+      right_elbow_joint: -0.36779286152801555
+      right_wrist_roll_joint: 1.4208916019359226
+      right_wrist_pitch_joint: 0.6685400641646249
+      right_wrist_yaw_joint: 0.7408425943197581
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.285435
+    head_x_error_m: 0.0
+  - alpha: 0.217391
+    target_head_z_m: 1.484348
+    actual_head_z_m: 1.484348
+    actual_head_x_m: 0.293044
+    head_down_dot: 0.239565
+    head_axis_y: -9.0e-06
+    hand_center_y_mm: -0.691
+    max_hand_grip_y_abs_mm: 4.878
+    loop_grip_mm: 7.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.114052
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.3359263373403345
+      left_shoulder_roll_joint: 0.5580917067479525
+      left_shoulder_yaw_joint: -0.667915168849164
+      left_elbow_joint: 0.21451852332782098
+      left_wrist_roll_joint: -1.8581684017591835
+      left_wrist_pitch_joint: 0.8257237022044335
+      left_wrist_yaw_joint: -0.8377178558255417
+      right_shoulder_pitch_joint: -0.5508649587659961
+      right_shoulder_roll_joint: -0.43296165282231885
+      right_shoulder_yaw_joint: 0.626307555483304
+      right_elbow_joint: -0.3708499455293399
+      right_wrist_roll_joint: 1.3642860119150308
+      right_wrist_pitch_joint: 0.6342020761348307
+      right_wrist_yaw_joint: 0.7754860356428729
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.293043
+    head_x_error_m: 0.0
+  - alpha: 0.26087
+    target_head_z_m: 1.465217
+    actual_head_z_m: 1.465217
+    actual_head_x_m: 0.300652
+    head_down_dot: 0.258478
+    head_axis_y: -8.0e-06
+    hand_center_y_mm: -0.606
+    max_hand_grip_y_abs_mm: 4.551
+    loop_grip_mm: 6.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.130095
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2658372952654595
+      left_shoulder_roll_joint: 0.5578785008546019
+      left_shoulder_yaw_joint: -0.677334745553466
+      left_elbow_joint: 0.15985362011723028
+      left_wrist_roll_joint: -1.8421249047554487
+      left_wrist_pitch_joint: 0.7933787705974696
+      left_wrist_yaw_joint: -0.8297532900771646
+      right_shoulder_pitch_joint: -0.4946730571024496
+      right_shoulder_roll_joint: -0.43422054905698226
+      right_shoulder_yaw_joint: 0.6625673028199939
+      right_elbow_joint: -0.3656363907252524
+      right_wrist_roll_joint: 1.31008460018635
+      right_wrist_pitch_joint: 0.6014665325619619
+      right_wrist_yaw_joint: 0.8131967808734014
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.300652
+    head_x_error_m: 0.0
+  - alpha: 0.304348
+    target_head_z_m: 1.446087
+    actual_head_z_m: 1.446087
+    actual_head_x_m: 0.308261
+    head_down_dot: 0.277391
+    head_axis_y: -7.0e-06
+    hand_center_y_mm: -0.533
+    max_hand_grip_y_abs_mm: 3.936
+    loop_grip_mm: 5.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.152474
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.1959474214871308
+      left_shoulder_roll_joint: 0.5566519368377991
+      left_shoulder_yaw_joint: -0.6884180929944973
+      left_elbow_joint: 0.11240795902273752
+      left_wrist_roll_joint: -1.8197464226731885
+      left_wrist_pitch_joint: 0.7587490055098525
+      left_wrist_yaw_joint: -0.8284672571492419
+      right_shoulder_pitch_joint: -0.4438878355997038
+      right_shoulder_roll_joint: -0.4372470377989542
+      right_shoulder_yaw_joint: 0.6986497326842998
+      right_elbow_joint: -0.3526282587983692
+      right_wrist_roll_joint: 1.2585458684942996
+      right_wrist_pitch_joint: 0.5694278689399611
+      right_wrist_yaw_joint: 0.8528537406479583
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.308261
+    head_x_error_m: 0.0
+  - alpha: 0.347826
+    target_head_z_m: 1.426957
+    actual_head_z_m: 1.426957
+    actual_head_x_m: 0.31587
+    head_down_dot: 0.296304
+    head_axis_y: -6.0e-06
+    hand_center_y_mm: -0.48
+    max_hand_grip_y_abs_mm: 3.148
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.180399
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.1274289404092608
+      left_shoulder_roll_joint: 0.5542514858785709
+      left_shoulder_yaw_joint: -0.7015671763153477
+      left_elbow_joint: 0.07331577185665193
+      left_wrist_roll_joint: -1.791820745956236
+      left_wrist_pitch_joint: 0.7229023809573505
+      left_wrist_yaw_joint: -0.8338295034503337
+      right_shoulder_pitch_joint: -0.3982281633424997
+      right_shoulder_roll_joint: -0.4406202012829443
+      right_shoulder_yaw_joint: 0.7339526560390228
+      right_elbow_joint: -0.332147009662183
+      right_wrist_roll_joint: 1.2098570316968043
+      right_wrist_pitch_joint: 0.5374224334033066
+      right_wrist_yaw_joint: 0.8935393495574623
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.31587
+    head_x_error_m: 0.0
+  - alpha: 0.391304
+    target_head_z_m: 1.407826
+    actual_head_z_m: 1.407826
+    actual_head_x_m: 0.323478
+    head_down_dot: 0.315217
+    head_axis_y: -5.0e-06
+    hand_center_y_mm: -0.446
+    max_hand_grip_y_abs_mm: 2.27
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.212773
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.0612883995344728
+      left_shoulder_roll_joint: 0.5505857679972603
+      left_shoulder_yaw_joint: -0.7169670354659198
+      left_elbow_joint: 0.043354560277688345
+      left_wrist_roll_joint: -1.759446948539671
+      left_wrist_pitch_joint: 0.6866171415954072
+      left_wrist_yaw_joint: -0.8454923762716999
+      right_shoulder_pitch_joint: -0.3573567623867652
+      right_shoulder_roll_joint: -0.443099775077914
+      right_shoulder_yaw_joint: 0.7679909957136536
+      right_elbow_joint: -0.30446285105644477
+      right_wrist_roll_joint: 1.1641722488199575
+      right_wrist_pitch_joint: 0.505010309801579
+      right_wrist_yaw_joint: 0.9345886837318955
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.323478
+    head_x_error_m: -0.0
+  - alpha: 0.434783
+    target_head_z_m: 1.388696
+    actual_head_z_m: 1.388696
+    actual_head_x_m: 0.331087
+    head_down_dot: 0.33413
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.428
+    max_hand_grip_y_abs_mm: 1.367
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.248366
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9982964444311103
+      left_shoulder_roll_joint: 0.5455843450930135
+      left_shoulder_yaw_joint: -0.734576516781476
+      left_elbow_joint: 0.02294146491099493
+      left_wrist_roll_joint: -1.7238541157689513
+      left_wrist_pitch_joint: 0.6503764889848517
+      left_wrist_yaw_joint: -0.8628909752116484
+      right_shoulder_pitch_joint: -0.3209028358421763
+      right_shoulder_roll_joint: -0.4437182185672771
+      right_shoulder_yaw_joint: 0.8003813043676747
+      right_elbow_joint: -0.269832835487919
+      right_wrist_roll_joint: 1.121619785610786
+      right_wrist_pitch_joint: 0.47195325747972106
+      right_wrist_yaw_joint: 0.9755854779087171
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.331087
+    head_x_error_m: -0.0
+  - alpha: 0.478261
+    target_head_z_m: 1.369565
+    actual_head_z_m: 1.369565
+    actual_head_x_m: 0.338696
+    head_down_dot: 0.353043
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.419
+    max_hand_grip_y_abs_mm: 0.475
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.285958
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9389736334379901
+      left_shoulder_roll_joint: 0.5391636670968939
+      left_shoulder_yaw_joint: -0.7541545589145299
+      left_elbow_joint: 0.012196969392179033
+      left_wrist_roll_joint: -1.6862616508624266
+      left_wrist_pitch_joint: 0.6144198326026274
+      left_wrist_yaw_joint: -0.8853540431219493
+      right_shoulder_pitch_joint: -0.2885083202567923
+      right_shoulder_roll_joint: -0.44179734606957255
+      right_shoulder_yaw_joint: 0.8308328852694905
+      right_elbow_joint: -0.22851107974931428
+      right_wrist_roll_joint: 1.0822968131034423
+      right_wrist_pitch_joint: 0.43818428994755687
+      right_wrist_yaw_joint: 1.0163269746352723
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.338696
+    head_x_error_m: -0.0
+  - alpha: 0.521739
+    target_head_z_m: 1.350435
+    actual_head_z_m: 1.350435
+    actual_head_x_m: 0.346304
+    head_down_dot: 0.371957
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.415
+    max_hand_grip_y_abs_mm: 1.215
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.324427
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8836199345327005
+      left_shoulder_roll_joint: 0.5312078918268966
+      left_shoulder_yaw_joint: -0.7753101063401234
+      left_elbow_joint: 0.011037178987734165
+      left_wrist_roll_joint: -1.647793090221562
+      left_wrist_pitch_joint: 0.5788194654467222
+      left_wrist_yaw_joint: -0.9121986593183358
+      right_shoulder_pitch_joint: -0.2598647642299908
+      right_shoulder_roll_joint: -0.43691375525792137
+      right_shoulder_yaw_joint: 0.8591408687029014
+      right_elbow_joint: -0.1807451725471636
+      right_wrist_roll_joint: 1.0462579692287328
+      right_wrist_pitch_joint: 0.4037667533590656
+      right_wrist_yaw_joint: 1.0567759615207775
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.346304
+    head_x_error_m: -0.0
+  - alpha: 0.565217
+    target_head_z_m: 1.331304
+    actual_head_z_m: 1.331304
+    actual_head_x_m: 0.353913
+    head_down_dot: 0.39087
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.413
+    max_hand_grip_y_abs_mm: 2.033
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.362786
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8323644723690578
+      left_shoulder_roll_joint: 0.5215637233961105
+      left_shoulder_yaw_joint: -0.7975587642374599
+      left_elbow_joint: 0.0192622481444152
+      left_wrist_roll_joint: -1.6094343168327816
+      left_wrist_pitch_joint: 0.5435555156220558
+      left_wrist_yaw_joint: -0.9427980043950468
+      right_shoulder_pitch_joint: -0.2347309084806278
+      right_shoulder_roll_joint: -0.42883956816255325
+      right_shoulder_yaw_joint: 0.8851792886462473
+      right_elbow_joint: -0.12676373317670908
+      right_wrist_roll_joint: 1.013503750424502
+      right_wrist_pitch_joint: 0.3688474912469298
+      right_wrist_yaw_joint: 1.0970144163150806
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.353913
+    head_x_error_m: -0.0
+  - alpha: 0.608696
+    target_head_z_m: 1.312174
+    actual_head_z_m: 1.312174
+    actual_head_x_m: 0.361522
+    head_down_dot: 0.409783
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.411
+    max_hand_grip_y_abs_mm: 2.818
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.4002
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7852164175138183
+      left_shoulder_roll_joint: 0.5100449318127281
+      left_shoulder_yaw_joint: -0.8203738138333675
+      left_elbow_joint: 0.03662604720486789
+      left_wrist_roll_joint: -1.5720201881001887
+      left_wrist_pitch_joint: 0.5085725535005442
+      left_wrist_yaw_joint: -0.9766231932858334
+      right_shoulder_pitch_joint: -0.2129353112243436
+      right_shoulder_roll_joint: -0.41747935559369065
+      right_shoulder_yaw_joint: 0.9088922069903538
+      right_elbow_joint: -0.06675751183812599
+      right_wrist_roll_joint: 0.9839738134784107
+      right_wrist_pitch_joint: 0.33361241060047186
+      right_wrist_yaw_joint: 1.1372066357489994
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.361522
+    head_x_error_m: -0.0
+  - alpha: 0.652174
+    target_head_z_m: 1.293043
+    actual_head_z_m: 1.293044
+    actual_head_x_m: 0.36913
+    head_down_dot: 0.428696
+    head_axis_y: -5.0e-06
+    hand_center_y_mm: -0.408
+    max_hand_grip_y_abs_mm: 3.58
+    loop_grip_mm: 4.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.435983
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7421068583612143
+      left_shoulder_roll_joint: 0.4964408322628005
+      left_shoulder_yaw_joint: -0.843224885850144
+      left_elbow_joint: 0.06288648127406939
+      left_wrist_roll_joint: -1.5362366417438515
+      left_wrist_pitch_joint: 0.47381199082685455
+      left_wrist_yaw_joint: -1.0132654646189385
+      right_shoulder_pitch_joint: -0.1943732843726086
+      right_shoulder_roll_joint: -0.40281552395081643
+      right_shoulder_yaw_joint: 0.9302823951122835
+      right_elbow_joint: -0.0008564216881973726
+      right_wrist_roll_joint: 0.9575473227448259
+      right_wrist_pitch_joint: 0.2982517732903862
+      right_wrist_yaw_joint: 1.1775741377079907
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.36913
+    head_x_error_m: -0.0
+  - alpha: 0.695652
+    target_head_z_m: 1.273913
+    actual_head_z_m: 1.273913
+    actual_head_x_m: 0.376739
+    head_down_dot: 0.447609
+    head_axis_y: -6.0e-06
+    hand_center_y_mm: -0.406
+    max_hand_grip_y_abs_mm: 4.336
+    loop_grip_mm: 5.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.396049
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7029189791779651
+      left_shoulder_roll_joint: 0.48052395401570075
+      left_shoulder_yaw_joint: -0.8656015642572603
+      left_elbow_joint: 0.09784287833066262
+      left_wrist_roll_joint: -1.5026316029480022
+      left_wrist_pitch_joint: 0.43922172345912486
+      left_wrist_yaw_joint: -1.052446137277267
+      right_shoulder_pitch_joint: -0.1790063342020639
+      right_shoulder_roll_joint: -0.3848666214135192
+      right_shoulder_yaw_joint: 0.9493990013523551
+      right_elbow_joint: 0.07089543000138593
+      right_wrist_roll_joint: 0.9340489330161101
+      right_wrist_pitch_joint: 0.2629391752574518
+      right_wrist_yaw_joint: 1.2183814458592
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.376739
+    head_x_error_m: -0.0
+  - alpha: 0.73913
+    target_head_z_m: 1.254783
+    actual_head_z_m: 1.254783
+    actual_head_x_m: 0.384348
+    head_down_dot: 0.466522
+    head_axis_y: -7.0e-06
+    hand_center_y_mm: -0.407
+    max_hand_grip_y_abs_mm: 5.109
+    loop_grip_mm: 6.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.354499
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6675084256467124
+      left_shoulder_roll_joint: 0.46205357360655275
+      left_shoulder_yaw_joint: -0.8870212674160034
+      left_elbow_joint: 0.14136866767515946
+      left_wrist_roll_joint: -1.4716330945051643
+      left_wrist_pitch_joint: 0.4047479763100846
+      left_wrist_yaw_joint: -1.0940209802385683
+      right_shoulder_pitch_joint: -0.16686919208197662
+      right_shoulder_roll_joint: -0.3636580013051511
+      right_shoulder_yaw_joint: 0.9663264922353055
+      right_elbow_joint: 0.1485659265647371
+      right_wrist_roll_joint: 0.9132565748482362
+      right_wrist_pitch_joint: 0.22782486607657
+      right_wrist_yaw_joint: 1.259931077152882
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.384348
+    head_x_error_m: -0.0
+  - alpha: 0.782609
+    target_head_z_m: 1.235652
+    actual_head_z_m: 1.235652
+    actual_head_x_m: 0.391956
+    head_down_dot: 0.485435
+    head_axis_y: -8.0e-06
+    hand_center_y_mm: -0.414
+    max_hand_grip_y_abs_mm: 5.929
+    loop_grip_mm: 6.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.311864
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6357170779769894
+      left_shoulder_roll_joint: 0.44077275194050747
+      left_shoulder_yaw_joint: -0.9070204073484642
+      left_elbow_joint: 0.19344702738116745
+      left_wrist_roll_joint: -1.4435756615368158
+      left_wrist_pitch_joint: 0.37031463289895
+      left_wrist_yaw_joint: -1.1379847483849526
+      right_shoulder_pitch_joint: -0.1580881804212102
+      right_shoulder_roll_joint: -0.3392027949800558
+      right_shoulder_yaw_joint: 0.9811777387647529
+      right_elbow_joint: 0.23236298045416146
+      right_wrist_roll_joint: 0.8949069026912945
+      right_wrist_pitch_joint: 0.19304290463171508
+      right_wrist_yaw_joint: 1.3025663510847951
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.391957
+    head_x_error_m: -0.0
+  - alpha: 0.826087
+    target_head_z_m: 1.216522
+    actual_head_z_m: 1.216522
+    actual_head_x_m: 0.399565
+    head_down_dot: 0.504348
+    head_axis_y: -1.0e-05
+    hand_center_y_mm: -0.429
+    max_hand_grip_y_abs_mm: 6.837
+    loop_grip_mm: 7.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.267749
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6073840148784244
+      left_shoulder_roll_joint: 0.4163973293539448
+      left_shoulder_yaw_joint: -0.925126486343071
+      left_elbow_joint: 0.2542171266211773
+      left_wrist_roll_joint: -1.4187388763054956
+      left_wrist_pitch_joint: 0.33579307884526644
+      left_wrist_yaw_joint: -1.184481776774574
+      right_shoulder_pitch_joint: -0.1529157920834753
+      right_shoulder_roll_joint: -0.3114915993704755
+      right_shoulder_yaw_joint: 0.9940947421833398
+      right_elbow_joint: 0.3226657683964322
+      right_wrist_roll_joint: 0.8786944022517673
+      right_wrist_pitch_joint: 0.15873381096487646
+      right_wrist_yaw_joint: 1.3466813625032845
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.399565
+    head_x_error_m: -0.0
+  - alpha: 0.869565
+    target_head_z_m: 1.197391
+    actual_head_z_m: 1.197391
+    actual_head_x_m: 0.407174
+    head_down_dot: 0.523261
+    head_axis_y: -1.4e-05
+    hand_center_y_mm: -0.459
+    max_hand_grip_y_abs_mm: 7.893
+    loop_grip_mm: 8.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.221692
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5823585204969343
+      left_shoulder_roll_joint: 0.3885946160151164
+      left_shoulder_yaw_joint: -0.9408040165030477
+      left_elbow_joint: 0.3240413600961536
+      left_wrist_roll_joint: -1.3974051220933963
+      left_wrist_pitch_joint: 0.3009637381815715
+      left_wrist_yaw_joint: -1.2338303907407275
+      right_shoulder_pitch_joint: -0.15179046676119795
+      right_shoulder_roll_joint: -0.2804914470574553
+      right_shoulder_yaw_joint: 1.0052621565035973
+      right_elbow_joint: 0.4200590827307048
+      right_wrist_roll_joint: 0.8642593218247314
+      right_wrist_pitch_joint: 0.12509080210815954
+      right_wrist_yaw_joint: 1.3927383224955747
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.407174
+    head_x_error_m: -0.0
+  - alpha: 0.913043
+    target_head_z_m: 1.178261
+    actual_head_z_m: 1.178261
+    actual_head_x_m: 0.414782
+    head_down_dot: 0.542174
+    head_axis_y: -2.3e-05
+    hand_center_y_mm: -1.92
+    max_hand_grip_y_abs_mm: 11.57
+    loop_grip_mm: 1.0e-05
+    loop_axis_error: 0.0
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.175398
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5561821281747799
+      left_shoulder_roll_joint: 0.3527882219213208
+      left_shoulder_yaw_joint: -0.9488583725725294
+      left_elbow_joint: 0.4042693271764224
+      left_wrist_roll_joint: -1.3822213773866499
+      left_wrist_pitch_joint: 0.25748522699753035
+      left_wrist_yaw_joint: -1.2842259901843163
+      right_shoulder_pitch_joint: -0.16359128303375917
+      right_shoulder_roll_joint: -0.26176962338692344
+      right_shoulder_yaw_joint: 1.0251551946025375
+      right_elbow_joint: 0.5133569802354837
+      right_wrist_roll_joint: 0.8592969657069122
+      right_wrist_pitch_joint: 0.10123563340169345
+      right_wrist_yaw_joint: 1.439032476182934
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.414783
+    head_x_error_m: -0.0
+  - alpha: 0.956522
+    target_head_z_m: 1.15913
+    actual_head_z_m: 1.159131
+    actual_head_x_m: 0.422391
+    head_down_dot: 0.561087
+    head_axis_y: -4.8e-05
+    hand_center_y_mm: -5.375
+    max_hand_grip_y_abs_mm: 19.319
+    loop_grip_mm: 1.2e-05
+    loop_axis_error: 0.0
+    loop_orientation_error: 2.0e-08
+    min_joint_margin_rad: 0.131309
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5278195595839165
+      left_shoulder_roll_joint: 0.30693305297421003
+      left_shoulder_yaw_joint: -0.9430649457205426
+      left_elbow_joint: 0.49694551950122795
+      left_wrist_roll_joint: -1.3782020191781459
+      left_wrist_pitch_joint: 0.20131441782724915
+      left_wrist_yaw_joint: -1.3365791205009716
+      right_shoulder_pitch_joint: -0.1967346815701297
+      right_shoulder_roll_joint: -0.2654790487632866
+      right_shoulder_yaw_joint: 1.0640392296403147
+      right_elbow_joint: 0.5904255367587141
+      right_wrist_roll_joint: 0.8686188553851373
+      right_wrist_pitch_joint: 0.09899250008918234
+      right_wrist_yaw_joint: 1.4831206244102797
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.422391
+    head_x_error_m: -0.0
+  - alpha: 1.0
+    target_head_z_m: 1.14
+    actual_head_z_m: 1.14
+    actual_head_x_m: 0.429999
+    head_down_dot: 0.58
+    head_axis_y: -0.000117
+    hand_center_y_mm: -2.218
+    max_hand_grip_y_abs_mm: 24.524
+    loop_grip_mm: 3.6e-05
+    loop_axis_error: 1.0e-08
+    loop_orientation_error: 5.0e-08
+    min_joint_margin_rad: 0.107031
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5072615601281515
+      left_shoulder_roll_joint: 0.297481983340935
+      left_shoulder_yaw_joint: -0.9511507246342572
+      left_elbow_joint: 0.584696411153286
+      left_wrist_roll_joint: -1.4521551660776266
+      left_wrist_pitch_joint: 0.10911732701099444
+      left_wrist_yaw_joint: -1.4044467001322083
+      right_shoulder_pitch_joint: -0.28183680700075
+      right_shoulder_roll_joint: -0.27494100617860784
+      right_shoulder_yaw_joint: 1.136837790631335
+      right_elbow_joint: 0.6422672211000958
+      right_wrist_roll_joint: 0.8926183673356529
+      right_wrist_pitch_joint: 0.15817950508749667
+      right_wrist_yaw_joint: 1.5073993863738253
+      waist_pitch_joint: 0.0
+    target_head_x_m: 0.43
+    head_x_error_m: -1.0e-06
+  waist_pitch_bias_rad: 0.0
+knee_double_v1b:
+  memo: Kneeling double-hold v1b based on stable knee_double_v1; 0.15 m axial hand spacing; end lowered to 0.56 m, start raised to 0.95 m, with stronger per-hand y-centering objective.
+  base_pose: knee_double_v1b_start
+  start_head_z_m: 0.95
+  end_head_z_m: 0.56
+  start_head_x_m: null
+  end_head_x_m: null
+  actual_head_z_amplitude_m: 0.389999
+  duration_s: 4.0
+  left_grip_distance_m: 0.15
+  clamp_center_offset_m: 0.0
+  grip_roll_phase_deg: -120.0
+  validation:
+    passed: true
+    closed_loop_only: true
+    full_pose_locked: false
+    max_loop_grip_mm: 2.7e-05
+    max_loop_axis_error: 2.0e-08
+    max_loop_orientation_error: 1.0e-08
+    max_head_z_error_m: 1.0e-06
+    max_head_x_error_m: 0.0
+    max_head_axis_y_abs: 7.9e-05
+    max_hand_center_y_mm: 3.65
+    max_hand_grip_y_abs_mm: 4.69
+    min_arm_joint_margin_rad: 0.135454
+    max_neighbor_joint_step_rad: 0.053603
+    max_torso_contacts: 0
+  waypoints:
+  - alpha: 0.0
+    target_head_z_m: 0.95
+    actual_head_z_m: 0.949999
+    actual_head_x_m: 0.492095
+    head_down_dot: 0.5
+    head_axis_y: 7.9e-05
+    hand_center_y_mm: 3.65
+    max_hand_grip_y_abs_mm: 4.69
+    loop_grip_mm: 2.7e-05
+    loop_axis_error: 2.0e-08
+    loop_orientation_error: 1.0e-08
+    min_joint_margin_rad: 0.135454
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.462399675028861
+      left_shoulder_roll_joint: 0.5189294092135149
+      left_shoulder_yaw_joint: -0.4411657102430808
+      left_elbow_joint: 0.29527523591274446
+      left_wrist_roll_joint: -1.8367660346999621
+      left_wrist_pitch_joint: 0.9959425282144839
+      left_wrist_yaw_joint: -0.753979786677469
+      right_shoulder_pitch_joint: -0.7254122972932693
+      right_shoulder_roll_joint: -0.3696938845351116
+      right_shoulder_yaw_joint: 0.4397828940749428
+      right_elbow_joint: -0.39336860005434876
+      right_wrist_roll_joint: 1.4992817780229462
+      right_wrist_pitch_joint: 0.8651866347335117
+      right_wrist_yaw_joint: 0.6320331948077924
+      waist_pitch_joint: -0.08
+  - alpha: 0.043478
+    target_head_z_m: 0.933043
+    actual_head_z_m: 0.933044
+    actual_head_x_m: 0.497838
+    head_down_dot: 0.515217
+    head_axis_y: -7.0e-06
+    hand_center_y_mm: 0.307
+    max_hand_grip_y_abs_mm: 0.722
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.154604
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.4113765402793823
+      left_shoulder_roll_joint: 0.503831051559788
+      left_shoulder_yaw_joint: -0.4530301525969885
+      left_elbow_joint: 0.2672974589744867
+      left_wrist_roll_joint: -1.8176159811895076
+      left_wrist_pitch_joint: 0.963257461240192
+      left_wrist_yaw_joint: -0.7577185004017528
+      right_shoulder_pitch_joint: -0.6788862223633526
+      right_shoulder_roll_joint: -0.38889376322417973
+      right_shoulder_yaw_joint: 0.45571179461200645
+      right_elbow_joint: -0.39365443776532344
+      right_wrist_roll_joint: 1.4590392650898927
+      right_wrist_pitch_joint: 0.8534524720832914
+      right_wrist_yaw_joint: 0.6856359143218816
+      waist_pitch_joint: -0.08
+  - alpha: 0.086957
+    target_head_z_m: 0.916087
+    actual_head_z_m: 0.916087
+    actual_head_x_m: 0.502891
+    head_down_dot: 0.530435
+    head_axis_y: -7.0e-06
+    hand_center_y_mm: -0.027
+    max_hand_grip_y_abs_mm: 0.097
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.174356
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.3587500577631726
+      left_shoulder_roll_joint: 0.4980164885960131
+      left_shoulder_yaw_joint: -0.4616184124984473
+      left_elbow_joint: 0.23907436180894462
+      left_wrist_roll_joint: -1.7978642489809284
+      left_wrist_pitch_joint: 0.9408483816491591
+      left_wrist_yaw_joint: -0.7682082979295658
+      right_shoulder_pitch_joint: -0.6375864983461682
+      right_shoulder_roll_joint: -0.3935848913233242
+      right_shoulder_yaw_joint: 0.4810203049087485
+      right_elbow_joint: -0.38642000919004266
+      right_wrist_roll_joint: 1.4117250383829358
+      right_wrist_pitch_joint: 0.8330266066260581
+      right_wrist_yaw_joint: 0.7308019394231163
+      waist_pitch_joint: -0.08
+  - alpha: 0.130435
+    target_head_z_m: 0.89913
+    actual_head_z_m: 0.899131
+    actual_head_x_m: 0.50741
+    head_down_dot: 0.545652
+    head_axis_y: -6.0e-06
+    hand_center_y_mm: -0.056
+    max_hand_grip_y_abs_mm: 0.163
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.194699
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.308398703065003
+      left_shoulder_roll_joint: 0.4930578781202894
+      left_shoulder_yaw_joint: -0.471758505081489
+      left_elbow_joint: 0.21401230141715533
+      left_wrist_roll_joint: -1.7775211815125918
+      left_wrist_pitch_joint: 0.9208685295678564
+      left_wrist_yaw_joint: -0.7806243299290542
+      right_shoulder_pitch_joint: -0.5971981030502663
+      right_shoulder_roll_joint: -0.39565804119431225
+      right_shoulder_yaw_joint: 0.5077396325238693
+      right_elbow_joint: -0.3770308128915707
+      right_wrist_roll_joint: 1.365254875756742
+      right_wrist_pitch_joint: 0.8087983456366752
+      right_wrist_yaw_joint: 0.772383802839354
+      waist_pitch_joint: -0.08
+  - alpha: 0.173913
+    target_head_z_m: 0.882174
+    actual_head_z_m: 0.882174
+    actual_head_x_m: 0.51148
+    head_down_dot: 0.56087
+    head_axis_y: -5.0e-06
+    hand_center_y_mm: -0.059
+    max_hand_grip_y_abs_mm: 0.259
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.215806
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2600320297876275
+      left_shoulder_roll_joint: 0.48803585823486617
+      left_shoulder_yaw_joint: -0.48331816032380226
+      left_elbow_joint: 0.19207093871272185
+      left_wrist_roll_joint: -1.7564143287908227
+      left_wrist_pitch_joint: 0.9018753715623561
+      left_wrist_yaw_joint: -0.7942862442118316
+      right_shoulder_pitch_joint: -0.5578324615154633
+      right_shoulder_roll_joint: -0.3968099006823994
+      right_shoulder_yaw_joint: 0.5347487057587914
+      right_elbow_joint: -0.36550272684849805
+      right_wrist_roll_joint: 1.320775486749766
+      right_wrist_pitch_joint: 0.7822788241079204
+      right_wrist_yaw_joint: 0.8114727024994494
+      waist_pitch_joint: -0.08
+  - alpha: 0.217391
+    target_head_z_m: 0.865217
+    actual_head_z_m: 0.865217
+    actual_head_x_m: 0.515145
+    head_down_dot: 0.576087
+    head_axis_y: -5.0e-06
+    hand_center_y_mm: -0.061
+    max_hand_grip_y_abs_mm: 0.312
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.237562
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.2132858701270328
+      left_shoulder_roll_joint: 0.482917374883424
+      left_shoulder_yaw_joint: -0.49603152001044387
+      left_elbow_joint: 0.17299963058362672
+      left_wrist_roll_joint: -1.7346579412575245
+      left_wrist_pitch_joint: 0.8833309875207016
+      left_wrist_yaw_joint: -0.8089665493465071
+      right_shoulder_pitch_joint: -0.5197582863509341
+      right_shoulder_roll_joint: -0.3973379844481935
+      right_shoulder_yaw_joint: 0.5616643904198511
+      right_elbow_joint: -0.3516820056827129
+      right_wrist_roll_joint: 1.2786403196652056
+      right_wrist_pitch_joint: 0.7542985881574655
+      right_wrist_yaw_joint: 0.848380609388439
+      waist_pitch_joint: -0.08
+  - alpha: 0.26087
+    target_head_z_m: 0.848261
+    actual_head_z_m: 0.848261
+    actual_head_x_m: 0.518428
+    head_down_dot: 0.591304
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.062
+    max_hand_grip_y_abs_mm: 0.347
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.259803
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.1679526382264986
+      left_shoulder_roll_joint: 0.47771898594706386
+      left_shoulder_yaw_joint: -0.5097204076867361
+      left_elbow_joint: 0.1566144512635747
+      left_wrist_roll_joint: -1.7124166310358682
+      left_wrist_pitch_joint: 0.8649894713287763
+      left_wrist_yaw_joint: -0.8244849410390779
+      right_shoulder_pitch_joint: -0.4830621458098153
+      right_shoulder_roll_joint: -0.39728083805979597
+      right_shoulder_yaw_joint: 0.588227205350211
+      right_elbow_joint: -0.33558201446952207
+      right_wrist_roll_joint: 1.2389723443085272
+      right_wrist_pitch_joint: 0.7253789680103844
+      right_wrist_yaw_joint: 0.8832753970224516
+      waist_pitch_joint: -0.08
+  - alpha: 0.304348
+    target_head_z_m: 0.831304
+    actual_head_z_m: 0.831304
+    actual_head_x_m: 0.521341
+    head_down_dot: 0.606522
+    head_axis_y: -4.0e-06
+    hand_center_y_mm: -0.063
+    max_hand_grip_y_abs_mm: 0.372
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.282357
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.123908427954793
+      left_shoulder_roll_joint: 0.4724501874341799
+      left_shoulder_yaw_joint: -0.5242546845335135
+      left_elbow_joint: 0.14277302401153114
+      left_wrist_roll_joint: -1.689863326068164
+      left_wrist_pitch_joint: 0.846730709126968
+      left_wrist_yaw_joint: -0.8406760444988429
+      right_shoulder_pitch_joint: -0.4477276240825304
+      right_shoulder_roll_joint: -0.39661185116561554
+      right_shoulder_yaw_joint: 0.6142421888792163
+      right_elbow_joint: -0.31730934880081735
+      right_wrist_roll_joint: 1.201789592439395
+      right_wrist_pitch_joint: 0.695882505463596
+      right_wrist_yaw_joint: 0.9162893936626532
+      waist_pitch_joint: -0.08
+  - alpha: 0.347826
+    target_head_z_m: 0.814348
+    actual_head_z_m: 0.814348
+    actual_head_x_m: 0.523887
+    head_down_dot: 0.621739
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.065
+    max_hand_grip_y_abs_mm: 0.391
+    loop_grip_mm: 3.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.305055
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.0810693318321825
+      left_shoulder_roll_joint: 0.4671124802226266
+      left_shoulder_yaw_joint: -0.5395252551998223
+      left_elbow_joint: 0.1313555873656778
+      left_wrist_roll_joint: -1.6671653041859844
+      left_wrist_pitch_joint: 0.8284960985967373
+      left_wrist_yaw_joint: -0.8573891946178601
+      right_shoulder_pitch_joint: -0.4136910025063372
+      right_shoulder_roll_joint: -0.39529574979089604
+      right_shoulder_yaw_joint: 0.6395643557475529
+      right_elbow_joint: -0.2970129544515066
+      right_wrist_roll_joint: 1.1670559209080582
+      right_wrist_pitch_joint: 0.6660815193967284
+      right_wrist_yaw_joint: 0.9475463264626863
+      waist_pitch_joint: -0.08
+  - alpha: 0.391304
+    target_head_z_m: 0.797391
+    actual_head_z_m: 0.797391
+    actual_head_x_m: 0.526072
+    head_down_dot: 0.636957
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.066
+    max_hand_grip_y_abs_mm: 0.408
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.327741
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -1.0393723678955498
+      left_shoulder_roll_joint: 0.4617011699912211
+      left_shoulder_yaw_joint: -0.5554322797115748
+      left_elbow_joint: 0.12225754623490818
+      left_wrist_roll_joint: -1.644478957328649
+      left_wrist_pitch_joint: 0.8102613832465324
+      left_wrist_yaw_joint: -0.8744901443879348
+      right_shoulder_pitch_joint: -0.3808691752052513
+      right_shoulder_roll_joint: -0.39330740620572496
+      right_shoulder_yaw_joint: 0.6640893181683164
+      right_elbow_joint: -0.27485895264001076
+      right_wrist_roll_joint: 1.1347064680640873
+      right_wrist_pitch_joint: 0.6361913621089416
+      right_wrist_yaw_joint: 0.9771670980754223
+      waist_pitch_joint: -0.08
+  - alpha: 0.434783
+    target_head_z_m: 0.780435
+    actual_head_z_m: 0.780435
+    actual_head_x_m: 0.527899
+    head_down_dot: 0.652174
+    head_axis_y: -3.0e-06
+    hand_center_y_mm: -0.067
+    max_hand_grip_y_abs_mm: 0.423
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.350271
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9987677396607257
+      left_shoulder_roll_joint: 0.45620677549359767
+      left_shoulder_yaw_joint: -0.571880464770314
+      left_elbow_joint: 0.11538668557265609
+      left_wrist_roll_joint: -1.621948615288152
+      left_wrist_pitch_joint: 0.7920248943564352
+      left_wrist_yaw_joint: -0.8918616682232026
+      right_shoulder_pitch_joint: -0.34917323717241533
+      right_shoulder_roll_joint: -0.39063660171090914
+      right_shoulder_yaw_joint: 0.6877453099032471
+      right_elbow_joint: -0.25101866357554403
+      right_wrist_roll_joint: 1.1046619629173282
+      right_wrist_pitch_joint: 0.606388563264884
+      right_wrist_yaw_joint: 1.005268907596841
+      waist_pitch_joint: -0.08
+  - alpha: 0.478261
+    target_head_z_m: 0.763478
+    actual_head_z_m: 0.763478
+    actual_head_x_m: 0.529371
+    head_down_dot: 0.667391
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.068
+    max_hand_grip_y_abs_mm: 0.436
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.372513
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9592158225485454
+      left_shoulder_roll_joint: 0.4506161692259537
+      left_shoulder_yaw_joint: -0.5887771888368062
+      left_elbow_joint: 0.11066179487306399
+      left_wrist_roll_joint: -1.5997074169451728
+      left_wrist_pitch_joint: 0.773802235391183
+      left_wrist_yaw_joint: -0.9094030122571349
+      right_shoulder_pitch_joint: -0.3185153064618642
+      right_shoulder_roll_joint: -0.3872876781815937
+      right_shoulder_yaw_joint: 0.7104861677226199
+      right_elbow_joint: -0.22566337887162752
+      right_wrist_roll_joint: 1.0768377187611249
+      right_wrist_pitch_joint: 0.5768225972816478
+      right_wrist_yaw_joint: 1.0319626300339753
+      waist_pitch_joint: -0.08
+  - alpha: 0.521739
+    target_head_z_m: 0.746522
+    actual_head_z_m: 0.746522
+    actual_head_x_m: 0.530493
+    head_down_dot: 0.682609
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.069
+    max_hand_grip_y_abs_mm: 0.45
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.394341
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.9206861139423083
+      left_shoulder_roll_joint: 0.44491352209300844
+      left_shoulder_yaw_joint: -0.6060316306887287
+      left_elbow_joint: 0.10801148725048179
+      left_wrist_roll_joint: -1.5778792057823496
+      left_wrist_pitch_joint: 0.7556239155209175
+      left_wrist_yaw_joint: -0.9270284271114606
+      right_shoulder_pitch_joint: -0.2888119582278356
+      right_shoulder_roll_joint: -0.38327772643670455
+      right_shoulder_yaw_joint: 0.7322852722839185
+      right_elbow_joint: -0.1989630718797711
+      right_wrist_roll_joint: 1.0511498085489999
+      right_wrist_pitch_joint: 0.5476247378264176
+      right_wrist_yaw_joint: 1.0573500522754657
+      waist_pitch_joint: -0.08
+  - alpha: 0.565217
+    target_head_z_m: 0.729565
+    actual_head_z_m: 0.729565
+    actual_head_x_m: 0.53127
+    head_down_dot: 0.697826
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.07
+    max_hand_grip_y_abs_mm: 0.462
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.415639
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8831569738686043
+      left_shoulder_roll_joint: 0.4390811548316168
+      left_shoulder_yaw_joint: -0.6235541674798909
+      left_elbow_joint: 0.10737281773020521
+      left_wrist_roll_joint: -1.5565809483985433
+      left_wrist_pitch_joint: 0.7375344053724009
+      left_wrist_yaw_joint: -0.9446650979659
+      right_shoulder_pitch_joint: -0.25998588972670084
+      right_shoulder_roll_joint: -0.37863478334275824
+      right_shoulder_yaw_joint: 0.7531303576818859
+      right_elbow_joint: -0.17108772015518012
+      right_wrist_roll_joint: 1.0275195259497114
+      right_wrist_pitch_joint: 0.5189156945625476
+      right_wrist_yaw_joint: 1.081521424715126
+      waist_pitch_joint: -0.08
+  - alpha: 0.608696
+    target_head_z_m: 0.712609
+    actual_head_z_m: 0.712609
+    actual_head_x_m: 0.531711
+    head_down_dot: 0.713043
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.069
+    max_hand_grip_y_abs_mm: 0.474
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.436295
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8466158732723301
+      left_shoulder_roll_joint: 0.4331003106494279
+      left_shoulder_yaw_joint: -0.6412558132471032
+      left_elbow_joint: 0.10868978441272406
+      left_wrist_roll_joint: -1.5359253822522896
+      left_wrist_pitch_joint: 0.7195921674961947
+      left_wrist_yaw_joint: -0.962250777923285
+      right_shoulder_pitch_joint: -0.23196663035652565
+      right_shoulder_roll_joint: -0.3733966113531427
+      right_shoulder_yaw_joint: 0.7730192120329317
+      right_elbow_joint: -0.1422105275266625
+      right_wrist_roll_joint: 1.0058768183287479
+      right_wrist_pitch_joint: 0.4908125432402454
+      right_wrist_yaw_joint: 1.104553246065373
+      waist_pitch_joint: -0.08
+  - alpha: 0.652174
+    target_head_z_m: 0.695652
+    actual_head_z_m: 0.695652
+    actual_head_x_m: 0.531823
+    head_down_dot: 0.728261
+    head_axis_y: -2.0e-06
+    hand_center_y_mm: -0.069
+    max_hand_grip_y_abs_mm: 0.485
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.456196
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.8110598802393341
+      left_shoulder_roll_joint: 0.4269519169363549
+      left_shoulder_yaw_joint: -0.6590475591830489
+      left_elbow_joint: 0.11191146111050992
+      left_wrist_roll_joint: -1.5160238720633892
+      left_wrist_pitch_joint: 0.7018704483247022
+      left_wrist_yaw_joint: -0.9797310651007873
+      right_shoulder_pitch_joint: -0.20469058309407512
+      right_shoulder_roll_joint: -0.36761032714875347
+      right_shoulder_yaw_joint: 0.7919561765850168
+      right_elbow_joint: -0.11251295620549243
+      right_wrist_roll_joint: 0.9861630649179493
+      right_wrist_pitch_joint: 0.46343543437551793
+      right_wrist_yaw_joint: 1.1265060111775498
+      waist_pitch_joint: -0.08
+  - alpha: 0.695652
+    target_head_z_m: 0.678696
+    actual_head_z_m: 0.678696
+    actual_head_x_m: 0.531617
+    head_down_dot: 0.743478
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.068
+    max_hand_grip_y_abs_mm: 0.495
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.467008
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7764964460098418
+      left_shoulder_roll_joint: 0.42061734852504085
+      left_shoulder_yaw_joint: -0.6768395514001991
+      left_elbow_joint: 0.11698988988659154
+      left_wrist_roll_joint: -1.496989393164872
+      left_wrist_pitch_joint: 0.6844589021212918
+      left_wrist_yaw_joint: -0.9970564604390575
+      right_shoulder_pitch_joint: -0.17810066496837923
+      right_shoulder_roll_joint: -0.36133293023649377
+      right_shoulder_yaw_joint: 0.809949314722438
+      right_elbow_joint: -0.08219146638295911
+      right_wrist_roll_joint: 0.9683335427622335
+      right_wrist_pitch_joint: 0.43691437899101637
+      right_wrist_yaw_joint: 1.1474216481878348
+      waist_pitch_joint: -0.08
+  - alpha: 0.73913
+    target_head_z_m: 0.661739
+    actual_head_z_m: 0.661739
+    actual_head_x_m: 0.531108
+    head_down_dot: 0.758696
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.066
+    max_hand_grip_y_abs_mm: 0.503
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.44711
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7429444754736545
+      left_shoulder_roll_joint: 0.41407931073200305
+      left_shoulder_yaw_joint: -0.6945401344768529
+      left_elbow_joint: 0.12387749985440205
+      left_wrist_roll_joint: -1.478939805913584
+      left_wrist_pitch_joint: 0.667466093446
+      left_wrist_yaw_joint: -1.0141790321642319
+      right_shoulder_pitch_joint: -0.15214555032065472
+      right_shoulder_roll_joint: -0.3546328135714647
+      right_shoulder_yaw_joint: 0.8270081460811974
+      right_elbow_joint: -0.051466262543476325
+      right_wrist_roll_joint: 0.9523598555927705
+      right_wrist_pitch_joint: 0.4113964131430874
+      right_wrist_yaw_joint: 1.1673202563737215
+      waist_pitch_joint: -0.08
+  - alpha: 0.782609
+    target_head_z_m: 0.644783
+    actual_head_z_m: 0.644783
+    actual_head_x_m: 0.530312
+    head_down_dot: 0.773913
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.063
+    max_hand_grip_y_abs_mm: 0.508
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.428234
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.7104356093544473
+      left_shoulder_roll_joint: 0.40732291156089806
+      left_shoulder_yaw_joint: -0.7120546533065283
+      left_elbow_joint: 0.13252376808372235
+      left_wrist_roll_joint: -1.4620015312795707
+      left_wrist_pitch_joint: 0.6510230484050433
+      left_wrist_yaw_joint: -1.0310484499515786
+      right_shoulder_pitch_joint: -0.12677849388013968
+      right_shoulder_roll_joint: -0.3475924098037054
+      right_shoulder_yaw_joint: 0.8431418356944754
+      right_elbow_joint: -0.020592527194647672
+      right_wrist_roll_joint: 0.938232623731417
+      right_wrist_pitch_joint: 0.38705352931982145
+      right_wrist_yaw_joint: 1.1861957211715257
+      waist_pitch_joint: -0.08
+  - alpha: 0.826087
+    target_head_z_m: 0.627826
+    actual_head_z_m: 0.627826
+    actual_head_x_m: 0.529249
+    head_down_dot: 0.78913
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.059
+    max_hand_grip_y_abs_mm: 0.51
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.41042
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6790157486534697
+      left_shoulder_roll_joint: 0.4003370787301503
+      left_shoulder_yaw_joint: -0.7292840002903652
+      left_elbow_joint: 0.1428708401058806
+      left_wrist_roll_joint: -1.4463138712896193
+      left_wrist_pitch_joint: 0.6352880514858569
+      left_wrist_yaw_joint: -1.0476071125322088
+      right_shoulder_pitch_joint: -0.10195568134980693
+      right_shoulder_roll_joint: -0.34031212935235067
+      right_shoulder_yaw_joint: 0.8583577235755314
+      right_elbow_joint: 0.010125238852140226
+      right_wrist_roll_joint: 0.9259647949060749
+      right_wrist_pitch_joint: 0.36409178157791633
+      right_wrist_yaw_joint: 1.2040096823945756
+      waist_pitch_joint: -0.08
+  - alpha: 0.869565
+    target_head_z_m: 0.61087
+    actual_head_z_m: 0.61087
+    actual_head_x_m: 0.527941
+    head_down_dot: 0.804348
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.054
+    max_hand_grip_y_abs_mm: 0.506
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.393747
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6487466937145545
+      left_shoulder_roll_joint: 0.3931164828353611
+      left_shoulder_yaw_joint: -0.7461227605436169
+      left_elbow_joint: 0.1548475161683766
+      left_wrist_roll_joint: -1.4320342822715861
+      left_wrist_pitch_joint: 0.6204530366337353
+      left_wrist_yaw_joint: -1.0637838136660842
+      right_shoulder_pitch_joint: -0.07763386706973488
+      right_shoulder_roll_joint: -0.33291584906256144
+      right_shoulder_yaw_joint: 0.8726600454249118
+      right_elbow_joint: 0.04031479059537335
+      right_wrist_roll_joint: 0.9155959705033113
+      right_wrist_pitch_joint: 0.3427620810300124
+      right_wrist_yaw_joint: 1.2206831669589762
+      waist_pitch_joint: -0.08
+  - alpha: 0.913043
+    target_head_z_m: 0.593913
+    actual_head_z_m: 0.593913
+    actual_head_x_m: 0.526419
+    head_down_dot: 0.819565
+    head_axis_y: -1.0e-06
+    hand_center_y_mm: -0.047
+    max_hand_grip_y_abs_mm: 0.494
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.378345
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.6197077464928888
+      left_shoulder_roll_joint: 0.38566427356739363
+      left_shoulder_yaw_joint: -0.7624568310663171
+      left_elbow_joint: 0.16836081135830455
+      left_wrist_roll_joint: -1.4193451658837006
+      left_wrist_pitch_joint: 0.6067519362050892
+      left_wrist_yaw_joint: -1.0794851716225198
+      right_shoulder_pitch_joint: -0.05376704238827442
+      right_shoulder_roll_joint: -0.32555831750011827
+      right_shoulder_yaw_joint: 0.8860487006913684
+      right_elbow_joint: 0.06951238297087697
+      right_wrist_roll_joint: 0.9071983756597589
+      right_wrist_pitch_joint: 0.3233733029022803
+      right_wrist_yaw_joint: 1.2360849231150255
+      waist_pitch_joint: -0.08
+  - alpha: 0.956522
+    target_head_z_m: 0.576957
+    actual_head_z_m: 0.576957
+    actual_head_x_m: 0.524714
+    head_down_dot: 0.834783
+    head_axis_y: -0.0
+    hand_center_y_mm: -0.038
+    max_hand_grip_y_abs_mm: 0.473
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.364415
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5919971249090379
+      left_shoulder_roll_joint: 0.37799596203738933
+      left_shoulder_yaw_joint: -0.7781602071986538
+      left_elbow_joint: 0.18328412439945035
+      left_wrist_roll_joint: -1.4084629985280794
+      left_wrist_pitch_joint: 0.5944716433026941
+      left_wrist_yaw_joint: -1.094583710890475
+      right_shoulder_pitch_joint: -0.03030183792210797
+      right_shoulder_roll_joint: -0.31843490561022036
+      right_shoulder_yaw_joint: 0.8985178160895338
+      right_elbow_joint: 0.09713213316846205
+      right_wrist_roll_joint: 0.9008854985288
+      right_wrist_pitch_joint: 0.30630846624318986
+      right_wrist_yaw_joint: 1.250015101658484
+      waist_pitch_joint: -0.08
+  - alpha: 1.0
+    target_head_z_m: 0.56
+    actual_head_z_m: 0.56
+    actual_head_x_m: 0.522865
+    head_down_dot: 0.85
+    head_axis_y: -0.0
+    hand_center_y_mm: -0.027
+    max_hand_grip_y_abs_mm: 0.438
+    loop_grip_mm: 2.0e-06
+    loop_axis_error: 0.0
+    loop_orientation_error: 0.0
+    min_joint_margin_rad: 0.352248
+    torso_contacts: 0
+    joints_rad:
+      left_shoulder_pitch_joint: -0.5657328426058414
+      left_shoulder_roll_joint: 0.370144967422077
+      left_shoulder_yaw_joint: -0.7930903830993196
+      left_elbow_joint: 0.19944041290953365
+      left_wrist_roll_joint: -1.3996512419208642
+      left_wrist_pitch_joint: 0.5839665525824499
+      left_wrist_yaw_joint: -1.1089007141563303
+      right_shoulder_pitch_joint: -0.0071711193703684825
+      right_shoulder_roll_joint: -0.31179418039622087
+      right_shoulder_yaw_joint: 0.910053577824222
+      right_elbow_joint: 0.12242634954457396
+      right_wrist_roll_joint: 0.8968249165391766
+      right_wrist_pitch_joint: 0.29204509862969974
+      right_wrist_yaw_joint: 1.2621822820000104
+      waist_pitch_joint: -0.08
+  waist_pitch_bias_rad: -0.08

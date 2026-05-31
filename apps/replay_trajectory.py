@@ -28,9 +28,10 @@ from core.safety_filter import clamp_joint_limits
 from sim.run_sim_controller import UNITREE_G1_29DOF_XML
 
 GAIN_PROFILES_CONFIG = PROJECT_ROOT / "configs" / "gain_profiles.yaml"
-SHUTDOWN_DISABLE_REPEATS = 20
+SHUTDOWN_COMMAND_REPEATS = 20
 ARM_SDK_JOINT_INDICES = tuple(range(12, 29))
-RELEASE_POSE_NAME = "hammer_mounted_elbow_65"
+WAIST_JOINT_INDICES = (12, 13, 14)
+RELEASE_POSE_NAME = "real_release_standby_20260531_094252"
 INITIAL_RAMP_S = 2.0
 RESAMPLED_TRAJECTORY_WAYPOINTS = 1000
 WAIST_BIAS_JOINTS = (
@@ -279,8 +280,23 @@ def sample_waypoint_path(q_waypoints: list[np.ndarray], phase: float) -> np.ndar
     return q_waypoints[lower] + alpha * (q_waypoints[upper] - q_waypoints[lower])
 
 
+def trim_waypoint_path(q_waypoints: list[np.ndarray], replay_length: float) -> list[np.ndarray]:
+    replay_length = min(1.0, max(0.01, float(replay_length)))
+    if replay_length >= 1.0:
+        return [np.asarray(q, dtype=float).copy() for q in q_waypoints]
+    count = max(2, int(round(len(q_waypoints) * replay_length)))
+    trimmed = [np.asarray(q, dtype=float).copy() for q in q_waypoints[:count]]
+    trimmed[-1] = sample_waypoint_path(q_waypoints, replay_length)
+    return trimmed
+
+
 def velocity_feedforward(ctx: ReplayContext, q_safe: np.ndarray, q_prev: np.ndarray) -> np.ndarray:
     return float(ctx.velocity_ff_gain) * (np.asarray(q_safe, dtype=float) - np.asarray(q_prev, dtype=float)) / ctx.dt
+
+
+def latest_q_or_fallback(ctx: ReplayContext, fallback: np.ndarray) -> np.ndarray:
+    latest = ctx.backend.latest_state()
+    return latest.q.copy() if latest is not None else np.asarray(fallback, dtype=float).copy()
 
 
 def trajectory_base_q(
@@ -493,6 +509,7 @@ class ReplayContext:
     adaptive_tau_bias: WaistAdaptiveTauBias | None
     impact_kp: np.ndarray | None = None
     impact_kd: np.ndarray | None = None
+    last_q_cmd: np.ndarray | None = None
     last_tau_gravity: np.ndarray | None = None
     last_tau_bias: np.ndarray | None = None
     report_step: int = 0
@@ -725,7 +742,7 @@ def release_to_pose_and_disable(
         time_plan={"type": "linear"},
         integrate_bias=False,
     )
-    graceful_release(ctx=ctx, disable_repeats=SHUTDOWN_DISABLE_REPEATS)
+    graceful_release(ctx=ctx, disable_repeats=SHUTDOWN_COMMAND_REPEATS)
     return q_prev
 
 
@@ -740,6 +757,51 @@ def graceful_release(
         time.sleep(ctx.dt)
     if ctx.adaptive_tau_bias is not None:
         ctx.adaptive_tau_bias.reset()
+
+
+def send_arm_zero_gain_keep_waist_command(
+    ctx: ReplayContext,
+    q_ref: np.ndarray,
+    repeats: int,
+) -> None:
+    """Zero shoulder/elbow/wrist gains while keeping waist joints actively held."""
+    print("sending arm_sdk zero-gain command for arms; waist stays held", flush=True)
+    q_ref = np.asarray(q_ref, dtype=float)
+    zeros = np.zeros_like(q_ref)
+    kp = zeros.copy()
+    kd = zeros.copy()
+    for idx in WAIST_JOINT_INDICES:
+        kp[idx] = ctx.kp[idx]
+        kd[idx] = ctx.kd[idx]
+    for _ in range(max(1, int(repeats))):
+        ctx.backend.publish_arm_sdk_command(
+            q_ref,
+            kp=kp,
+            kd=kd,
+            tau=zeros,
+            dq_des=zeros,
+            weight=1.0,
+            joint_indices=ARM_SDK_JOINT_INDICES,
+        )
+        time.sleep(ctx.dt)
+    if ctx.adaptive_tau_bias is not None:
+        ctx.adaptive_tau_bias.reset()
+
+
+def handle_keyboard_interrupt(
+    *,
+    ctx: ReplayContext,
+    q_prev: np.ndarray,
+    command_started: bool,
+) -> None:
+    if not command_started:
+        print("Ctrl+C caught before commands started; exiting without command/release", flush=True)
+        return
+
+    fallback = ctx.last_q_cmd.copy() if ctx.last_q_cmd is not None else q_prev.copy()
+    q_zero_gain = latest_q_or_fallback(ctx, fallback)
+    print("Ctrl+C caught; sending arm zero-gain command with waist held and exiting", flush=True)
+    send_arm_zero_gain_keep_waist_command(ctx=ctx, q_ref=q_zero_gain, repeats=SHUTDOWN_COMMAND_REPEATS)
 
 
 def prepare_command(
@@ -836,6 +898,51 @@ def publish_command(
         weight=1.0,
         joint_indices=ARM_SDK_JOINT_INDICES,
     )
+    ctx.last_q_cmd = np.asarray(q_des, dtype=float).copy()
+
+
+def arm_sdk_to_current_pose(
+    *,
+    ctx: ReplayContext,
+    q_current: np.ndarray,
+    duration_s: float,
+) -> np.ndarray:
+    q_hold = latest_q_or_fallback(ctx, q_current)
+    zero = np.zeros_like(q_hold)
+    steps = max(1, int(round(float(duration_s) / ctx.dt)))
+    zero_gain_steps = max(1, steps // 4)
+    print(f"arming arm_sdk at current pose over {duration_s:.2f}s", flush=True)
+
+    for _ in range(zero_gain_steps):
+        ctx.backend.publish_arm_sdk_command(
+            q_hold,
+            kp=zero,
+            kd=zero,
+            tau=zero,
+            dq_des=zero,
+            weight=1.0,
+            joint_indices=ARM_SDK_JOINT_INDICES,
+        )
+        ctx.last_q_cmd = q_hold.copy()
+        time.sleep(ctx.dt)
+
+    ramp_steps = max(1, steps - zero_gain_steps)
+    for step in range(ramp_steps):
+        alpha = smoothstep((step + 1) / ramp_steps)
+        kp = ctx.kp * alpha
+        kd = ctx.kd * alpha
+        ctx.backend.publish_arm_sdk_command(
+            q_hold,
+            kp=kp,
+            kd=kd,
+            tau=zero,
+            dq_des=zero,
+            weight=1.0,
+            joint_indices=ARM_SDK_JOINT_INDICES,
+        )
+        ctx.last_q_cmd = q_hold.copy()
+        time.sleep(ctx.dt)
+    return q_hold
 
 
 def wait_menu_choice(prompt: str, choices: dict[str, str]) -> str:
@@ -972,7 +1079,9 @@ def main() -> int:
     limit_margin_rad = float(run_config.get("limit_margin_rad", 0.0))
     q_release_target = clamp_joint_limits(q_release_target, q_min, q_max, margin=limit_margin_rad)
     sparse_q_waypoints = [clamp_joint_limits(q, q_min, q_max, margin=limit_margin_rad) for q in sparse_q_waypoints]
-    forward_q_waypoints = resample_waypoints(sparse_q_waypoints, RESAMPLED_TRAJECTORY_WAYPOINTS)
+    replay_length = float(run_config.get("replay_length", 0.9))
+    full_forward_q_waypoints = resample_waypoints(sparse_q_waypoints, RESAMPLED_TRAJECTORY_WAYPOINTS)
+    forward_q_waypoints = trim_waypoint_path(full_forward_q_waypoints, replay_length)
     q_waypoints = forward_q_waypoints
     waist_yaw_index = name_to_index["waist_yaw"]
     standby_yaw_cfg = run_config.get("standby_waist_yaw") or {}
@@ -992,6 +1101,7 @@ def main() -> int:
     impact_phase_s = float(run_config.get("impact_phase_s", DEFAULT_IMPACT_PHASE_S))
     transition_phase_s = float(run_config.get("transition_phase_s", 0.2))
     standby_yaw_switch_s = float(standby_yaw_cfg.get("switch_duration_s", INITIAL_RAMP_S))
+    arm_sdk_arming_s = float(run_config.get("arm_sdk_arming_s", 1.0))
     velocity_ff_gain = float(run_config.get("velocity_ff_gain", 0.5))
     time_plan = run_config.get("time_plan") or trajectory.get("time_plan") or {"type": "acceleration"}
     return_time_plan = run_config.get("return_time_plan") or trajectory.get("return_time_plan") or {"type": "trapezoid", "accel_fraction": 0.2}
@@ -1020,7 +1130,9 @@ def main() -> int:
     print(f"Replaying {trajectory_name} on DDS interface {interface}. arm_sdk=True.")
     print(
         f"waypoints={len(q_waypoints)} source_waypoints={len(sparse_q_waypoints)} duration_s={total_duration:.2f} "
-        f"actual_duration_s={playback_steps * dt:.2f} initial_ramp_s={INITIAL_RAMP_S:.2f} "
+        f"actual_duration_s={playback_steps * dt:.2f} arm_sdk_arming_s={arm_sdk_arming_s:.2f} "
+        f"initial_ramp_s={INITIAL_RAMP_S:.2f} "
+        f"replay_length={replay_length:.2f} "
         f"time_plan={time_plan.get('type', 'acceleration')} "
         f"return_time_plan={return_time_plan.get('type', 'trapezoid')} "
         f"velocity_ff_gain={velocity_ff_gain:.2f} "
@@ -1055,13 +1167,18 @@ def main() -> int:
                     state = transition_state(state, ReplayState.DONE)
                     continue
 
+                command_started = True
+                q_prev = arm_sdk_to_current_pose(
+                    ctx=ctx,
+                    q_current=q_current,
+                    duration_s=arm_sdk_arming_s,
+                )
                 q_prev = publish_initial_ramp(
                     ctx=ctx,
-                    q_start=q_current,
+                    q_start=q_prev,
                     q_target=q_waypoints[0],
                     min_duration_s=INITIAL_RAMP_S,
                 )
-                command_started = True
                 state = transition_state(state, ReplayState.STANDBY)
                 continue
 
@@ -1151,18 +1268,21 @@ def main() -> int:
             raise RuntimeError(f"Unhandled replay state: {state}")
     except KeyboardInterrupt:
         interrupted = True
-        print("interrupted; disabling command immediately and exiting", flush=True)
-        graceful_release(ctx=ctx, disable_repeats=SHUTDOWN_DISABLE_REPEATS)
+        handle_keyboard_interrupt(ctx=ctx, q_prev=q_prev, command_started=command_started)
     finally:
         if hold_exit_requested:
             print("exiting from hammer standby without release; last hold command was left active", flush=True)
-        elif command_started and release_requested:
-            q_prev = release_to_pose_and_disable(
-                ctx=ctx,
-                q_prev=q_prev,
-                q_release=q_release_target,
-                duration_s=return_duration_s,
-            )
+        elif command_started and release_requested and not interrupted:
+            try:
+                q_prev = release_to_pose_and_disable(
+                    ctx=ctx,
+                    q_prev=q_prev,
+                    q_release=q_release_target,
+                    duration_s=return_duration_s,
+                )
+            except KeyboardInterrupt:
+                interrupted = True
+                handle_keyboard_interrupt(ctx=ctx, q_prev=q_prev, command_started=command_started)
 
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(exist_ok=True)
@@ -1174,7 +1294,7 @@ def main() -> int:
     if hold_exit_requested:
         print("exited from hammer standby without release")
     elif interrupted:
-        print("interrupted; command disabled")
+        print("interrupted; arm zero-gain command sent with waist held")
     elif release_requested:
         print(f"returned to {RELEASE_POSE_NAME} and released")
     else:

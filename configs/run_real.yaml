@@ -1,8 +1,28 @@
 profile: real
 base_config: run_base.yaml
 
+trajectory: knee_double_v1
+velocity_ff_gain: 0.5
+duration_s: 0.2
+replay_length: 0.9
+impact_phase_s: 0.2
+transition_phase_s: 0.2
+standby_waist_yaw:
+  right_deg: -90.0
+  switch_duration_s: 2.0
+time_plan:
+  type: acceleration
+return_time_plan:
+  type: trapezoid
+  accel_fraction: 0.2
+limit_margin_rad: 0.0
+cycles: 0
+gain_profile: double_hand
+impact_gain_profile: impact
+return_duration_s: 2.0
+
+
 interface: eth0
 domain_id: 0
-pose: standing_double_v2_start
+pose: knee_double_v1_start
 hammer_variant: easy_450_150
-run: false

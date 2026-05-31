@@ -214,15 +214,16 @@ Trajectory replay uses a small menu with allowed transitions:
 3. `[h]` starts the hammer trajectory loop. It repeatedly plays forward/back until `[s]` stops it.
 4. After hammering, the app holds the final/current command.
 5. `[b]` manually reverses back to hammer standby; `[h]` can hammer again from standby.
-6. `[x]` from hammer standby or stopped state returns to `hammer_mounted_elbow_65` and releases.
+6. `[x]` from hammer standby or stopped state returns to the real release standby pose and releases.
 7. From hammer standby, `[q]` exits without release and leaves the last hold command active for hardware adjustment.
-8. `Ctrl+C` immediately disables the active command interface and exits.
+8. `Ctrl+C` sends zero gain to shoulders/elbows/wrists while keeping waist held, then exits.
 
 The backward lift, manual reverse, and release return duration are controlled by
 `return_duration_s`.
 
 Replay commands use Unitree's G1 `rt/arm_sdk` path only. The app sets
-`motor_cmd[29].q = 1` while active and disables arm SDK on release or Ctrl+C.
+`motor_cmd[29].q = 1` while active and disables arm SDK only on the planned
+`[x]` release path.
 The built-in high-level lower-body mode stays running; this project does not use
 full-body `rt/lowcmd` for the hammer replay workflow.
 
@@ -426,9 +427,12 @@ Replay menu workflow:
 [p]: move to hammer standby
 [h]: hammer
 [b]: after hammering, manually reverse back to standby
-[x]: from standby or stopped, return to hammer_mounted_elbow_65, then release
+[x]: from standby or stopped, return to the real release standby pose, then release
 [q]: from standby only, exit without release and leave hold command active
+Ctrl+C: zero shoulder/elbow/wrist gains, keep waist held, then exit
 ```
 
 Use the robot-side physical emergency stop if anything looks wrong. Terminal
-`Ctrl+C` immediately disables the active command interface and exits; use `[x]` for the planned software release.
+`Ctrl+C` is not a software release path; it sends zero kp/kd/tau/dq for
+shoulders/elbows/wrists, keeps waist kp/kd active at the current pose, and exits.
+Use `[x]` for the planned software release.
